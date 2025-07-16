@@ -1,0 +1,44 @@
+/* src/components/AvatarWithRotatingBorder.css */
+.avatar-border-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .avatar-border-wrapper .avatar-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--border-size) - 8px);
+    height: calc(var(--border-size) - 8px);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  .rotating-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--border-size);
+    height: var(--border-size);
+    border-radius: 50%;
+    padding: 4px;
+    box-sizing: border-box;
+    background: conic-gradient(
+      #2196f3 0deg 180deg,
+      #f50057 180deg 360deg
+    );
+    -webkit-mask: radial-gradient(
+      closest-side,
+      transparent 0,
+      transparent calc(50% - 4px),
+      black calc(50% - 4px),
+      black 50%
+    );
+    animation: spin 4s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }

@@ -1,0 +1,72 @@
+{
+  "name": "bun-turborepo-nx-vite-monorepo",
+  "module": "index.ts",
+  "private": true,
+  "packageManager": "bun@1.2.18",
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ],
+    "catalog": {
+      "vite": "^7.0.4",
+      "@emotion/react": "^11.14.0",
+      "@emotion/styled": "^11.14.1",
+      "@mui/icons-material": "^7.2.0",
+      "@mui/material": "^7.2.0",
+      "@mui/material-pigment-css": "^7.2.0",
+      "axios": "^1.10.0",
+      "lucide-react": "^0.525.0",
+      "react": "^19.1.0",
+      "react-dom": "^19.1.0",
+      "react-hook-form": "^7.60.0",
+      "react-router-dom": "^7.6.3",
+      "zustand": "^5.0.6",
+      "@eslint/js": "^9.30.1",
+      "@types/react": "^19.1.8",
+      "@types/react-dom": "^19.1.6",
+      "@unocss/preset-uno": "^66.3.3",
+      "@unocss/vite": "^66.3.3",
+      "@vitejs/plugin-react-swc": "^3.10.2",
+      "bun-types": "^1.2.18",
+      "eslint": "^9.30.1",
+      "eslint-plugin-react-hooks": "^5.2.0",
+      "eslint-plugin-react-refresh": "^0.4.20",
+      "globals": "^16.3.0",
+      "typescript": "~5.8.3",
+      "typescript-eslint": "^8.36.0",
+      "unocss": "^66.3.3",
+      "@vitejs/plugin-react": "^4.6.0",
+      "@types/bun": "^1.2.18",
+      "rimraf": "^6.0.1",
+      "tsup": "^8.5.0",
+      "@iconify/react": "^6.0.0",
+      "turbo": "^2.5.4"
+    }
+  },
+  "scripts": {
+    "dev:web": "bun turbo run dev --filter=./apps/web",
+    "dev:admin": "bun turbo run dev --filter=./apps/admin",
+    "build:web": "bun turbo run build --filter=./apps/web",
+    "build:admin": "bun turbo run build --filter=./apps/admin",
+    "build:plugins": "bun turbo run build --filter=@fastest/plugins",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "clean": "bunx rimraf --glob '**/bun.lock' '**/dist' '**/.turbo' '**/.next' '**/node_modules'"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "less": "^4.3.0",
+    "rimraf": "catalog:",
+    "tsup": "catalog:"
+  },
+  "peerDependencies": {
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

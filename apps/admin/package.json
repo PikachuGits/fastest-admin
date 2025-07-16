@@ -1,0 +1,48 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "catalog:",
+    "@emotion/styled": "catalog:",
+    "@mui/icons-material": "catalog:",
+    "@mui/material": "catalog:",
+    "@mui/material-pigment-css": "catalog:",
+    "axios": "catalog:",
+    "lucide-react": "catalog:",
+    "notistack": "^3.0.2",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-hook-form": "catalog:",
+    "react-router-dom": "catalog:",
+    "zustand": "catalog:"
+  },
+  "devDependencies": {
+    "@fastest/ui": "workspace:*",
+    "@fastest/utils": "workspace:*",
+    "@fastest/plugins": "workspace:*",
+    "@fastest/components": "workspace:*",
+    "@eslint/js": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@unocss/preset-uno": "catalog:",
+    "@unocss/vite": "catalog:",
+    "@vitejs/plugin-react-swc": "catalog:",
+    "bun-types": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "globals": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "unocss": "catalog:",
+    "vite": "catalog:"
+  }
+}
