@@ -15,7 +15,7 @@ const MenuListItemButton = styled(ListItemButton)(({ theme }) => ({
   tapHighlightColor: "transparent",
   backgroundColor: "transparent",
   outline: 0,
-  border: 0,
+  border: "1px solid red",
   margin: 0,
   cursor: "pointer",
   userSelect: "none",
@@ -33,7 +33,7 @@ const MenuListItemButton = styled(ListItemButton)(({ theme }) => ({
 export default function MenuListItem(props: any) {
   return (
     <MenuListItemButton {...props}>
-      <ListItemIcon sx={{ mr: 1, fontSize: "24px", minWidth: 0 }}>
+      {/* <ListItemIcon sx={{ mr: 2, fontSize: "24px", minWidth: 0 }}>
         {props.icon}
       </ListItemIcon>
       <span
@@ -46,6 +46,7 @@ export default function MenuListItem(props: any) {
         <span style={{ fontSize: "14px" }}>{props.primary}</span>
         <Typography>{props.secondary}</Typography>
       </span>
+      {props.subIcon} */}
     </MenuListItemButton>
   );
 }

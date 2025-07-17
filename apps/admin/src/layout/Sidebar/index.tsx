@@ -33,7 +33,12 @@ const Sidebar: React.FC<SidebarProps> = () => {
   return (
     <Box
       component="nav"
-      sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+      sx={{
+        width: { md: 300 },
+        flexShrink: { md: 0 },
+        border: "1px solid red",
+        px: 2,
+      }}
     >
       <MenuList />
     </Box>

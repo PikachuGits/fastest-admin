@@ -25,11 +25,11 @@
     "zustand": "catalog:"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@fastest/components": "workspace:*",
+    "@fastest/plugins": "workspace:*",
     "@fastest/ui": "workspace:*",
     "@fastest/utils": "workspace:*",
-    "@fastest/plugins": "workspace:*",
-    "@fastest/components": "workspace:*",
-    "@eslint/js": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@unocss/preset-uno": "catalog:",
@@ -43,6 +43,7 @@
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "unocss": "catalog:",
+    "unocss-preset-animations": "^1.2.1",
     "vite": "catalog:"
   }
 }

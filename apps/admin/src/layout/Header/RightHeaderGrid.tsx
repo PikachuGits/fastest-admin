@@ -36,7 +36,7 @@ export const RightHeaderGrid = () => {
       <IconButtonBox>
         <Iconify
           icon="solar:settings-bold-duotone"
-          className="text-inherit text-gary-500 animate-spin-slow"
+          className="text-inherit text-gary-500 animate-spin"
         />
       </IconButtonBox>
       {/* 头像 */}
