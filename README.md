@@ -1,6 +1,5 @@
-# Bun + Turborepo + Nx + Vite Monorepo
-
-一个基于 Bun、Turborepo、Nx 和 Vite 的现代化 Monorepo 项目模板。
+#FASTEST ADMIN
+一个基于 Bun、Turborepo 和 Vite 的现代化 Monorepo 项目模板。
 
 ## 📋 目录
 
