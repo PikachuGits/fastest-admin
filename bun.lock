@@ -21,6 +21,7 @@
       "dependencies": {
         "@emotion/react": "catalog:",
         "@emotion/styled": "catalog:",
+        "@fontsource/roboto": "^5.2.6",
         "@mui/icons-material": "catalog:",
         "@mui/material": "catalog:",
         "@mui/material-pigment-css": "catalog:",
@@ -302,6 +303,8 @@
     "@fastest/ui": ["@fastest/ui@workspace:packages/ui"],
 
     "@fastest/utils": ["@fastest/utils@workspace:packages/utils"],
+
+    "@fontsource/roboto": ["@fontsource/roboto@5.2.6", "", {}, "sha512-hzarG7yAhMoP418smNgfY4fO7UmuUEm5JUtbxCoCcFHT0hOJB+d/qAEyoNjz7YkPU5OjM2LM8rJnW8hfm0JLaA=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.1", "", {}, "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="],
 

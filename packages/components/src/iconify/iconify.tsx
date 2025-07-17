@@ -20,7 +20,7 @@ export type IconifyProps = React.ComponentProps<typeof IconRoot> &
 export function Iconify({
   className,
   icon,
-  width = "1em",
+  width = "100%",
   height,
   sx,
   ...other
@@ -44,12 +44,10 @@ export function Iconify({
       ssr
       id={id}
       icon={icon}
-      className={classes_merge([iconifyClasses.root, className])}
+      className={classes_merge([className, iconifyClasses.root])}
       sx={[
         {
-          width,
           flexShrink: 0,
-          height: height ?? width,
           display: "inline-flex",
         },
         ...(Array.isArray(sx) ? sx : [sx]),

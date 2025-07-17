@@ -19,7 +19,7 @@ export const themeConfig: ThemeConfig = {
   /** **************************************
    * Base
    *************************************** */
-  classesPrefix: 'minimal',
+  classesPrefix: 'fastest',
   /** **************************************
    * Typography
    *************************************** */

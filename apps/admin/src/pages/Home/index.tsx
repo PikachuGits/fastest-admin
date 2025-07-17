@@ -35,7 +35,10 @@ const Index = () => {
             className="aspect-square"
           >
             <Box className="text-gray-500 rounded-md h-full w-full flex items-center justify-center hover:text-gray-800 bg-white cursor-pointer">
-              <Iconify icon={key as IconifyName} className="text-2xl" />
+              <Iconify
+                icon={key as IconifyName}
+                className="text-xl color-gray-500"
+              />
             </Box>
           </Grid>
         ))}

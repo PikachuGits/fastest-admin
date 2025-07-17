@@ -15,6 +15,7 @@ const IconButtonBox = styled(IconButton)(({ theme }) => {
     justifyContent: "center",
     transition: "all 0.3s ease-in-out",
     marginLeft: "10px",
+    padding: theme.spacing(0.5),
     "&:hover": {
       scale: 1.05,
     },
@@ -29,7 +30,7 @@ const RotatingBorderAvatar = (props: AvatarWithRotatingBorderProps) => {
         width="100%"
         height="100%"
         viewBox="0 0 120 120"
-        className="animate-spin-slow absolute top-0 left-0"
+        className="animate-spin animate-duration-5000 absolute top-0 left-0"
       >
         <title id="svgTitle">Avatar</title>
         <defs>
@@ -57,11 +58,7 @@ const RotatingBorderAvatar = (props: AvatarWithRotatingBorderProps) => {
         </defs>
       </svg>
       {/* 头像层 */}
-
-      <Avatar
-        className="w-full h-full absolute left-0 top-0 border-[4px] border-transparent"
-        src={props.src}
-      />
+      <Avatar sx={{ width: "100%", height: "100%" }} src={props.src} />
     </IconButtonBox>
   );
 };

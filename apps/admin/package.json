@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "catalog:",
     "@emotion/styled": "catalog:",
+    "@fontsource/roboto": "^5.2.6",
     "@mui/icons-material": "catalog:",
     "@mui/material": "catalog:",
     "@mui/material-pigment-css": "catalog:",

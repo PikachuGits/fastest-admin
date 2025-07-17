@@ -10,7 +10,7 @@ import {
   styled,
 } from "@mui/material";
 import { Iconify, text } from "@fastest/components";
-import { Typography } from "@fastest/ui";
+import { FastTypography } from "@fastest/ui";
 // import {
 //   ExpandLess,
 //   ExpandMore,
@@ -97,10 +97,10 @@ const NestedNav = () => {
                 }}
               >
                 <span style={{ fontSize: "14px" }}>Landing</span>
-                <Typography>
+                <FastTypography>
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
-                </Typography>
+                </FastTypography>
               </span>
             </ListItemButton>
             <ListItemButton>
@@ -110,10 +110,10 @@ const NestedNav = () => {
               <ListItemTextFlex
                 primary="Level 2a"
                 secondary={
-                  <Typography>
+                  <FastTypography>
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry.
-                  </Typography>
+                  </FastTypography>
                 }
               />
             </ListItemButton>
@@ -157,10 +157,10 @@ const NestedNav = () => {
                   <ListItemTextFlex
                     primary="Level 2a"
                     secondary={
-                      <Typography>
+                      <FastTypography>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry.
-                      </Typography>
+                      </FastTypography>
                     }
                   />
                   <ArrowIcon open={openLevel2a} />

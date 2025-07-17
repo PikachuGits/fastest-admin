@@ -12,6 +12,7 @@ const IconButtonBox = styled(IconButton)(({ theme }) => {
     justifyContent: "center",
     margin: "0 2px",
     cursor: "pointer",
+    transition: "all 0.3s ease",
     "&:hover": {
       scale: 1.05,
     },
@@ -24,19 +25,19 @@ export const RightHeaderGrid = () => {
       <IconButtonBox>
         <Iconify
           icon="solar:full-screen-square-outline"
-          className="text-inherit text-gary-500 "
+          className=" text-gray-500 "
         />
       </IconButtonBox>
       <IconButtonBox>
         <Iconify
           icon="solar:bell-bing-bold-duotone"
-          className="text-inherit text-gary-500 "
+          className=" text-gray-500 "
         />
       </IconButtonBox>
       <IconButtonBox>
         <Iconify
           icon="solar:settings-bold-duotone"
-          className="text-inherit text-gary-500 animate-spin"
+          className="text-gray-500 animate-spin animate-duration-5000"
         />
       </IconButtonBox>
       {/* 头像 */}
