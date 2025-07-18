@@ -22,7 +22,7 @@ const Index = () => {
 
   return (
     <Box className="bg-gray-100">
-      <MenuExamples />
+      {/* <MenuExamples /> */}
     </Box>
   );
 };

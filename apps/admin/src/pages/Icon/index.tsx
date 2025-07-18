@@ -20,11 +20,11 @@ const Index = () => {
   };
 
   return (
-    <Box className="bg-gray-100">
+    <Box className="dark:bg-gray-900">
       <Grid
         container
         spacing={1}
-        className="border-1 border-gray-200 p-2 rounded-md"
+        className="p-2 rounded-md"
         columns={24}
       >
         {Object.keys(iconSets).map((key) => (
@@ -32,12 +32,12 @@ const Index = () => {
             key={key}
             size={{ xs: 6, sm: 4, md: 2, lg: 1 }} // 每行图标个数响应式控制
             onClick={() => onClick(key as IconifyName)}
-            className="aspect-square"
+            className="aspect-square  rounded-md border border-white dark:border-black"
           >
-            <Box className="text-gray-500 rounded-md h-full w-full flex items-center justify-center hover:text-gray-800 bg-white cursor-pointer">
+            <Box className="rounded-md bg-gray-100 h-full w-full flex items-center justify-center hover:text-gray-800 dark:bg-black cursor-pointer">
               <Iconify
                 icon={key as IconifyName}
-                className="text-xl color-gray-500"
+                className="text-xl dark:text-gray-500"
               />
             </Box>
           </Grid>

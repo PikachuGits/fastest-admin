@@ -48,13 +48,36 @@ declare module '@mui/material/styles' {
    */
   interface Theme {
     customShadows: CustomShadows;
+    /**
+     * Custom layout configuration
+     * 自定义布局配置，支持应用层的布局需求
+     */
+    customLayout: {
+      headerHeight: number;
+      sidebarWidth: number;
+      sidebarCollapsedWidth: number;
+      footerHeight: number;
+      contentPadding: number;
+    };
   }
   interface ThemeOptions {
     customShadows?: CustomShadows;
+    /**
+     * Custom layout options
+     * 自定义布局选项，允许部分覆盖默认配置
+     */
+    customLayout?: Partial<{
+      headerHeight: number;
+      sidebarWidth: number;
+      sidebarCollapsedWidth: number;
+      footerHeight: number;
+      contentPadding: number;
+    }>;
   }
   interface ThemeVars {
     customShadows: CustomShadows;
     typography: Theme['typography'];
     transitions: Theme['transitions'];
+    customLayout: Theme['customLayout'];
   }
 }

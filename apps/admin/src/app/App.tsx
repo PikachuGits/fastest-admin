@@ -6,6 +6,7 @@ import { router } from "./routes/router";
 import { RouterProvider } from "react-router-dom";
 import { AppThemeProvider } from "./providers/ThemeProvider";
 import { SnackbarProvider } from "notistack";
+
 /**
  * 有初始化逻辑（如埋点、日志、鉴权、初始化 SDK 等），可以在这里进行初始化
  */

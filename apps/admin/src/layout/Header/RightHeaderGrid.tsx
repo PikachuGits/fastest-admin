@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { Iconify } from "@fastest/components";
-
+import { useAppTheme } from '@/app/providers/ThemeProvider'
 import RotatingBorderAvatar from "./AvatarWithRotatingBorder";
 
 const IconButtonBox = styled(IconButton)(({ theme }) => {
@@ -20,24 +20,40 @@ const IconButtonBox = styled(IconButton)(({ theme }) => {
 });
 
 export const RightHeaderGrid = () => {
+  const { toggleTheme, isDarkMode } = useAppTheme()
+
+
+
   return (
     <Fragment>
-      <IconButtonBox>
+      <IconButtonBox onClick={toggleTheme}>
+        {
+          isDarkMode ? <Iconify
+            icon={"solar:sun-2-bold-duotone"}
+            className="animate-fade-in animate-fade-out  animate-duration-1000"
+          /> :
+            <Iconify
+              icon={"solar:cloudy-moon-bold"}
+              className="animate-fade-in animate-fade-out animate-duration-1000"
+            />
+        }
+      </IconButtonBox>
+      <IconButtonBox >
         <Iconify
           icon="solar:full-screen-square-outline"
-          className=" text-gray-500 "
+          className=" "
         />
       </IconButtonBox>
       <IconButtonBox>
         <Iconify
           icon="solar:bell-bing-bold-duotone"
-          className=" text-gray-500 "
+          className="  "
         />
       </IconButtonBox>
       <IconButtonBox>
         <Iconify
           icon="solar:settings-bold-duotone"
-          className="text-gray-500 animate-spin animate-duration-5000"
+          className=" animate-spin animate-duration-5000"
         />
       </IconButtonBox>
       {/* 头像 */}
