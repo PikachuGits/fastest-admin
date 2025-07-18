@@ -1,12 +1,40 @@
 // 组件导出
-export { default as MenuList } from "./components/MenuList";
+export { MenuList } from "./components/MenuList";
+export { MenuListRefactored } from "./components/MenuList/MenuListRefactored";
 export { MenuItem } from "./components/MenuItem";
 export { NumberChip } from "./components/NumberChip";
 export { GroupHeader } from "./components/GroupHeader";
 
-// 原有组件导出（如果存在时可以取消注释）
-// export { default as MenuListItem } from "./ListItem";
-// export { default as MenuListSubheader } from "./ListSubheader";
+// 示例组件
+export { MenuExamples } from "./examples/MenuExamples";
+
+// Hooks 导出
+export { useMenuState } from "./hooks/useMenuState";
+
+// 工具函数导出
+export {
+  parseInfoBadge,
+  getBadgeColor,
+  parseIcon,
+  hasPermission,
+  generateItemPath,
+  findMenuItem,
+} from "./utils/menuHelpers";
+
+// 配置导出
+export {
+  getMenuConfig,
+  getMenuStyle,
+  defaultMenuConfig,
+  collapsedMenuConfig,
+  doubleColumnConfig,
+  adminMenuConfig,
+  guestMenuConfig,
+  standardStyle,
+  collapsedStyle,
+  doubleColumnStyle,
+  gridStyle,
+} from "./config/menuVariants";
 
 // 类型导出
 export type { MenuItemProps } from "./components/MenuItem";
@@ -20,4 +48,8 @@ export type {
   IconMap,
   MenuItemState,
   MenuConfig,
+  MenuStyleVariant,
+  MenuVariant,
+  MenuStyleVariantType,
+  MenuListProps,
 } from "./types/index";

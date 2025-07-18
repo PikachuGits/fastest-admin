@@ -71,7 +71,7 @@ const getBadgeColor = (badge?: number): "default" | "primary" | "success" => {
   return "success";
 };
 
-export default function MenuList(props: any) {
+const MenuList = (props: any) => {
   // 初始化展开状态 - 从数据结构中智能设置默认展开状态
   const initializeOpenStates = useCallback((data: NavData) => {
     const states: Record<string, boolean> = {};
@@ -224,3 +224,4 @@ export default function MenuList(props: any) {
     </ListBox>
   );
 }
+export default MenuList;

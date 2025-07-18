@@ -47,4 +47,33 @@ export interface MenuConfig {
   defaultSelectedItem?: string;
   enableRoleBasedAccess?: boolean;
   userRoles?: string[];
-} 
+}
+
+// 菜单样式变体类型
+export interface MenuStyleVariant {
+  width: number | string;
+  maxWidth?: number | string;
+  minWidth?: number | string;
+  layout: 'single' | 'double' | 'grid';
+  itemHeight: number;
+  spacing: number;
+  showIcons: boolean;
+  showBadges: boolean;
+  collapsible: boolean;
+}
+
+// 菜单变体类型
+export type MenuVariant = 'default' | 'collapsed' | 'double' | 'admin' | 'guest';
+export type MenuStyleVariantType = 'standard' | 'collapsed' | 'double' | 'grid';
+
+// 菜单属性接口
+export interface MenuListProps {
+  data?: NavData;
+  config?: MenuConfig;
+  variant?: MenuVariant;
+  styleVariant?: MenuStyleVariantType;
+  onItemClick?: (path: string, item: NavItem) => void;
+  onItemToggle?: (path: string, isOpen: boolean) => void;
+  className?: string;
+  style?: React.CSSProperties;
+}
