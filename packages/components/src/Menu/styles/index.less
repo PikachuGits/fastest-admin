@@ -1,0 +1,29 @@
+.fast-menu-item-container-sub {
+  position: relative;
+}
+
+.fast-menu-item-container-sub::before {
+  top: 0;
+  left: 0;
+  width: 2px;
+  content: "";
+  position: absolute;
+  background-color: #EDEFF2;
+  bottom: 0;
+  height: calc(100% - 32px);
+}
+
+.fast-menu-item-container-sub-child {
+  position: relative;
+}
+
+.fast-menu-item-container-sub-child[data-level="true"]::before {
+  left: 0px;
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #EDEFF2;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath d='M1 1v4a8 8 0 0 0 8 8h4' stroke='%23efefef' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 50% 50% / 100% no-repeat;
+  transform: translate(calc(12px * -1), calc(12px * -0.4));
+}

@@ -1,5 +1,5 @@
 import { ListSubheader, styled, type SxProps, type Theme } from "@mui/material";
-import { Iconify } from "../iconify";
+import { Iconify } from "../../../iconify";
 
 export interface GroupHeaderProps {
   title: string;
@@ -37,9 +37,8 @@ export const GroupHeader = ({ title, onClick, open }: GroupHeaderProps) => {
     >
       <Iconify
         icon={"eva:arrow-ios-downward-fill"}
-        className={`transition-all duration-300 ease-in-out ${
-          open ? "rotate-0" : "rotate-[-90deg]"
-        } icon-arrow text-xl mr-1`}
+        className={`transition-all duration-300 ease-in-out ${open ? "rotate-0" : "rotate-[-90deg]"
+          } icon-arrow text-xl mr-1`}
         sx={{ color: "#757575", opacity: 0, width: 0 }}
       />
       <span className="text-xs">{title}</span>

@@ -6,9 +6,10 @@ import {
   type ListProps,
 } from "@mui/material";
 import { useState, useCallback, type ReactElement } from "react";
-import { MenuItem } from "./MenuItem";
-import { GroupHeader } from "./GroupHeader";
-import menuData from "./menu-data.json";
+import { MenuItem } from "../MenuItem";
+import { GroupHeader } from "../GroupHeader";
+import menuData from "../../data/menu-data.json";
+import "../../styles/index.less";
 
 const ListBox = styled(List)(({ theme }) => ({
   width: "100%",
@@ -139,7 +140,7 @@ export default function MenuList(props: any) {
       const isOpen = openStates[itemPath] || false;
       const hasChildren = item.children && item.children.length > 0;
       const badge = parseInfoBadge(item.info);
-      const actualIcon = item.icon ? iconMap[item.icon] : undefined;
+      const actualIcon = item.icon ? item.icon : undefined;
 
       return (
         <ContainerBox key={itemPath}>

@@ -136,3 +136,26 @@ function App() {
 ## 自定义配置
 
 如果需要使用自定义的菜单数据，可以修改 `menu-data.json` 文件或传入自定义配置。
+
+Menu/
+├── components/           # 组件文件夹
+│   ├── GroupHeader/      # 分组标题组件
+│   │   ├── index.ts
+│   │   └── index.tsx
+│   ├── MenuItem/         # 菜单项组件
+│   │   ├── index.ts
+│   │   └── index.tsx
+│   ├── MenuList/         # 主菜单容器组件
+│   │   ├── index.ts
+│   │   └── index.tsx
+│   └── NumberChip/       # 数字标记组件
+│       ├── index.ts
+│       └── index.tsx
+├── data/                 # 数据文件
+│   └── menu-data.json
+├── styles/               # 样式文件
+│   └── index.less
+├── types/                # 类型定义
+│   └── index.ts
+├── index.tsx             # 主入口文件
+└── README.md             # 文档

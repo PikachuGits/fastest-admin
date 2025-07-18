@@ -7,13 +7,12 @@ import {
   type SxProps,
   type Theme,
 } from "@mui/material";
-import { Iconify } from "../iconify";
-import { NumberChip, type NumberChipColor } from "./NumberChip";
-import { FastTypography } from "@fastest/ui";
-import "./index.less";
+import { Iconify } from "../../../iconify";
+import { NumberChip, type NumberChipColor } from "../NumberChip";
+import "../../styles/index.less";
 
 export interface MenuItemProps {
-  icon?: import("../iconify").IconifyProps["icon"];
+  icon?: import("../../../iconify").IconifyProps["icon"];
   primary: string;
   secondary?: string;
   level?: number;
@@ -35,8 +34,8 @@ const StyledListItemButton = styled(ListItemButton)<{
   marginTop: theme.spacing(0.5),
   padding: " 4px 8px 4px 12px",
   minHeight: 44,
-  backgroundColor: "rgba(0, 0, 0, 0.04)",
-  // backgroundColor: selected ? "#E8F5E8" : "transparent",
+  // backgroundColor: "rgba(0, 0, 0, 0.04)",
+  backgroundColor: selected ? "#E8F5E8" : "transparent",
   borderRadius: theme.spacing(1),
   "&:hover": {
     backgroundColor: selected ? "#E8F5E8" : "#F5F5F5",
@@ -54,6 +53,26 @@ const StyledListItemButton = styled(ListItemButton)<{
   },
 }));
 
+const StyledListItemText = styled(ListItemText)({
+  flex: "1 1 auto",
+  display: "inline-flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  maxHeight: 40,
+  padding: "0 8px 0 0",
+  margin: 0,
+  "& .MuiListItemText-secondary": {
+    fontSize: "12px",
+    color: "#757575",
+    lineHeight: 0
+  },
+  "& .MuiListItemText-primary": {
+    fontSize: "14px",
+    color: "#212121",
+    fontWeight: 500
+  }
+})
+
 const ArrowIcon = ({
   open,
   className,
@@ -66,9 +85,8 @@ const ArrowIcon = ({
   return (
     <Iconify
       icon={"eva:arrow-ios-downward-fill"}
-      className={`transition-all duration-300 ease-in-out ${
-        open ? "rotate-0" : "rotate-[-90deg]"
-      } ${className}`}
+      className={`transition-all duration-300 ease-in-out ${open ? "rotate-0" : "rotate-[-90deg]"
+        } ${className}`}
       sx={{ color: "#757575" }}
       {...props}
     />
@@ -108,39 +126,29 @@ export const MenuItem = ({
       className="fast-menu-item-container-sub-child"
     >
       {icon && (
-        <ListItemIcon>
+        <ListItemIcon >
           <Iconify
             icon={icon}
+            className="w-full h-full"
             sx={{
-              width: 20,
-              height: 20,
               color: selected ? "#2E7D32" : disabled ? "#BDBDBD" : "#757575",
             }}
           />
         </ListItemIcon>
       )}
-      <ListItemText
+      <StyledListItemText
         primary={
           primary && (
-            <span className="font-black text-sm truncate">{primary}</span>
+            <span className="text-sm truncate">{primary}</span>
           )
         }
         secondary={
           secondary && (
-            <span className="inline-block font-bold text-xs truncate w-full">
+            <span className="inline-block text-xs truncate w-full">
               {secondary}
             </span>
           )
         }
-        sx={{
-          flex: "1 1 auto",
-          display: "inline-flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          maxHeight: 40,
-          padding: "0 8px 0 0",
-          margin: 0,
-        }}
       />
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         {numberBadge && <NumberChip number={numberBadge} color={badgeColor} />}
