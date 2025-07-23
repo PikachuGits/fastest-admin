@@ -9,9 +9,9 @@
   --AppBar-border-color: rgba(0, 0, 0, 0.1);
 }
 
-body {
-  transition: background-color 0.3s ease-in-out;
-}
+// body {
+//   // transition: background-color 0.3s ease-in-out;
+// }
 
 /* 暗色模式下 */
 .dark {
@@ -58,47 +58,70 @@ body {
 // }
 
 
-/* 定义圆形揭示动画 */
-@keyframes reveal-in {
-  from {
-    /*
-         * 动画的起点是一个半径为 0 的圆，
-         * 圆心位置由 JS 设置的 CSS 变量 --click-x 和 --click-y 决定
-        */
-    clip-path: circle(0% at var(--click-x) var(--click-y));
-  }
+// /* 定义圆形揭示动画 */
+// @keyframes reveal-in {
+//   from {
+//     /*
+//          * 动画的起点是一个半径为 0 的圆，
+//          * 圆心位置由 JS 设置的 CSS 变量 --click-x 和 --click-y 决定
+//         */
+//     clip-path: circle(0% at var(--click-x) var(--click-y));
+//   }
 
-  to {
-    /*
-         * 动画的终点是一个足够大的圆，可以覆盖整个屏幕
-        */
-    clip-path: circle(150% at var(--click-x) var(--click-y));
-  }
-}
+//   to {
+//     /*
+//          * 动画的终点是一个足够大的圆，可以覆盖整个屏幕
+//         */
+//     clip-path: circle(150% at var(--click-x) var(--click-y));
+//   }
+// }
 
-/*
- * 将动画应用到新视图的伪元素上。
- * 当 View Transition 发生时，浏览器会自动为新页面快照应用这个动画。
-*/
-::view-transition-new(root) {
-  /*
-     * 禁用默认的混合模式，否则可能会有奇怪的颜色叠加效果
-    */
-  mix-blend-mode: normal;
+// /*
+//  * 将动画应用到新视图的伪元素上。
+//  * 当 View Transition 发生时，浏览器会自动为新页面快照应用这个动画。
+// */
+// ::view-transition-new(root) {
+//   /*
+//      * 禁用默认的混合模式，否则可能会有奇怪的颜色叠加效果
+//     */
+//   mix-blend-mode: normal;
 
-  /*
-     * 应用我们自定义的动画
-     * - 动画时长 600ms
-     * - 动画曲线 ease-in-out
-     * - 动画方向 forwards (保持在最后一帧)
-    */
-  animation: reveal-in 600ms ease-in-out forwards;
-}
+//   /*
+//      * 应用我们自定义的动画
+//      * - 动画时长 600ms
+//      * - 动画曲线 ease-in-out
+//      * - 动画方向 forwards (保持在最后一帧)
+//     */
+//   animation: reveal-in 600ms ease-in-out forwards;
+// }
 
-// 我们不希望旧视图有任何动画，所以直接让它消失
+// // 我们不希望旧视图有任何动画，所以直接让它消失
+// ::view-transition-old(root) {
+//   /* 禁用默认的淡出动画 */
+//   animation: none;
+//   /* 禁用默认的混合模式 */
+//   mix-blend-mode: normal;
+// }
+
+
+::view-transition-new(root),
 ::view-transition-old(root) {
-  /* 禁用默认的淡出动画 */
   animation: none;
-  /* 禁用默认的混合模式 */
   mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 2147483646;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+html.dark::view-transition-old(root) {
+  z-index: 1;
+}
+
+html.dark::view-transition-new(root) {
+  z-index: 2147483646;
 }

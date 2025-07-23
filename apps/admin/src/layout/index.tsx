@@ -15,6 +15,8 @@ const Layout = (props: any) => {
     <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
       {/* Header */}
       <Header onDrawerToggle={handleDrawerToggle} />
+      {/* Sidebar */}
+      <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
       {/* 主体区域 */}
       <Box
         sx={{
@@ -23,8 +25,7 @@ const Layout = (props: any) => {
           pt: (theme) => `${theme.customLayout.headerHeight}px`,
         }}
       >
-        {/* Sidebar */}
-        <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
+
         {/* 主内容 */}
         <Box
           component="main"

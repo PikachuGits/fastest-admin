@@ -37,6 +37,7 @@
       "devDependencies": {
         "@eslint/js": "catalog:",
         "@fastest/components": "workspace:*",
+        "@fastest/hook": "workspace:*",
         "@fastest/plugins": "workspace:*",
         "@fastest/ui": "workspace:*",
         "@fastest/utils": "workspace:*",
@@ -53,7 +54,7 @@
         "typescript": "catalog:",
         "typescript-eslint": "catalog:",
         "unocss": "catalog:",
-        "unocss-preset-animations": "^1.2.1",
+        "unocss-preset-animations": "catalog:",
         "vite": "catalog:",
       },
     },
@@ -86,6 +87,14 @@
       "dependencies": {
         "@fastest/utils": "workspace:*",
         "@iconify/react": "catalog:",
+      },
+    },
+    "packages/hook": {
+      "name": "@fastest/hook",
+      "version": "0.0.1",
+      "devDependencies": {
+        "typescript": "catalog:",
+        "vite": "catalog:",
       },
     },
     "packages/plugins": {
@@ -146,6 +155,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.36.0",
     "unocss": "^66.3.3",
+    "unocss-preset-animations": "^1.2.1",
     "vite": "^7.0.4",
     "zustand": "^5.0.6",
   },
@@ -297,6 +307,8 @@
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.3.3", "", { "dependencies": { "@eslint/core": "^0.15.1", "levn": "^0.4.1" } }, "sha512-1+WqvgNMhmlAambTvT3KPtCl/Ibr68VldY2XY40SL1CE0ZXiakFR/cbTspaF5HsnpDMvcYYoJHfl4980NBjGag=="],
 
     "@fastest/components": ["@fastest/components@workspace:packages/components"],
+
+    "@fastest/hook": ["@fastest/hook@workspace:packages/hook"],
 
     "@fastest/plugins": ["@fastest/plugins@workspace:packages/plugins"],
 

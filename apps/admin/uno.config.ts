@@ -51,19 +51,5 @@ export default defineConfig({
         }
       `,
     },
-  ],
-  // 2. 将设计规范注入 UnoCSS theme
-  // theme: {
-  //   colors: {
-  //     primary: lightDesignTokens.colors.primary,
-  //     background: lightDesignTokens.colors.background,
-  //     text: lightDesignTokens.colors.text,
-  //   },
-  // },
-  // rules: [
-  //   // 支持你未来扩展，比如 layout 高度等
-  // ],
-  // shortcuts: [
-  //   ['btn-primary', 'bg-primary text-white px-4 py-2 rounded hover:bg-primary/90'],
-  // ],
+  ]
 });
