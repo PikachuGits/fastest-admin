@@ -37,6 +37,7 @@
       "typescript": "~5.8.3",
       "typescript-eslint": "^8.36.0",
       "unocss": "^66.3.3",
+      "unocss-preset-animations": "^1.2.1",
       "@vitejs/plugin-react": "^4.6.0",
       "@types/bun": "^1.2.18",
       "rimraf": "^6.0.1",

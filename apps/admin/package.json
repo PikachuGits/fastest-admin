@@ -44,7 +44,7 @@
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "unocss": "catalog:",
-    "unocss-preset-animations": "^1.2.1",
+    "unocss-preset-animations": "catalog:",
     "vite": "catalog:"
   }
 }
