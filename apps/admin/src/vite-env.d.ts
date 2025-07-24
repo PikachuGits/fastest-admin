@@ -7,14 +7,26 @@ declare module '@mui/material/styles' {
   interface Theme {
     customLayout: {
       headerHeight: number;
-      footerHeight?: number;
+      sidebarWidth: number;
+      sidebarCollapsedWidth: number;
+      footerHeight: number;
+      contentPadding: number;
+      showSidebar: boolean;
+      sidebarCollapsed: boolean;
+      showFooter: boolean;
     };
   }
 
   interface ThemeOptions {
     customLayout?: {
       headerHeight?: number;
+      sidebarWidth?: number;
+      sidebarCollapsedWidth?: number;
       footerHeight?: number;
+      contentPadding?: number;
+      showSidebar?: boolean;
+      sidebarCollapsed?: boolean;
+      showFooter?: boolean;
     };
   }
 }

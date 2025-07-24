@@ -4,14 +4,14 @@
 @import '@fontsource/roboto/700.css';
 
 :root {
-  --AppBar-bg: #ffffff;
+  --AppBar-bg: rgba(244, 240, 234, 1);
   --AppBar-color: #333333;
   --AppBar-border-color: rgba(0, 0, 0, 0.1);
 }
 
-// body {
-//   // transition: background-color 0.3s ease-in-out;
-// }
+html {
+  background: rgba(244, 240, 234, 1);
+}
 
 /* 暗色模式下 */
 .dark {
@@ -19,6 +19,18 @@
   --AppBar-color: #ffffff;
   --AppBar-border-color: rgba(255, 255, 255, 0.1);
 }
+
+// .glass {
+//   background-color: rgba(255, 255, 255, 0.1);
+//   /* 半透明背景 */
+//   backdrop-filter: blur(10px);
+//   /* 背后模糊 */
+//   -webkit-backdrop-filter: blur(10px);
+//   /* Safari 兼容 */
+//   border-radius: 12px;
+//   border: 1px solid rgba(255, 255, 255, 0.2);
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+// }
 
 /* 定义新视图滑入的动画 */
 @keyframes slide-from-right {
@@ -41,68 +53,6 @@
     transform: translateX(-100%);
   }
 }
-
-/* --- 关键部分 --- */
-/* 应用动画到新旧视图的伪元素上 */
-
-// /* 旧视图，应用滑出动画 */
-// ::view-transition-old(root) {
-//   animation: 300ms ease-out forwards slide-to-left;
-// }
-
-// /* 新视图，应用滑入动画 */
-// ::view-transition-new(root) {
-//   /* 混合模式可以创造更有趣的效果，但这里先禁用 */
-//   mix-blend-mode: normal;
-//   animation: 300ms ease-out forwards slide-from-right;
-// }
-
-
-// /* 定义圆形揭示动画 */
-// @keyframes reveal-in {
-//   from {
-//     /*
-//          * 动画的起点是一个半径为 0 的圆，
-//          * 圆心位置由 JS 设置的 CSS 变量 --click-x 和 --click-y 决定
-//         */
-//     clip-path: circle(0% at var(--click-x) var(--click-y));
-//   }
-
-//   to {
-//     /*
-//          * 动画的终点是一个足够大的圆，可以覆盖整个屏幕
-//         */
-//     clip-path: circle(150% at var(--click-x) var(--click-y));
-//   }
-// }
-
-// /*
-//  * 将动画应用到新视图的伪元素上。
-//  * 当 View Transition 发生时，浏览器会自动为新页面快照应用这个动画。
-// */
-// ::view-transition-new(root) {
-//   /*
-//      * 禁用默认的混合模式，否则可能会有奇怪的颜色叠加效果
-//     */
-//   mix-blend-mode: normal;
-
-//   /*
-//      * 应用我们自定义的动画
-//      * - 动画时长 600ms
-//      * - 动画曲线 ease-in-out
-//      * - 动画方向 forwards (保持在最后一帧)
-//     */
-//   animation: reveal-in 600ms ease-in-out forwards;
-// }
-
-// // 我们不希望旧视图有任何动画，所以直接让它消失
-// ::view-transition-old(root) {
-//   /* 禁用默认的淡出动画 */
-//   animation: none;
-//   /* 禁用默认的混合模式 */
-//   mix-blend-mode: normal;
-// }
-
 
 ::view-transition-new(root),
 ::view-transition-old(root) {

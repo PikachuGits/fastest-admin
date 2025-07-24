@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { Iconify } from "@fastest/components";
-import { useAppTheme } from '@/app/providers/ThemeProvider'
+import { useAppTheme } from "@/app/providers";
+import { useAppLayout } from "@fastest/hook";
 import RotatingBorderAvatar from "./AvatarWithRotatingBorder";
 
 const IconButtonBox = styled(IconButton)(({ theme }) => {

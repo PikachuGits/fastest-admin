@@ -12,7 +12,7 @@ const Layout = (props: any) => {
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
+    <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column", background: 'rgba(244,240,234, 1)' }}>
       {/* Header */}
       <Header onDrawerToggle={handleDrawerToggle} />
       {/* Sidebar */}
@@ -32,6 +32,7 @@ const Layout = (props: any) => {
           sx={{
             flexGrow: 1,
             pt: 1,
+            pl: (theme) => `${theme.customLayout.sidebarWidth}px`,
           }}
         >
           <Container sx={{ height: "100vh" }} maxWidth={false}>

@@ -27,29 +27,29 @@ export default defineConfig({
     presetAttributify(),
     presetAnimations()
   ],
-  // 2. 预定义快捷方式（可选）
-  shortcuts: [
-    ['btn-primary', 'bg-primary text-white px-4 py-2 rounded hover:bg-primary/90'],
-    ['btn-secondary', 'bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/90'],
-  ],
+  // // 2. 预定义快捷方式（可选）
+  // shortcuts: [
+  //   ['btn-primary', 'bg-primary text-white px-4 py-2 rounded hover:bg-primary/90'],
+  //   ['btn-secondary', 'bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/90'],
+  // ],
 
-  // 3. preflights：注入根、.dark 下的 CSS 变量
-  preflights: [
-    {
-      getCSS: () => `
-        :root {
-          --color-primary: ${lightDesignTokens.colors.primary};
-          --color-secondary: ${lightDesignTokens.colors.secondary};
-          --color-background: ${lightDesignTokens.colors.background};
-          --color-text: ${lightDesignTokens.colors.text};
-        }
-        .dark {
-          --color-primary: ${darkDesignTokens.colors.primary};
-          --color-secondary: ${darkDesignTokens.colors.secondary};
-          --color-background: ${darkDesignTokens.colors.background};
-          --color-text: ${darkDesignTokens.colors.text};
-        }
-      `,
-    },
-  ]
+  // // 3. preflights：注入根、.dark 下的 CSS 变量
+  // preflights: [
+  //   {
+  //     getCSS: () => `
+  //       :root {
+  //         --color-primary: ${lightDesignTokens.colors.primary};
+  //         --color-secondary: ${lightDesignTokens.colors.secondary};
+  //         --color-background: ${lightDesignTokens.colors.background};
+  //         --color-text: ${lightDesignTokens.colors.text};
+  //       }
+  //       .dark {
+  //         --color-primary: ${darkDesignTokens.colors.primary};
+  //         --color-secondary: ${darkDesignTokens.colors.secondary};
+  //         --color-background: ${darkDesignTokens.colors.background};
+  //         --color-text: ${darkDesignTokens.colors.text};
+  //       }
+  //     `,
+  //   },
+  // ]
 });

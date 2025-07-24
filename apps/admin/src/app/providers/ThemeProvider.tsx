@@ -4,22 +4,12 @@ import {
   useContext,
   useMemo,
   useState,
-  useEffect,
-  type ReactNode,
 } from "react";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme"; // 你定义的主题
-import type { Theme } from "@mui/material/styles";
-import { useViewTransitionToggle } from '@fastest/hook'
-
-// 定义上下文类型
-interface ThemeContextProps {
-  isDarkMode: boolean;
-  toggleTheme: (e: any) => void;
-  theme: Theme;
-  headerHeight: number;
-  setHeaderHeight: (height: number) => void;
-}
+import { useViewTransitionToggle } from '@fastest/hook';
+import { useLayoutConfig } from '@fastest/hook';
+import type { ThemeContextProps, AppThemeProviderProps } from './types';
 
 // 创建上下文
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
@@ -33,26 +23,38 @@ export const useAppTheme = () => {
 
 
 // Provider 组件
-export function AppThemeProvider({ children }: { children: ReactNode }) {
+export function AppThemeProvider({ children, initialLayoutConfig }: AppThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [headerHeight, setHeaderHeight] = useState(0);
-  // useViewTransitionToggle hook 内部已经处理了类名切换逻辑
-  const toggleTheme = useViewTransitionToggle(isDarkMode, setIsDarkMode);
+  const {
+    layoutConfig,
+    updateLayoutConfig,
+    resetLayoutConfig,
+  } = useLayoutConfig(initialLayoutConfig);
 
+  const toggleTheme = useViewTransitionToggle(isDarkMode, setIsDarkMode);
+  // useViewTransitionToggle hook 内部已经处理了类名切换逻辑
+
+  // 生成包含布局配置的主题
   const theme = useMemo(() => {
     const base = isDarkMode ? darkTheme : lightTheme;
     return {
       ...base,
       customLayout: {
         ...base.customLayout,
-        headerHeight,
+        ...layoutConfig,
       },
     };
-  }, [isDarkMode, headerHeight]); // <- headerHeight 变化时，生成新的 theme
+  }, [isDarkMode, layoutConfig]);
 
   return (
     <ThemeContext.Provider
-      value={{ isDarkMode, toggleTheme, theme, headerHeight, setHeaderHeight }}
+      value={{
+        isDarkMode,
+        toggleTheme,
+        theme,
+        updateLayoutConfig,
+        resetLayoutConfig,
+      }}
     >
       <MuiThemeProvider theme={theme}>
         <CssBaseline />

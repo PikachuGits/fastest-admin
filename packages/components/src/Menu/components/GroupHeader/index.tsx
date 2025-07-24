@@ -18,6 +18,7 @@ const StyledGroupHeader = styled(ListSubheader)(({ theme }) => ({
   textTransform: "uppercase",
   display: "flex",
   alignItems: "center",
+  position: "relative",
   "&:hover": {
     color: theme.palette.text.primary,
     "& .icon-arrow": {

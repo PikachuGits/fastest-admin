@@ -1,7 +1,7 @@
 import { Iconify, type IconifyName, iconSets } from "@fastest/components";
 import { useSnackbar } from "notistack";
 import "./index.less";
-import { Box, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { MenuExamples } from "@fastest/components";
 
 const Index = () => {
@@ -23,6 +23,7 @@ const Index = () => {
   return (
     <Box className="bg-gray-100">
       {/* <MenuExamples /> */}
+      <Button variant="contained">测试</Button>
     </Box>
   );
 };

@@ -7,8 +7,12 @@
     "scripts": {
         "build": "bun build src/index.ts --outdir dist"
     },
+    "peerDependencies": {
+        "react": "^18.0.0"
+    },
     "devDependencies": {
         "vite": "catalog:",
-        "typescript": "catalog:"
+        "typescript": "catalog:",
+        "@types/react": "catalog:"
     }
 }

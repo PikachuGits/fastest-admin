@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import {
   Box,
-  Divider,
-  Drawer,
-  Typography,
-  useTheme,
-  useMediaQuery,
+  // Divider,
+  // Drawer,
+  // Typography,
+  // useMediaQuery,
 } from "@mui/material";
 import { MenuList } from "@fastest/components";
 import { useAppTheme } from "@/app/providers/ThemeProvider";
@@ -18,7 +17,15 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = () => {
-  // const { theme } = useAppTheme();
+  const { theme, updateLayoutConfig } = useAppTheme();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (sidebarRef.current) {
+      updateLayoutConfig({ sidebarWidth: sidebarRef.current.offsetWidth });
+    }
+  }, [sidebarRef, sidebarRef.current?.offsetWidth]);
+  // const theme = useTheme();
   // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // const drawer = (
@@ -30,26 +37,23 @@ const Sidebar: React.FC<SidebarProps> = () => {
   //     <Box>导航链接2</Box>
   //   </Box>
   // );
-  // console.log(theme.customLayout.headerHeight);
-
 
   return (
     <Box
+      ref={sidebarRef}
       component="nav"
       sx={{
         width: { md: 300 },
-        flexShrink: { md: 0 },
-        border: "1px solid blue",
-        px: 2,
         height: (theme) => `calc(100vh - ${theme.customLayout.headerHeight}px)`,
-        overflowY: "auto",
+        flexShrink: { md: 0 },
+        px: 1,
         position: "fixed",
         top: (theme) => `${theme.customLayout.headerHeight}px`,
+        overflowY: "auto",
+        // background: "#999",
       }}
     >
-      <div style={{ border: "1px solid red" }}>
-        <div style={{ backgroundColor: "red" }}></div>
-      </div>
+      <MenuList />
     </Box>
   );
 };

@@ -4,6 +4,7 @@ import {
   IconButton,
   Toolbar,
   useMediaQuery,
+  useTheme,
   Box,
   Grid,
   styled,
@@ -13,7 +14,7 @@ import { Iconify } from "@fastest/components";
 import "@/layout/styles/header.less";
 import { RightHeaderGrid } from "./RightHeaderGrid";
 import { LeftHeaderGrid } from "./LeftHeaderGrid";
-import { useAppTheme } from "@/app/providers/ThemeProvider";
+import { useAppLayout } from "@fastest/hook";
 
 interface HeaderProps {
   onDrawerToggle: () => void;
@@ -38,15 +39,16 @@ const IconButtonBox = styled(IconButton)(({ theme }) => {
  * @returns
  */
 const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
-  const { theme, setHeaderHeight } = useAppTheme();
+  const { updateLayoutConfig } = useAppLayout();
+  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const headerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
+      updateLayoutConfig({ headerHeight: headerRef.current.offsetHeight });
     }
-  }, [headerRef, headerRef.current?.offsetHeight]);
+  }, [headerRef?.current]);
 
   return (
     <AppBar

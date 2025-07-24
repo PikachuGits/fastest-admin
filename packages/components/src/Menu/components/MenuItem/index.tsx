@@ -31,15 +31,15 @@ const StyledListItemButton = styled(ListItemButton)<{
   selected?: boolean;
   hasSubItems?: boolean;
 }>(({ theme, level = 0, selected, hasSubItems }) => ({
-  marginTop: theme.spacing(0.5),
+  marginTop: level ? theme.spacing(0.5) : 0,
   padding: " 4px 8px 4px 12px",
   minHeight: 44,
   // backgroundColor: "rgba(0, 0, 0, 0.04)",
   backgroundColor: selected ? "#E8F5E8" : "transparent",
   borderRadius: theme.spacing(1),
-  "&:hover": {
-    backgroundColor: selected ? "#E8F5E8" : "#F5F5F5",
-  },
+  // "&:hover": {
+  //   backgroundColor: selected ? "#78db78" : "#793535",
+  // },
   "& .MuiListItemIcon-root": {
     minWidth: 24,
     marginRight: theme.spacing(1.5),

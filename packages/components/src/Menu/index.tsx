@@ -1,5 +1,5 @@
 // 组件导出
-export { MenuList } from "./components/MenuList";
+export { default as MenuList } from "./components/MenuList";
 export { MenuListRefactored } from "./components/MenuList/MenuListRefactored";
 export { MenuItem } from "./components/MenuItem";
 export { NumberChip } from "./components/NumberChip";

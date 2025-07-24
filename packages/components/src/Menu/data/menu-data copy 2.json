@@ -1,0 +1,115 @@
+{
+    "navItems": [
+        {
+            "subheader": "",
+            "items": [
+                {
+                    "title": "用户管理",
+                    "path": "/main/user/list",
+                    "icon": "solar:users-group-rounded-bold",
+                    "children": [
+                        {
+                            "title": "用户列表",
+                            "path": "/main/user/list"
+                        },
+                        {
+                            "title": "用户组列表",
+                            "path": "/main/user/group"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "subheader": "",
+            "items": [
+                {
+                    "title": "公司管理",
+                    "path": "/main/company/list",
+                    "icon": "solar:settings-bold-duotone",
+                    "children": [
+                        {
+                            "title": "公司列表",
+                            "path": "/main/company/list",
+                            "icon": "solar:settings-bold-duotone"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "subheader": "",
+            "items": [
+                {
+                    "title": "权限管理",
+                    "path": "/main/permission/role",
+                    "icon": "solar:settings-bold-duotone",
+                    "children": [
+                        {
+                            "title": "角色管理",
+                            "path": "/main/permission/role",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "用户授权管理",
+                            "path": "/main/permission/auth-to-user",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "公司授权管理",
+                            "path": "/main/permission/auth",
+                            "icon": "solar:settings-bold-duotone"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "subheader": "",
+            "items": [
+                {
+                    "title": "系统管理",
+                    "path": "/main/system/func",
+                    "icon": "solar:settings-bold-duotone",
+                    "children": [
+                        {
+                            "title": "任务方法",
+                            "path": "/main/system/func",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "流程管理",
+                            "path": "/main/system/process",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "任务模板",
+                            "path": "/main/system/quest",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "文件库管理",
+                            "path": "/main/system/document",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "字典配置",
+                            "path": "/main/system/dictionary",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "系统配置",
+                            "path": "/main/system/configuration",
+                            "icon": "solar:settings-bold-duotone"
+                        },
+                        {
+                            "title": "菜单管理",
+                            "path": "/main/system/menu",
+                            "icon": "solar:settings-bold-duotone"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
