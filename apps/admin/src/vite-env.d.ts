@@ -1,8 +1,9 @@
 /// <reference types="vite/client" />
 
-// src/types/theme.d.ts
-import { Theme as MuiTheme, ThemeOptions as MuiThemeOptions } from '@mui/material/styles';
+// 导入组件库的主题类型扩展
+import type {} from '@fastest/components/src/theme/extend-theme-types';
 
+// 应用层特定的主题扩展
 declare module '@mui/material/styles' {
   interface Theme {
     customLayout: {
@@ -18,15 +19,15 @@ declare module '@mui/material/styles' {
   }
 
   interface ThemeOptions {
-    customLayout?: {
-      headerHeight?: number;
-      sidebarWidth?: number;
-      sidebarCollapsedWidth?: number;
-      footerHeight?: number;
-      contentPadding?: number;
-      showSidebar?: boolean;
-      sidebarCollapsed?: boolean;
-      showFooter?: boolean;
-    };
+    customLayout?: Partial<{
+      headerHeight: number;
+      sidebarWidth: number;
+      sidebarCollapsedWidth: number;
+      footerHeight: number;
+      contentPadding: number;
+      showSidebar: boolean;
+      sidebarCollapsed: boolean;
+      showFooter: boolean;
+    }>;
   }
 }

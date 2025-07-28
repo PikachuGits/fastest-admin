@@ -12,7 +12,8 @@ const Layout = (props: any) => {
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column", background: 'rgba(244,240,234, 1)' }}>
+    // 'rgba(244,240,234, 1)'
+    <Box sx={{ display: "flex", minHeight: "100vh", flexDirection: "column", background: (theme) => theme.palette.background.default }}>
       {/* Header */}
       <Header onDrawerToggle={handleDrawerToggle} />
       {/* Sidebar */}

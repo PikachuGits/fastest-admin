@@ -7,7 +7,9 @@ export const BASE_SPACING_UNIT = 8;
 export const lightPalette: PaletteOptions = {
     mode: 'light',
     primary: { main: '#1976d2' },
-    background: { default: '#ffffff', paper: '#f5f5f5' },
+    // rgba(244, 240, 234, 1)
+    background: { default: 'rgba(244, 240, 234, 1)', paper: '#f5f5f5' },
+    // background: { default: '#ffffff', paper: '#f5f5f5' },
     text: {
         primary: '#212B36',
         secondary: '#637381',
@@ -24,7 +26,8 @@ export const lightPalette: PaletteOptions = {
 export const darkPalette: PaletteOptions = {
     mode: 'dark',
     primary: { main: '#42a5f5' },
-    background: { default: '#161C24', paper: '#212B36' },
+    background: { default: 'rgba(0, 0, 0, 0.51)', paper: '#212B36' },
+    // background: { default: '#161C24', paper: '#212B36' },
     text: {
         primary: '#ffffff',
         secondary: '#919EAB',

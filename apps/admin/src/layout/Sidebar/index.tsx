@@ -1,12 +1,14 @@
-import React, { useLayoutEffect, useRef } from "react";
-import {
-  Box,
-
-} from "@mui/material";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { MenuList } from "@fastest/components";
 import { useAppTheme } from "@/app/providers/ThemeProvider";
 import menuDataRaw from './menu-data.json';
 import type { NavData } from "@fastest/components";
+import {
+  StyledArrowIcon,
+  StyledSidebarContainer,
+  StyledToggleButton,
+  StyledSidebarNav
+} from "./sidebar.styles";
 
 // 类型断言确保 JSON 数据符合 NavData 接口
 const menuData = menuDataRaw as NavData;
@@ -19,6 +21,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = () => {
+  const [open, setOpen] = useState(false);
   const { theme, updateLayoutConfig } = useAppTheme();
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -41,59 +44,23 @@ const Sidebar: React.FC<SidebarProps> = () => {
   // );
 
   return (
-    <Box
-      ref={sidebarRef}
-      component="nav"
-      sx={{
-        width: { md: 300 },
-        height: (theme) => `calc(100vh - ${theme.customLayout.headerHeight}px)`,
-        flexShrink: { md: 0 },
-        px: 1,
-        position: "fixed",
-        top: (theme) => `${theme.customLayout.headerHeight}px`,
-        overflowY: "auto",
-        borderRight: '1px solid #e0e0e0',
-      }}
-    >
-      <MenuList data={menuData} />
-    </Box>
+    <StyledSidebarContainer>
+      <StyledToggleButton onClick={() => setOpen(!open)}>
+        <StyledArrowIcon
+          icon="eva:arrow-ios-downward-fill"
+          open={open}
+          className="icon-arrow"
+        />
+      </StyledToggleButton>
+
+      <StyledSidebarNav
+        ref={sidebarRef}
+      >
+        <MenuList data={menuData} />
+      </StyledSidebarNav>
+    </StyledSidebarContainer>
   );
 };
 
 export default Sidebar;
 export { drawerWidth };
-//  {/* 临时 drawer (手机端) */}
-//  {isMobile && (
-//   <Drawer
-//     variant="temporary"
-//     open={mobileOpen}
-//     onClose={onDrawerToggle}
-//     ModalProps={{ keepMounted: true }}
-//     sx={{
-//       display: { xs: "block", md: "none" },
-//       "& .MuiDrawer-paper": {
-//         boxSizing: "border-box",
-//         width: drawerWidth,
-//       },
-//     }}
-//   >
-//     {drawer}
-//   </Drawer>
-// )}
-
-// {/* 固定 drawer (桌面端) */}
-// {!isMobile && (
-//   <Drawer
-//     variant="permanent"
-//     open
-//     sx={{
-//       display: { xs: "none", md: "block" },
-//       "& .MuiDrawer-paper": {
-//         boxSizing: "border-box",
-//         width: drawerWidth,
-//       },
-//     }}
-//   >
-//     {drawer}
-//   </Drawer>
-// )}
