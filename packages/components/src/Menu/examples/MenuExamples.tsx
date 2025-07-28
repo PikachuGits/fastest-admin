@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, ButtonGroup, Typography, Paper } from '@mui/material';
-import { MenuListRefactored } from '../components/MenuList/MenuListRefactored';
+import MenuList from '../components/MenuList';
 import type { MenuVariant, MenuStyleVariantType } from '../types';
 
 /**
@@ -70,7 +70,7 @@ export const MenuExamples: React.FC = () => {
 
       {/* 菜单展示 */}
       <Paper sx={{ p: 2, display: 'inline-block' }}>
-        <MenuListRefactored
+        <MenuList
           variant={currentVariant}
           styleVariant={currentStyleVariant}
           onItemClick={handleItemClick}

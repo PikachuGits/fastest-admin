@@ -6,8 +6,9 @@ import {
   // Typography,
   // useMediaQuery,
 } from "@mui/material";
-import { MenuList } from "@fastest/components";
+import { MenuList, MiniMenu } from "@fastest/components";
 import { useAppTheme } from "@/app/providers/ThemeProvider";
+import { Navigation } from './demo'
 
 const drawerWidth = 240;
 
@@ -53,7 +54,14 @@ const Sidebar: React.FC<SidebarProps> = () => {
         // background: "#999",
       }}
     >
-      <MenuList />
+      {/* <Navigation></Navigation> */}
+      {/* <MenuList /> */}
+      <MiniMenu
+        sx={{
+          maxWidth: 320,
+          boxShadow: 2,
+        }}
+      />
     </Box>
   );
 };

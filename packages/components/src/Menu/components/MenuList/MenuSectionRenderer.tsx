@@ -7,7 +7,7 @@ import React, { useState, type ReactElement } from 'react';
 import { Collapse, List } from '@mui/material';
 import { GroupHeader } from '../GroupHeader';
 import { MenuItemRenderer } from './MenuItemRenderer';
-import type { NavSection, OpenStatesRecord } from './types';
+import type { NavSection, OpenStatesRecord } from '../../types';
 
 /**
  * MenuSectionRenderer 组件属性接口
