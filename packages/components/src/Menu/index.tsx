@@ -72,9 +72,7 @@ export {
  * 组件属性类型
  * Component props types
  */
-export type { MenuItemProps } from "./components/MenuItem";
 export type { NumberChipProps, NumberChipColor } from "./components/NumberChip";
-export type { GroupHeaderProps } from "./components/GroupHeader";
 
 /**
  * 菜单相关类型定义

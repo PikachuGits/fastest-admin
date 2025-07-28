@@ -1,14 +1,15 @@
 import React, { useLayoutEffect, useRef } from "react";
 import {
   Box,
-  // Divider,
-  // Drawer,
-  // Typography,
-  // useMediaQuery,
+
 } from "@mui/material";
-import { MenuList, MiniMenu } from "@fastest/components";
+import { MenuList } from "@fastest/components";
 import { useAppTheme } from "@/app/providers/ThemeProvider";
-import { Navigation } from './demo'
+import menuDataRaw from './menu-data.json';
+import type { NavData } from "@fastest/components";
+
+// 类型断言确保 JSON 数据符合 NavData 接口
+const menuData = menuDataRaw as NavData;
 
 const drawerWidth = 240;
 
@@ -51,17 +52,10 @@ const Sidebar: React.FC<SidebarProps> = () => {
         position: "fixed",
         top: (theme) => `${theme.customLayout.headerHeight}px`,
         overflowY: "auto",
-        // background: "#999",
+        borderRight: '1px solid #e0e0e0',
       }}
     >
-      {/* <Navigation></Navigation> */}
-      {/* <MenuList /> */}
-      <MiniMenu
-        sx={{
-          maxWidth: 320,
-          boxShadow: 2,
-        }}
-      />
+      <MenuList data={menuData} />
     </Box>
   );
 };

@@ -7,26 +7,7 @@ import React, { useState, type ReactElement } from 'react';
 import { Collapse, List } from '@mui/material';
 import { GroupHeader } from '../GroupHeader';
 import { MenuItemRenderer } from './MenuItemRenderer';
-import type { NavSection, OpenStatesRecord } from '../../types';
-
-/**
- * MenuSectionRenderer 组件属性接口
- * MenuSectionRenderer component props interface
- */
-export interface MenuSectionRendererProps {
-  /** 菜单分组数据 */
-  section: NavSection;
-  /** 分组索引 */
-  sectionIndex: number;
-  /** 当前选中的菜单项路径 */
-  selectedItem: string;
-  /** 菜单项展开状态记录 */
-  openStates: OpenStatesRecord;
-  /** 切换展开状态的回调函数 */
-  onToggleOpen: (key: string) => void;
-  /** 菜单项点击回调函数 */
-  onItemClick: (itemKey: string) => void;
-}
+import { type MenuSectionRendererProps } from './MenuSectionRenderer.styles';
 
 /**
  * 菜单分组渲染组件
@@ -91,9 +72,8 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
           onClick={handleSubheaderClick}
         />
       )}
-      
       {/* 分组内容（可折叠） */}
-      <Collapse in={isSubheaderOpen} timeout="auto" unmountOnExit>
+      <Collapse sx={{ px: 0.5 }} in={isSubheaderOpen} timeout="auto" unmountOnExit>
         {renderSectionItems()}
       </Collapse>
     </div>

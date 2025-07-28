@@ -8,8 +8,8 @@ export const lightPalette: PaletteOptions = {
     mode: 'light',
     primary: { main: '#1976d2' },
     background: { default: '#ffffff', paper: '#f5f5f5' },
-    text: { 
-        primary: '#212B36', 
+    text: {
+        primary: '#212B36',
         secondary: '#637381',
         disabled: '#919EAB'
     },
@@ -25,8 +25,8 @@ export const darkPalette: PaletteOptions = {
     mode: 'dark',
     primary: { main: '#42a5f5' },
     background: { default: '#161C24', paper: '#212B36' },
-    text: { 
-        primary: '#ffffff', 
+    text: {
+        primary: '#ffffff',
         secondary: '#919EAB',
         disabled: '#637381'
     },
@@ -42,13 +42,13 @@ export const darkPalette: PaletteOptions = {
 export const sharedTokens = {
     breakpoints: {
         values: {
-          xs: 0,
-          sm: 600,
-          md: 900,
-          lg: 1200,
-          xl: 1536,
+            xs: 0,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
         },
-      },
+    },
     shape: { borderRadius: 8 },
     typography: {
         fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',

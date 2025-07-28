@@ -1,32 +1,28 @@
-import { Chip } from "@mui/material";
+import React from 'react';
+import {
+  StyledNumberChip,
+  type NumberChipProps,
+  type NumberChipColor,
+} from './NumberChip.styles';
 
-export type NumberChipColor = "default" | "primary" | "success";
+// ==================== 主组件 Main Component ====================
 
-export interface NumberChipProps {
-  number: number;
-  color?: NumberChipColor;
-}
-
+/**
+ * 数字芯片组件
+ * Number chip component
+ * 
+ * 用于显示数字标识的小型芯片组件
+ * A small chip component for displaying numeric identifiers
+ */
 export const NumberChip = ({ number, color = "default" }: NumberChipProps) => {
-  const chipColors = {
-    default: { backgroundColor: "#F5F5F5", color: "#757575" },
-    primary: { backgroundColor: "#E3F2FD", color: "#1976D2" },
-    success: { backgroundColor: "#E8F5E8", color: "#2E7D32" },
-  };
-
   return (
-    <Chip
+    <StyledNumberChip
       label={`+${number}`}
       size="small"
-      sx={{
-        height: 20,
-        fontSize: "11px",
-        fontWeight: 500,
-        ...chipColors[color],
-        "& .MuiChip-label": {
-          padding: "0 6px",
-        },
-      }}
+      chipColor={color}
     />
   );
 };
+
+// 导出类型
+export type { NumberChipProps, NumberChipColor };

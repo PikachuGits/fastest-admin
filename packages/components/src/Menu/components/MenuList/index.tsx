@@ -15,31 +15,26 @@
  * - Rendering logic split into MenuItemRenderer and MenuSectionRenderer
  */
 
-import React from 'react';
+import React, { useState, useCallback, type ReactElement } from 'react';
 import { List, styled } from '@mui/material';
 import menuData from '../../data/menu-data.json';
 import '../../styles/index.less';
 
 // 导入拆分的模块
 // Import separated modules
-import type { NavData, MenuListProps } from '../../types';
+import type { NavData, NavSection, OpenStatesRecord, MenuListProps, NavItem } from '../../types';
 import { useMenuState } from '../../hooks/useMenuState';
 import { MenuSectionRenderer } from './MenuSectionRenderer';
 
 // ==================== 样式组件 Styled Components ====================
 
 /**
- * 主列表容器样式
- * Main list container styles
- * 
- * 定义菜单列表的基础样式和布局
- * Defines basic styles and layout for the menu list
+ * 菜单列表容器样式
+ * Menu list container styles
  */
-const ListBox = styled(List)(({ theme }) => ({
-  width: '100%',
-  maxWidth: 360,
-  bgcolor: 'background.paper',
+const StyledListBox = styled(List)(({ theme }) => ({
   padding: 0,
+  margin: 0,
 }));
 
 // ==================== 主组件 Main Component ====================
@@ -56,7 +51,7 @@ const ListBox = styled(List)(({ theme }) => ({
  */
 const MenuList: React.FC<MenuListProps> = (props) => {
   // ==================== 状态管理 State Management ====================
-  
+
   /**
    * 使用自定义 Hook 管理菜单状态
    * Use custom Hook to manage menu state
@@ -74,9 +69,9 @@ const MenuList: React.FC<MenuListProps> = (props) => {
    */
   const handleMenuItemClickAdapter = (itemKey: string) => {
     handleItemClick(itemKey);
-    // 这里我们只能传递路径，因为 MenuSectionRenderer 不提供 item 对象
-    // Here we can only pass the path since MenuSectionRenderer doesn't provide the item object
-    props.onItemClick?.(itemKey, {} as any);
+    // 调用外部回调，传递路径和空的 item 对象（因为 MenuSectionRenderer 不提供完整的 item 对象）
+    // Call external callback, passing path and empty item object (since MenuSectionRenderer doesn't provide complete item object)
+    props.onItemClick?.(itemKey, {} as NavItem);
   };
 
   /**
@@ -100,10 +95,10 @@ const MenuList: React.FC<MenuListProps> = (props) => {
    */
   const renderMenuSections = () => {
     const data = props.data || (menuData as NavData);
-    
-    return data.navItems.map((section, index) => {
+
+    return data.navItems.map((section: NavSection, index: number) => {
       if (!section) return null; // 空值检查 Null check
-      
+
       return (
         <MenuSectionRenderer
           key={`section-${index}`}
@@ -121,17 +116,17 @@ const MenuList: React.FC<MenuListProps> = (props) => {
   // ==================== 组件渲染 Component Render ====================
 
   return (
-    <ListBox
+    <StyledListBox
       {...props}
       sx={{
         height: '100%',
-        pb: (theme) => theme.spacing(2),
+        pb: (theme: any) => theme.spacing(2),
         ...props.style,
       }}
       className={props.className}
     >
       {renderMenuSections()}
-    </ListBox>
+    </StyledListBox>
   );
 };
 
