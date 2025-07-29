@@ -1,6 +1,7 @@
 // components/AvatarWithRotatingBorder.tsx
-import { Box, Avatar, IconButton, styled } from "@mui/material";
+import { Avatar } from "@mui/material";
 import "@/layout/styles/avatarWithRotatingBorder.less";
+import { StyledAvatarIconButton } from "./header.styles";
 
 interface AvatarWithRotatingBorderProps {
   children?: React.ReactNode;
@@ -8,23 +9,9 @@ interface AvatarWithRotatingBorderProps {
   size?: number;
 }
 
-const IconButtonBox = styled(IconButton)(({ theme }) => {
-  return {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "all 0.3s ease-in-out",
-    marginLeft: "10px",
-    padding: theme.spacing(0.5),
-    "&:hover": {
-      scale: 1.05,
-    },
-  };
-});
-
 const RotatingBorderAvatar = (props: AvatarWithRotatingBorderProps) => {
   return (
-    <IconButtonBox className="relative w-10 h-10">
+    <StyledAvatarIconButton className="relative w-10 h-10">
       {/* 旋转的边框 SVG */}
       <svg
         width="100%"
@@ -59,7 +46,7 @@ const RotatingBorderAvatar = (props: AvatarWithRotatingBorderProps) => {
       </svg>
       {/* 头像层 */}
       <Avatar sx={{ width: "100%", height: "100%" }} src={props.src} />
-    </IconButtonBox>
+    </StyledAvatarIconButton>
   );
 };
 

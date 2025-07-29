@@ -23,7 +23,7 @@ const baseThemeOptions = {
     sidebarCollapsed: false,
     showFooter: true,
     outlined: {
-      borderColor: 'rgba(204, 240, 204, 1)',
+      borderColor: 'rgba(0, 0, 0, 0.1)',
     },
   },
   // 你可以在这里定义 components 的默认样式

@@ -15,7 +15,6 @@ export const StyledArrowIcon = styled(Iconify, {
 
 export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
     position: 'fixed',
-    background: theme.palette.background.default,
     zIndex: theme.zIndex.drawer + 10,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,

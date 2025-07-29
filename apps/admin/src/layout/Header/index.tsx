@@ -1,13 +1,8 @@
 import React, { useLayoutEffect, useRef } from "react";
 import {
-  AppBar,
-  IconButton,
-  Toolbar,
   useMediaQuery,
   useTheme,
-  Box,
   Grid,
-  styled,
 } from "@mui/material";
 import { Iconify } from "@fastest/components";
 
@@ -15,22 +10,18 @@ import "@/layout/styles/header.less";
 import { RightHeaderGrid } from "./RightHeaderGrid";
 import { LeftHeaderGrid } from "./LeftHeaderGrid";
 import { useAppLayout } from "@fastest/hook";
+import {
+  StyledAppBar,
+  StyledToolbar,
+  StyledIconButton,
+  StyledMainBox
+} from "./header.styles";
 
 interface HeaderProps {
   onDrawerToggle: () => void;
 }
 
-const IconButtonBox = styled(IconButton)(({ theme }) => {
-  return {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "0 2px",
-    "&:hover": {
-      scale: 1.05,
-    },
-  };
-});
+
 
 /**
  * 右 logo 操作图标 search
@@ -51,27 +42,26 @@ const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
   }, [headerRef?.current]);
 
   return (
-    <AppBar
+    <StyledAppBar
       ref={headerRef}
       elevation={0}
       className="header-bar-custom"
       position="fixed"
       color="transparent"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer - 1 }}
     >
-      <Toolbar disableGutters={false}>
+      <StyledToolbar disableGutters={false}>
         {isMobile && (
-          <IconButtonBox
+          <StyledIconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={onDrawerToggle}
           >
             <Iconify icon="custom:menu-duotone" />
-          </IconButtonBox>
+          </StyledIconButton>
         )}
 
-        <Box sx={{ flexGrow: 1 }}>
+        <StyledMainBox>
           <Grid container spacing={2}>
             <Grid size={isMobile ? 2 : 4}>
               <LeftHeaderGrid />
@@ -81,9 +71,9 @@ const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
               <RightHeaderGrid />
             </Grid>
           </Grid>
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </StyledMainBox>
+      </StyledToolbar>
+    </StyledAppBar>
   );
 };
 
