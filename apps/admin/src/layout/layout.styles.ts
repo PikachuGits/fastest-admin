@@ -1,9 +1,8 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container } from '@mui/material';
 
-export interface LayoutModeToggleProps {
-  layoutMode: 'fixed' | 'fluid';
-}
+// 布局模式类型
+type LayoutMode = 'fixed' | 'fluid';
 
 // 主布局容器
 export const StyledLayoutRoot = styled(Box)(({ theme }) => ({
@@ -38,7 +37,7 @@ export const StyledMainContent = styled(Box)<{ component?: React.ElementType }>(
 }));
 
 // 主内容容器
-export const StyledMainContainer = styled(Container)<{ layoutMode: 'fixed' | 'fluid' }>(({ theme, layoutMode }) => ({
+export const StyledMainContainer = styled(Container)<{ layoutMode: LayoutMode }>(({ theme, layoutMode }) => ({
   height: `calc(100vh - ${theme.customLayout.headerHeight}px)`,
   transition: 'all 0.3s ease',
 }));

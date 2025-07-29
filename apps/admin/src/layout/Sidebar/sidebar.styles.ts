@@ -2,8 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Box, IconButton } from "@mui/material";
 import { Iconify } from "@fastest/components";
 
-// 导入类型扩展
-
+// 侧边栏箭头图标
 export const StyledArrowIcon = styled(Iconify, {
     shouldForwardProp: (prop) => prop !== "open",
 })<{ open: boolean }>(({ theme, open }) => ({
@@ -13,6 +12,7 @@ export const StyledArrowIcon = styled(Iconify, {
     transform: open ? "rotate(90deg)" : "rotate(-90deg)",
 }));
 
+// 侧边栏主容器
 export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
     position: 'fixed',
     zIndex: theme.zIndex.drawer + 10,
@@ -25,6 +25,7 @@ export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
     },
 }));
 
+// 侧边栏切换按钮
 export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
     position: 'absolute',
     border: '1px solid rgba(0, 0, 0, 0.1)',
@@ -43,6 +44,7 @@ export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
     },
 }));
 
+// 侧边栏导航容器
 export const StyledSidebarNav = styled(Box)(({ theme }) => ({
     width: 'inherit',
     height: `calc(100vh - ${theme.customLayout.headerHeight}px)`,
