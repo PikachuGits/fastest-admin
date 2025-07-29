@@ -70,7 +70,7 @@ export const StyledListItemButton = styled(ListItemButton, {
     padding: " 4px 8px 4px 12px",
     minHeight: 44,
     borderRadius: theme.spacing(1),
-
+    overflow: "hidden",
     // 选中状态样式 Selected state styles
     ...((selected || parentSelected) && {
         // 一级菜单项（level=0）使用自定义绿色主题
@@ -141,7 +141,7 @@ export const StyledListItemText = styled(ListItemText)({
     flexDirection: "column",
     justifyContent: "center",
     maxHeight: 40,
-    padding: "0 8px 0 0",
+    padding: "0 8px 0 4px",
     margin: 0,
 
     // 次文本样式 Secondary text styles

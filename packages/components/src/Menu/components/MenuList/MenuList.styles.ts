@@ -16,6 +16,8 @@ export interface MenuListProps {
   onItemClick?: (itemKey: string, item: any) => void;
   /** 菜单项展开/折叠回调函数 Menu item toggle callback function */
   onItemToggle?: (path: string, isOpen: boolean) => void;
+  /** 是否收起状态 Whether in collapsed state */
+  collapsed?: boolean;
   /** 自定义样式 Custom styles */
   style?: React.CSSProperties;
   /** CSS 类名 CSS class name */

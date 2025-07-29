@@ -20,6 +20,8 @@ export interface MenuSectionRendererProps {
   onToggleOpen: (key: string) => void;
   /** 菜单项点击回调函数 Menu item click callback function */
   onItemClick: (itemKey: string) => void;
+  /** 是否收起状态 Whether in collapsed state */
+  collapsed?: boolean;
   /** 自定义样式 Custom styles */
   sx?: SxProps<Theme>;
 }

@@ -26,7 +26,7 @@ export const lightPalette: PaletteOptions = {
 export const darkPalette: PaletteOptions = {
     mode: 'dark',
     primary: { main: '#42a5f5' },
-    background: { default: 'rgba(0, 0, 0, 0.51)', paper: '#212B36' },
+    background: { default: 'rgba(18, 18, 18, 0.8)', paper: '#212B36' },
     // background: { default: '#161C24', paper: '#212B36' },
     text: {
         primary: '#ffffff',

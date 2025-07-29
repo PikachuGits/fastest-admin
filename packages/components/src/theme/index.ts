@@ -16,11 +16,10 @@ export * from './hooks/useThemeMode';
 export * from './design-tokens';
 export * from './unocss-theme';
 
-// 示例组件
-export * from './ThemeExample';
+
 
 // 迁移工具
-export * from './migration-helper';
+
 
 // 类型扩展
-export type {} from './extend-theme-types';
+export type { } from './extend-theme-types';

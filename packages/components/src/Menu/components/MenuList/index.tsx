@@ -22,7 +22,8 @@ import '../../styles/index.less';
 
 // 导入拆分的模块
 // Import separated modules
-import type { NavData, NavSection, OpenStatesRecord, MenuListProps, NavItem } from '../../types';
+import type { NavData, NavSection, OpenStatesRecord, NavItem } from '../../types';
+import type { MenuListProps } from './MenuList.styles';
 import { useMenuState } from '../../hooks/useMenuState';
 import { MenuSectionRenderer } from './MenuSectionRenderer';
 
@@ -57,9 +58,17 @@ const MenuList: React.FC<MenuListProps> = (props) => {
    * Use custom Hook to manage menu state
    */
   const { openStates, selectedItem, toggleOpen, handleItemClick } = useMenuState(
-    menuData as NavData,
+    props.data || (menuData as NavData),
     props.config
   );
+
+  /**
+   * 处理收起状态的菜单展开状态
+   * Handle menu open states for collapsed state
+   */
+  const effectiveOpenStates = props.collapsed 
+    ? {} // 收起状态时，所有菜单项都关闭
+    : openStates;
 
   // ==================== 事件处理 Event Handlers ====================
 
@@ -105,9 +114,10 @@ const MenuList: React.FC<MenuListProps> = (props) => {
           section={section}
           sectionIndex={index}
           selectedItem={selectedItem}
-          openStates={openStates}
-          onToggleOpen={handleMenuItemToggle}
+          openStates={effectiveOpenStates}
+          onToggleOpen={props.collapsed ? () => {} : handleMenuItemToggle}
           onItemClick={handleMenuItemClickAdapter}
+          collapsed={props.collapsed}
         />
       );
     });

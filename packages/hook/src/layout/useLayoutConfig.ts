@@ -8,7 +8,7 @@ import type { LayoutConfig, UseLayoutConfigReturn } from "./types";
  */
 export const DEFAULT_LAYOUT_CONFIG: LayoutConfig = {
   headerHeight: 64,
-  sidebarWidth: 280,
+  sidebarWidth: 300,
   sidebarCollapsedWidth: 80,
   footerHeight: 60,
   contentPadding: 24,
@@ -84,34 +84,9 @@ export function useLayoutConfig(initialConfig?: Partial<LayoutConfig>): UseLayou
     setLayoutConfig(mergedInitialConfig);
   }, [mergedInitialConfig]);
 
-  /**
-   * 便捷的更新函数
-   * Convenient update functions
-   */
-  const setHeaderHeight = useCallback((height: number) => {
-    updateLayoutConfig({ headerHeight: height });
-  }, [updateLayoutConfig]);
-
-  const setSidebarWidth = useCallback((width: number) => {
-    updateLayoutConfig({ sidebarWidth: width });
-  }, [updateLayoutConfig]);
-
-  const toggleSidebar = useCallback(() => {
-    setLayoutConfig(prev => ({ ...prev, sidebarCollapsed: !prev.sidebarCollapsed }));
-  }, []);
-
-  const setFooterHeight = useCallback((height: number) => {
-    updateLayoutConfig({ footerHeight: height });
-  }, [updateLayoutConfig]);
-
   return {
     layoutConfig,
     updateLayoutConfig,
     resetLayoutConfig,
-    // 便捷函数
-    setHeaderHeight,
-    setSidebarWidth,
-    toggleSidebar,
-    setFooterHeight,
   };
 }

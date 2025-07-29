@@ -4,63 +4,88 @@ import { useAppTheme } from "@/app/providers/ThemeProvider";
 import menuDataRaw from './menu-data.json';
 import type { NavData } from "@fastest/components";
 import {
-  StyledArrowIcon,
-  StyledSidebarContainer,
-  StyledToggleButton,
-  StyledSidebarNav
+    StyledArrowIcon,
+    StyledSidebarContainer,
+    StyledToggleButton,
+    StyledSidebarNav
 } from "./sidebar.styles";
 
 // 类型断言确保 JSON 数据符合 NavData 接口
 const menuData = menuDataRaw as NavData;
 
-const drawerWidth = 240;
-
 interface SidebarProps {
-  mobileOpen: boolean;
-  onDrawerToggle: () => void;
+    mobileOpen: boolean;
+    onDrawerToggle: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = () => {
-  const [open, setOpen] = useState(false);
-  const { updateLayoutConfig } = useAppTheme();
-  const sidebarRef = useRef<HTMLDivElement>(null);
+    const [open, setOpen] = useState(true);
+    const [isHovering, setIsHovering] = useState(false);
+    const { updateLayoutConfig, layoutConfig } = useAppTheme();
+    const sidebarRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    if (sidebarRef.current) {
-      updateLayoutConfig({ sidebarWidth: sidebarRef.current.offsetWidth });
-    }
-  }, [sidebarRef, sidebarRef.current?.offsetWidth]);
-  // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    // 计算菜单是否应该显示为收起状态
+    const isMenuCollapsed = !open && !isHovering;
 
-  // const drawer = (
-  //   <Box sx={{ p: 2 }}>
-  //     <Typography variant="h6">Sidebar</Typography>
-  //     <Divider sx={{ my: 2 }} />
-  //     {/* Sidebar Links */}
-  //     <Box>导航链接1</Box>
-  //     <Box>导航链接2</Box>
-  //   </Box>
-  // );
+    // 优化：将副作用逻辑与渲染逻辑分离，避免不必要的更新
+    useLayoutEffect(() => {
+        if (!sidebarRef.current) return;
+        // 展开时恢复为默认宽度，收起时为sidebarCollapsedWidth
+        if (open) {
+            updateLayoutConfig({ sidebarWidth: 300 });
+        } else {
+            updateLayoutConfig({ sidebarWidth: layoutConfig.sidebarCollapsedWidth });
+        }
+    }, [open, layoutConfig.sidebarCollapsedWidth, updateLayoutConfig]);
 
-  return (
-    <StyledSidebarContainer>
-      <StyledToggleButton onClick={() => setOpen(!open)}>
-        <StyledArrowIcon
-          icon="eva:arrow-ios-downward-fill"
-          open={open}
-          className="icon-arrow"
-        />
-      </StyledToggleButton>
+    // 处理鼠标进入事件
+    const handleMouseEnter = () => {
+        if (!open) {
+            setIsHovering(true);
+        }
+    };
 
-      <StyledSidebarNav
-        ref={sidebarRef}
-      >
-        <MenuList data={menuData} />
-      </StyledSidebarNav>
-    </StyledSidebarContainer>
-  );
+    // 处理鼠标离开事件
+    const handleMouseLeave = () => {
+        setIsHovering(false);
+    };
+
+    return (
+        <StyledSidebarContainer
+            ref={sidebarRef}
+            sx={{
+                zIndex: (theme) => theme.zIndex.drawer + 1,
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                width: (theme) => theme.customLayout.sidebarWidth,
+                // 当悬停时临时展开宽度
+                ...(isHovering && !open && {
+                    width: 300,
+                }),
+            }}
+        >
+            <StyledToggleButton onClick={() => setOpen((prev) => !prev)}>
+                <StyledArrowIcon
+                    icon="eva:arrow-ios-downward-fill"
+                    open={open}
+                    className="icon-arrow"
+                />
+            </StyledToggleButton>
+            <StyledSidebarNav
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <MenuList
+                    data={menuData}
+                    collapsed={isMenuCollapsed}
+                    config={{
+                        // 收起时不显示默认展开项
+                        defaultOpenItems: isMenuCollapsed ? [] : undefined,
+                    }}
+                />
+            </StyledSidebarNav>
+        </StyledSidebarContainer>
+    );
 };
 
 export default Sidebar;
-export { drawerWidth };
+// export { drawerWidth };

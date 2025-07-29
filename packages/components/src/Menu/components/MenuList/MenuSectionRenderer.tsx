@@ -26,6 +26,7 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
   openStates,
   onToggleOpen,
   onItemClick,
+  collapsed = false,
 }) => {
   // 分组标题的展开状态（独立于菜单项的展开状态）
   const [isSubheaderOpen, setIsSubheaderOpen] = useState(true);
@@ -66,14 +67,16 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
     <div key={`section-${sectionIndex}`}>
       {/* 分组标题（如果存在） */}
       {section.subheader && (
-        <GroupHeader
-          open={isSubheaderOpen}
-          title={section.subheader}
-          onClick={handleSubheaderClick}
-        />
+        <Collapse in={!collapsed} timeout="auto" unmountOnExit>
+          <GroupHeader
+            open={isSubheaderOpen}
+            title={section.subheader}
+            onClick={handleSubheaderClick}
+          />
+        </Collapse>
       )}
       {/* 分组内容（可折叠） */}
-      <Collapse sx={{ px: 0.5 }} in={isSubheaderOpen} timeout="auto" unmountOnExit>
+      <Collapse sx={{ px: 0.5 }} in={collapsed ? true : isSubheaderOpen} timeout="auto" unmountOnExit>
         {renderSectionItems()}
       </Collapse>
     </div>

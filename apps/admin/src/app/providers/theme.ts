@@ -15,7 +15,7 @@ const baseThemeOptions = {
   typography: sharedTokens.typography,
   customLayout: {
     headerHeight: 64,
-    sidebarWidth: 280,
+    sidebarWidth: 300,
     sidebarCollapsedWidth: 64,
     footerHeight: 48,
     contentPadding: 24,
@@ -41,7 +41,7 @@ const baseThemeOptions = {
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none' as const, // 例如，全局禁用按钮大写
+          // textTransform: 'none' as const, // 例如，全局禁用按钮大写
           borderRadius: 8,
           fontWeight: 500,
           padding: '8px 16px',

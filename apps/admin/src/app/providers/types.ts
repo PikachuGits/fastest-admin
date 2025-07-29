@@ -17,6 +17,8 @@ export interface ThemeContextProps {
   updateLayoutConfig: (updates: Partial<LayoutConfig>) => void;
   /** 重置布局配置 */
   resetLayoutConfig: () => void;
+  //
+  layoutConfig: LayoutConfig;
 }
 
 /**

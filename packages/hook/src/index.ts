@@ -15,7 +15,7 @@ export {
 export type {
   LayoutConfig,
   LayoutConfigUpdater,
-  LayoutConfigResetter,
+  LayoutConfigSetter,
   UseLayoutConfigReturn,
   UseAppLayoutReturn,
 } from './layout';

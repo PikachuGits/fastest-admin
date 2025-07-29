@@ -1,4 +1,4 @@
-import type { LayoutConfig, LayoutConfigUpdater, LayoutConfigResetter } from './layout-config';
+import type { LayoutConfig, LayoutConfigUpdater, LayoutConfigSetter } from './layout-config';
 
 /**
  * 布局配置 Hook 返回值类型
@@ -9,13 +9,7 @@ export interface UseLayoutConfigReturn {
   /** 更新布局配置 */
   updateLayoutConfig: LayoutConfigUpdater;
   /** 重置布局配置 */
-  resetLayoutConfig: LayoutConfigResetter;
-
-  // 便捷的更新函数
-  setHeaderHeight: (height: number) => void;
-  setSidebarWidth: (width: number) => void;
-  toggleSidebar: () => void;
-  setFooterHeight: (height: number) => void;
+  resetLayoutConfig: LayoutConfigSetter;
 }
 
 /**

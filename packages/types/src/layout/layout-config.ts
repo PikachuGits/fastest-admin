@@ -5,21 +5,21 @@
  */
 export interface LayoutConfig {
   /** 头部高度 */
-  headerHeight: number;
+  headerHeight?: number;
   /** 侧边栏宽度 */
-  sidebarWidth: number;
+  sidebarWidth?: number;
   /** 侧边栏收起时的宽度 */
-  sidebarCollapsedWidth: number;
+  sidebarCollapsedWidth?: number;
   /** 页脚高度 */
-  footerHeight: number;
+  footerHeight?: number;
   /** 内容区域内边距 */
-  contentPadding: number;
+  contentPadding?: number;
   /** 是否显示侧边栏 */
-  showSidebar: boolean;
+  showSidebar?: boolean;
   /** 侧边栏是否收起 */
-  sidebarCollapsed: boolean;
+  sidebarCollapsed?: boolean;
   /** 是否显示页脚 */
-  showFooter: boolean;
+  showFooter?: boolean;
 }
 
 /**
@@ -30,4 +30,4 @@ export type LayoutConfigUpdater = (updates: Partial<LayoutConfig>) => void;
 /**
  * 布局配置重置函数类型
  */
-export type LayoutConfigResetter = () => void;
+export type LayoutConfigSetter = () => void;

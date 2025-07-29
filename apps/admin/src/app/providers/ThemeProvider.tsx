@@ -41,7 +41,7 @@ export function AppThemeProvider({ children, initialLayoutConfig }: AppThemeProv
       ...base,
       customLayout: {
         ...base.customLayout,
-        ...layoutConfig,
+        ...layoutConfig
       },
     };
   }, [isDarkMode, layoutConfig]);
@@ -52,6 +52,7 @@ export function AppThemeProvider({ children, initialLayoutConfig }: AppThemeProv
         isDarkMode,
         toggleTheme,
         theme,
+        layoutConfig,
         updateLayoutConfig,
         resetLayoutConfig,
       }}
