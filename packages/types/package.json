@@ -10,8 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@mui/material": "catalog:",
-    "@mui/lab": "catalog:"
+    "@mui/material": "catalog:"
   },
   "devDependencies": {
     "typescript": "catalog:",

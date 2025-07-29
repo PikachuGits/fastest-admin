@@ -17,7 +17,9 @@ export interface NumberChipProps {
  * 数字芯片样式组件
  * Number chip styled component
  */
-export const StyledNumberChip = styled(Chip)<{ chipColor: NumberChipColor }>(({ theme, chipColor }) => {
+export const StyledNumberChip = styled(Chip, {
+  shouldForwardProp: (prop) => prop !== "chipColor",
+})<{ chipColor: NumberChipColor }>(({ theme, chipColor }) => {
   const chipColors = {
     default: { backgroundColor: "#F5F5F5", color: "#757575" },
     primary: { backgroundColor: "#E3F2FD", color: "#1976D2" },

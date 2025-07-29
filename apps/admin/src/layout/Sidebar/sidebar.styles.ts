@@ -1,4 +1,4 @@
-import { styled } from "@mui/system";
+import { styled } from '@mui/material/styles';
 import { Box, IconButton } from "@mui/material";
 import { Iconify } from "@fastest/components";
 
@@ -24,7 +24,7 @@ export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
 export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
     position: 'absolute',
     border: '1px solid rgba(0, 0, 0, 0.1)',
-    top: (theme as any).customLayout.headerHeight + 12,
+    top: theme.customLayout.headerHeight + 12,
     right: 0,
     background: theme.palette.background.default,
     display: 'flex',
@@ -41,13 +41,13 @@ export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
 
 export const StyledSidebarNav = styled(Box)(({ theme }) => ({
     width: 300,
-    height: `calc(100vh - ${(theme as any).customLayout.headerHeight}px)`,
+    height: `calc(100vh - ${theme.customLayout.headerHeight}px)`,
     flexShrink: 0,
     padding: theme.spacing(2, 1, 2, 1),
     position: "fixed",
-    top: `${(theme as any).customLayout.headerHeight}px`,
+    top: `${theme.customLayout.headerHeight}px`,
     overflowY: "auto",
-    borderRight: `1px solid ${(theme as any).customLayout.outlined?.borderColor}`,
+    borderRight: `1px solid ${theme.customLayout.outlined?.borderColor}`,
     [theme.breakpoints.down('md')]: {
         flexShrink: 0,
     },

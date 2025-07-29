@@ -115,6 +115,4 @@ declare module '@mui/material/styles' {
     };
     customShadows?: Partial<CustomShadows>;
   }
-
-
 }

@@ -1,5 +1,7 @@
 // 自定义主题配置类型
 
+import React from "react";
+
 /**
  * 主题模式类型
  */

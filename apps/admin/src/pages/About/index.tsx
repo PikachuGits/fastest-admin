@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Sparkles, RotateCcw, Shuffle } from 'lucide-react';
 
 interface Card {
   id: string;
@@ -135,7 +134,6 @@ function About() {
             animationDelay: `${Math.random() * 0.5}s`
           }}
         >
-          <Sparkles className="w-4 h-4 text-yellow-400" />
         </div>
       ))}
 
@@ -169,7 +167,6 @@ function About() {
               </div>
             ) : (
               <div className="flex items-center space-x-2">
-                <Shuffle className="w-6 h-6" />
                 <span>抽取卡牌</span>
               </div>
             )}
@@ -187,7 +184,6 @@ function About() {
               onClick={resetCards}
               className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors duration-200 flex items-center space-x-2 mx-auto"
             >
-              <RotateCcw className="w-4 h-4" />
               <span>重置卡牌</span>
             </button>
           </div>
@@ -281,7 +277,6 @@ function About() {
         {/* 提示信息 */}
         {drawnCards.length === 0 && !isDrawing && (
           <div className="text-center text-gray-400 mt-16">
-            <Sparkles className="w-16 h-16 mx-auto mb-4 opacity-50" />
             <p className="text-lg">还没有抽到卡牌，快来试试手气吧！</p>
           </div>
         )}
