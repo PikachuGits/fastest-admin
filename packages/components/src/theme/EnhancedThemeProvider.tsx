@@ -21,8 +21,6 @@ import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 
 import { useThemeMode, type UseThemeModeReturn, type UseThemeModeOptions } from './hooks/useThemeMode';
 
-import type {} from './extend-theme-types';
-
 // ----------------------------------------------------------------------
 
 /**

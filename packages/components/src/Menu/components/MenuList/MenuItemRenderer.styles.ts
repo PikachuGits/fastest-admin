@@ -44,7 +44,7 @@ export const StyledContainerBoxLevelSx: SxProps<Theme> = ({
   background: "rgba(255, 255, 255, 0.1)",
   backdropFilter: "blur(10px)",
   WebkitBackdropFilter: "blur(10px)",
-  marginTop: (theme) => theme.spacing(1),
+  marginBottom: (theme) => theme.spacing(1),
   borderRadius: 1,
   transition: (theme) =>
     theme.transitions.create("all", {

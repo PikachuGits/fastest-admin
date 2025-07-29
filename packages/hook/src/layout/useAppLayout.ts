@@ -56,6 +56,10 @@ export function useAppLayout(initialConfig?: Partial<LayoutConfig>): UseAppLayou
     layoutConfig,
     updateLayoutConfig,
     resetLayoutConfig,
+    setHeaderHeight,
+    setSidebarWidth,
+    toggleSidebar,
+    setFooterHeight,
   } = useLayoutConfig(initialConfig);
 
   // 解构布局配置，提供便捷访问
@@ -116,6 +120,10 @@ export function useAppLayout(initialConfig?: Partial<LayoutConfig>): UseAppLayou
     // 更新函数
     updateLayoutConfig,
     resetLayoutConfig,
+    setHeaderHeight,
+    setSidebarWidth,
+    toggleSidebar,
+    setFooterHeight,
     toggleSidebarVisibility,
     toggleFooterVisibility,
     setContentPadding,

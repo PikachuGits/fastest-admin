@@ -13,6 +13,19 @@ const baseThemeOptions = {
   breakpoints: sharedTokens.breakpoints,
   shape: sharedTokens.shape,
   typography: sharedTokens.typography,
+  customLayout: {
+    headerHeight: 64,
+    sidebarWidth: 280,
+    sidebarCollapsedWidth: 64,
+    footerHeight: 48,
+    contentPadding: 24,
+    showSidebar: true,
+    sidebarCollapsed: false,
+    showFooter: true,
+    outlined: {
+      borderColor: 'rgba(204, 240, 204, 1)',
+    },
+  },
   // 你可以在这里定义 components 的默认样式
   components: {
     MuiListItemButton: {

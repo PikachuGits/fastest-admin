@@ -1,7 +1,8 @@
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/system";
 import { Box, IconButton } from "@mui/material";
 import { Iconify } from "@fastest/components";
 
+// 导入类型扩展
 
 export const StyledArrowIcon = styled(Iconify, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -14,8 +15,7 @@ export const StyledArrowIcon = styled(Iconify, {
 
 export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
     width: 300,
-    position: 'relative',
-    border: '1px solid #c01',
+    position: 'fixed',
     [theme.breakpoints.down('md')]: {
         width: '100%',
     },
@@ -24,7 +24,7 @@ export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
 export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
     position: 'absolute',
     border: '1px solid rgba(0, 0, 0, 0.1)',
-    top: theme.customLayout.headerHeight,
+    top: (theme as any).customLayout.headerHeight + 12,
     right: 0,
     background: theme.palette.background.default,
     display: 'flex',
@@ -41,14 +41,13 @@ export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
 
 export const StyledSidebarNav = styled(Box)(({ theme }) => ({
     width: 300,
-    height: `calc(100vh - ${theme.customLayout.headerHeight}px)`,
+    height: `calc(100vh - ${(theme as any).customLayout.headerHeight}px)`,
     flexShrink: 0,
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    padding: theme.spacing(2, 1, 2, 1),
     position: "fixed",
-    top: `${theme.customLayout.headerHeight}px`,
+    top: `${(theme as any).customLayout.headerHeight}px`,
     overflowY: "auto",
-    borderRight: '1px solid #e0e0e0',
+    borderRight: `1px solid ${(theme as any).customLayout.outlined?.borderColor}`,
     [theme.breakpoints.down('md')]: {
         flexShrink: 0,
     },

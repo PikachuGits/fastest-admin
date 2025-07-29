@@ -153,7 +153,6 @@ export const baseTheme: ThemeOptions = {
     borderRadius: parseInt(designTokens.borderRadius.base),
   },
   cssVariables: themeConfig.cssVariables,
-  customLayout: themeConfig.layout,
 };
 
 // ----------------------------------------------------------------------

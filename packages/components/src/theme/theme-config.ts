@@ -174,11 +174,9 @@ export const themeConfig: ThemeConfig = {
      * 基于 Facebook 蓝色调整，具有良好的识别度和专业感
      */
     primary: {
-      lighter: '#D0ECFE', // 最浅色调，用于背景和悬停状态
-      light: '#73BAFB',   // 浅色调，用于次要元素
+      light: '#D0ECFE',   // 浅色调，用于背景和悬停状态
       main: '#1877F2',    // 主色调，品牌主色
       dark: '#0C44AE',    // 深色调，用于按下状态
-      darker: '#042174',  // 最深色调，用于文本和边框
       contrastText: '#FFFFFF', // 对比文本颜色
     },
     /**
@@ -188,11 +186,9 @@ export const themeConfig: ThemeConfig = {
      * 紫色代表创新和高端，适合科技产品
      */
     secondary: {
-      lighter: '#EFD6FF', // 最浅紫色
-      light: '#C684FF',   // 浅紫色
+      light: '#EFD6FF',   // 浅紫色
       main: '#8E33FF',    // 主紫色
       dark: '#5119B7',    // 深紫色
-      darker: '#27097A',  // 最深紫色
       contrastText: '#FFFFFF', // 对比文本颜色
     },
     /**
@@ -202,11 +198,9 @@ export const themeConfig: ThemeConfig = {
      * 青色给人清新、可信赖的感觉
      */
     info: {
-      lighter: '#CAFDF5', // 最浅青色
-      light: '#61F3F3',   // 浅青色
+      light: '#CAFDF5',   // 浅青色
       main: '#00B8D9',    // 主青色
       dark: '#006C9C',    // 深青色
-      darker: '#003768',  // 最深青色
       contrastText: '#FFFFFF', // 对比文本颜色
     },
     /**
@@ -216,11 +210,9 @@ export const themeConfig: ThemeConfig = {
      * 绿色是通用的成功色，易于理解
      */
     success: {
-      lighter: '#D3FCD2', // 最浅绿色
-      light: '#77ED8B',   // 浅绿色
+      light: '#D3FCD2',   // 浅绿色
       main: '#22C55E',    // 主绿色
       dark: '#118D57',    // 深绿色
-      darker: '#065E49',  // 最深绿色
       contrastText: '#ffffff', // 对比文本颜色
     },
     /**
@@ -230,11 +222,9 @@ export const themeConfig: ThemeConfig = {
      * 橙色能够吸引注意力但不会过于激进
      */
     warning: {
-      lighter: '#FFF5CC', // 最浅橙色
-      light: '#FFD666',   // 浅橙色
+      light: '#FFF5CC',   // 浅橙色
       main: '#FFAB00',    // 主橙色
       dark: '#B76E00',    // 深橙色
-      darker: '#7A4100',  // 最深橙色
       contrastText: '#1C252E', // 对比文本颜色（深色）
     },
     /**
@@ -244,11 +234,9 @@ export const themeConfig: ThemeConfig = {
      * 红色是通用的危险/错误色，具有强烈的警示作用
      */
     error: {
-      lighter: '#FFE9D5', // 最浅红色
-      light: '#FFAC82',   // 浅红色
+      light: '#FFE9D5',   // 浅红色
       main: '#FF5630',    // 主红色
       dark: '#B71D18',    // 深红色
-      darker: '#7A0916',  // 最深红色
       contrastText: '#FFFFFF', // 对比文本颜色
     },
     /**

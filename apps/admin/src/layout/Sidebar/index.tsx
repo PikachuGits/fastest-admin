@@ -22,7 +22,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = () => {
   const [open, setOpen] = useState(false);
-  const { theme, updateLayoutConfig } = useAppTheme();
+  const { updateLayoutConfig } = useAppTheme();
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {

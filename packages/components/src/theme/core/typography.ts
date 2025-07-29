@@ -45,12 +45,10 @@ const secondaryFont = setFont(themeConfig.fontFamily.secondary);
 
 export const typography: TypographyVariantsOptions = {
   fontFamily: primaryFont,
-  fontSecondaryFamily: secondaryFont,
-  fontWeightLight: '300',
-  fontWeightRegular: '400',
-  fontWeightMedium: '500',
-  fontWeightSemiBold: '600',
-  fontWeightBold: '700',
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 500,
+  fontWeightBold: 700,
   h1: {
     fontFamily: secondaryFont,
     fontWeight: 800,

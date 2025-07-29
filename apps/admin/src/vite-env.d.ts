@@ -1,33 +1,6 @@
 /// <reference types="vite/client" />
+/// <reference types="@fastest/types/theme/mui-theme-augmentation" />
 
-// 导入组件库的主题类型扩展
-import type {} from '@fastest/components/src/theme/extend-theme-types';
-
-// 应用层特定的主题扩展
-declare module '@mui/material/styles' {
-  interface Theme {
-    customLayout: {
-      headerHeight: number;
-      sidebarWidth: number;
-      sidebarCollapsedWidth: number;
-      footerHeight: number;
-      contentPadding: number;
-      showSidebar: boolean;
-      sidebarCollapsed: boolean;
-      showFooter: boolean;
-    };
-  }
-
-  interface ThemeOptions {
-    customLayout?: Partial<{
-      headerHeight: number;
-      sidebarWidth: number;
-      sidebarCollapsedWidth: number;
-      footerHeight: number;
-      contentPadding: number;
-      showSidebar: boolean;
-      sidebarCollapsed: boolean;
-      showFooter: boolean;
-    }>;
-  }
-}
+// 导入共享类型定义
+import '@fastest/types/theme/layout'; 
+import '@fastest/types/theme/mui-theme-augmentation';

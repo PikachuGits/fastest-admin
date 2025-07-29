@@ -417,14 +417,6 @@ export function useThemeMode(options: UseThemeModeOptions = {}): UseThemeModeRet
       themeOverrides: {
         ...darkOverrides,        // 暗色模式覆盖（如果适用）
         ...themeOverrides,       // 用户提供的主题覆盖
-        customLayout: layoutConfig, // 当前布局配置
-        // 确保用户的布局覆盖配置具有最高优先级
-        ...(themeOverrides.customLayout && {
-          customLayout: {
-            ...layoutConfig,                    // 当前布局配置
-            ...themeOverrides.customLayout,     // 用户布局覆盖
-          },
-        }),
       },
     });
   }, [mode, layoutConfig, themeOverrides]); // 依赖项：模式、布局配置、主题覆盖
