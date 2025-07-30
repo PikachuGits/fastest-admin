@@ -42,6 +42,14 @@ export interface UseAppLayoutReturn extends UseLayoutConfigReturn {
   /** 内容区域下边距 */
   contentMarginBottom: number;
 
+  /** 设置头部高度 */
+  setHeaderHeight: (height: number) => void;
+  /** 设置侧边栏宽度 */
+  setSidebarWidth: (width: number) => void;
+  /** 切换侧边栏收起状态 */
+  toggleSidebar: () => void;
+  /** 设置页脚高度 */
+  setFooterHeight: (height: number) => void;
   /** 切换侧边栏显示状态 */
   toggleSidebarVisibility: () => void;
   /** 切换页脚显示状态 */

@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "@/layout";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
-import NavigationBar from "@/pages/NavigationBar";
 import DemoIndexPage from "@/pages/demo";
 import ThemeTestPage from "@/pages/demo/theme-test";
 import SettingsPanelDemo from "@/layout/component/SettingsPanelDemo";
@@ -21,10 +20,6 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
-      },
-      {
-        path: "/navigation-bar",
-        element: <NavigationBar />,
       },
       {
         path: "/icon",

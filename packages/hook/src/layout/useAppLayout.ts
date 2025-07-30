@@ -56,10 +56,6 @@ export function useAppLayout(initialConfig?: Partial<LayoutConfig>): UseAppLayou
     layoutConfig,
     updateLayoutConfig,
     resetLayoutConfig,
-    setHeaderHeight,
-    setSidebarWidth,
-    toggleSidebar,
-    setFooterHeight,
   } = useLayoutConfig(initialConfig);
 
   // 解构布局配置，提供便捷访问
@@ -74,7 +70,23 @@ export function useAppLayout(initialConfig?: Partial<LayoutConfig>): UseAppLayou
     showFooter,
   } = layoutConfig;
 
-  // 额外的便捷更新函数
+  // 便捷更新函数
+  const setHeaderHeight = (height: number) => {
+    updateLayoutConfig({ headerHeight: height });
+  };
+
+  const setSidebarWidth = (width: number) => {
+    updateLayoutConfig({ sidebarWidth: width });
+  };
+
+  const toggleSidebar = () => {
+    updateLayoutConfig({ sidebarCollapsed: !sidebarCollapsed });
+  };
+
+  const setFooterHeight = (height: number) => {
+    updateLayoutConfig({ footerHeight: height });
+  };
+
   const toggleSidebarVisibility = () => {
     updateLayoutConfig({ showSidebar: !showSidebar });
   };
@@ -89,10 +101,10 @@ export function useAppLayout(initialConfig?: Partial<LayoutConfig>): UseAppLayou
 
   // 计算属性
   const computedValues = useMemo(() => {
-    const currentSidebarWidth = sidebarCollapsed ? sidebarCollapsedWidth : sidebarWidth;
+    const currentSidebarWidth = sidebarCollapsed ? (sidebarCollapsedWidth || 0) : (sidebarWidth || 0);
     const contentMarginLeft = showSidebar ? currentSidebarWidth : 0;
-    const contentMarginTop = headerHeight;
-    const contentMarginBottom = showFooter ? footerHeight : 0;
+    const contentMarginTop = headerHeight || 0;
+    const contentMarginBottom = showFooter ? (footerHeight || 0) : 0;
 
     return {
       currentSidebarWidth,
@@ -105,14 +117,14 @@ export function useAppLayout(initialConfig?: Partial<LayoutConfig>): UseAppLayou
   return {
     // 布局配置状态
     layoutConfig,
-    headerHeight,
-    sidebarWidth,
-    sidebarCollapsedWidth,
-    footerHeight,
-    contentPadding,
-    showSidebar,
-    sidebarCollapsed,
-    showFooter,
+    headerHeight: headerHeight!,
+    sidebarWidth: sidebarWidth!,
+    sidebarCollapsedWidth: sidebarCollapsedWidth!,
+    footerHeight: footerHeight!,
+    contentPadding: contentPadding!,
+    showSidebar: showSidebar!,
+    sidebarCollapsed: sidebarCollapsed!,
+    showFooter: showFooter!,
 
     // 计算属性
     ...computedValues,

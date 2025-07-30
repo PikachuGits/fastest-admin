@@ -13,7 +13,8 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '100%',
+  padding: theme.spacing(2),
+  borderBottom: `1px solid ${theme.palette.divider}`,
 }));
 
 // 全屏图标组件
@@ -69,7 +70,7 @@ const DrawerHeader: React.FC<DrawerHeaderProps> = ({
       <Typography variant="h6" component="h6">
         Settings
       </Typography>
-
+      
       <Box sx={{ display: 'flex', gap: 1 }}>
         <IconButton
           onClick={onFullscreen}
@@ -78,7 +79,7 @@ const DrawerHeader: React.FC<DrawerHeaderProps> = ({
         >
           <FullscreenIcon />
         </IconButton>
-
+        
         <IconButton
           onClick={onReset}
           aria-label="Reset all"
@@ -99,7 +100,7 @@ const DrawerHeader: React.FC<DrawerHeaderProps> = ({
             <ResetIcon />
           </Badge>
         </IconButton>
-
+        
         <IconButton
           onClick={onClose}
           aria-label="Close"
