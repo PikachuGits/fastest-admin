@@ -4,6 +4,7 @@ import {
     ListItemText,
     type SxProps,
     type Theme,
+    containerClasses,
 } from "@mui/material";
 import { Iconify } from "@fastest/components";
 import { type NumberChipColor } from "../NumberChip";
@@ -70,7 +71,12 @@ export const StyledListItemButton = styled(ListItemButton, {
     padding: " 4px 8px 4px 12px",
     minHeight: 44,
     borderRadius: theme.spacing(1),
-    overflow: "hidden",
+    // 设置容器查询上下文
+    overflow: 'visible', // 默认值
+    // 容器查询：当元素自身宽度小于100px时
+    '@container sidebar (max-width: 100px)': {
+        overflow: 'hidden',
+    },
     // 选中状态样式 Selected state styles
     ...((selected || parentSelected) && {
         // 一级菜单项（level=0）使用自定义绿色主题

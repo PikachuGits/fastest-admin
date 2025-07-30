@@ -54,6 +54,8 @@ export const StyledContainerBoxLevelSx: SxProps<Theme> = ({
   zIndex: (theme) => theme.zIndex.appBar + 10,
   boxShadow: (theme) => theme.shadows[3],
   padding: (theme) => theme.spacing(0.5),
+  containerType: 'inline-size',
+  containerName: 'sidebar',
 });
 /**
  * 子菜单容器样式
