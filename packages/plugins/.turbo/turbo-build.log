@@ -1,0 +1,14 @@
+
+[0m[2m[35m$[0m [2m[1mtsup[0m
+[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.0
+[34mCLI[39m Using tsup config: /Users/dongzhuo/Desktop/web/bun-Turborepo-Nx-vite-monorepo/packages/plugins/tsup.config.ts
+[34mCLI[39m Target: esnext
+[34mCLI[39m Cleaning output folder
+[34mESM[39m Build start
+[32mESM[39m [1mdist/index.mjs [22m[32m4.18 KB[39m
+[32mESM[39m ⚡️ Build success in 5ms
+DTS Build start
+DTS ⚡️ Build success in 564ms
+DTS dist/index.d.mts 519.00 B

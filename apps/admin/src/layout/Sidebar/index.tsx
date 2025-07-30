@@ -54,7 +54,6 @@ const Sidebar: React.FC<SidebarProps> = () => {
         <StyledSidebarContainer
             ref={sidebarRef}
             sx={{
-                zIndex: (theme) => theme.zIndex.drawer + 1,
                 border: '1px solid rgba(0, 0, 0, 0.1)',
                 width: (theme) => theme.customLayout.sidebarWidth,
                 // 当悬停时临时展开宽度

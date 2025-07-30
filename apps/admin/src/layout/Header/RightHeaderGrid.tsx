@@ -4,6 +4,7 @@ import { useAppTheme } from "@/app/providers";
 import { useAppLayout } from "@fastest/hook";
 import RotatingBorderAvatar from "./AvatarWithRotatingBorder";
 import { StyledRightIconButton } from "./header.styles";
+import { SettingButton } from "../component";
 
 export const RightHeaderGrid = () => {
   const { toggleTheme, isDarkMode } = useAppTheme()
@@ -31,15 +32,15 @@ export const RightHeaderGrid = () => {
       <StyledRightIconButton>
         <Iconify
           icon="solar:bell-bing-bold-duotone"
-          className="  "
         />
       </StyledRightIconButton>
-      <StyledRightIconButton>
+      <SettingButton />
+      {/* <StyledRightIconButton>
         <Iconify
           icon="solar:settings-bold-duotone"
           className=" animate-spin animate-duration-5000"
         />
-      </StyledRightIconButton>
+      </StyledRightIconButton> */}
       {/* 头像 */}
       <RotatingBorderAvatar src="https://pub-c5e31b5cdafb419fb247a8ac2e78df7a.r2.dev/public/assets/images/mock/avatar/avatar-25.webp" />
     </Fragment>

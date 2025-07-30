@@ -15,7 +15,6 @@ export const StyledArrowIcon = styled(Iconify, {
 // 侧边栏主容器
 export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
     position: 'fixed',
-    zIndex: theme.zIndex.drawer + 10,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,

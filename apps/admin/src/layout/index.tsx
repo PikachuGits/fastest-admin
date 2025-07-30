@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import {
     StyledLayoutRoot,
     StyledContentWrapper,
@@ -29,12 +29,12 @@ const Layout = (props: any) => {
     return (
         <StyledLayoutRoot>
             {/* Header */}
-            <Header onDrawerToggle={handleDrawerToggle}/>
+            <Header onDrawerToggle={handleDrawerToggle} />
             {/* 侧边栏和主体区域容器 */}
             <StyledContentWrapper>
                 {/* Sidebar */}
                 <StyledSidebarWrapper>
-                    <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle}/>
+                    <Sidebar mobileOpen={mobileOpen} onDrawerToggle={handleDrawerToggle} />
                 </StyledSidebarWrapper>
 
                 {/* 主内容 */}
@@ -50,7 +50,7 @@ const Layout = (props: any) => {
                                 {layoutMode === 'fixed' ? '定宽模式' : '自适应模式'}
                             </StyledLayoutModeText>
                         </StyledLayoutModeToggle>
-                        <Outlet/>
+                        <Outlet />
                     </StyledMainContainer>
                 </StyledMainContent>
             </StyledContentWrapper>

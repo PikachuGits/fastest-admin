@@ -25,7 +25,6 @@ export const StyledSidebarWrapper = styled(Box)(({ theme }) => ({
   width: `${theme.customLayout.sidebarWidth}px`,
   flexShrink: 0,
   transition: 'width 0.3s ease',
-  zIndex: theme.zIndex.drawer + 1,
 }));
 
 // 主内容区域
