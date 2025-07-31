@@ -66,7 +66,7 @@ const MenuList: React.FC<MenuListProps> = (props) => {
    * 处理收起状态的菜单展开状态
    * Handle menu open states for collapsed state
    */
-  const effectiveOpenStates = props.collapsed 
+  const effectiveOpenStates = props.collapsed
     ? {} // 收起状态时，所有菜单项都关闭
     : openStates;
 
@@ -115,7 +115,7 @@ const MenuList: React.FC<MenuListProps> = (props) => {
           sectionIndex={index}
           selectedItem={selectedItem}
           openStates={effectiveOpenStates}
-          onToggleOpen={props.collapsed ? () => {} : handleMenuItemToggle}
+          onToggleOpen={props.collapsed ? () => { } : handleMenuItemToggle}
           onItemClick={handleMenuItemClickAdapter}
           collapsed={props.collapsed}
         />
@@ -125,9 +125,13 @@ const MenuList: React.FC<MenuListProps> = (props) => {
 
   // ==================== 组件渲染 Component Render ====================
 
+  // 从props中排除自定义属性，避免传递给DOM元素
+  // Exclude custom properties from props to avoid passing to DOM element
+  const { data, config, collapsed, onItemClick, onItemToggle, ...listProps } = props;
+
   return (
     <StyledListBox
-      {...props}
+      {...listProps}
       sx={{
         height: '100%',
         pb: (theme: any) => theme.spacing(2),

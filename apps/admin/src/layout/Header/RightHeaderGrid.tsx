@@ -26,7 +26,6 @@ export const RightHeaderGrid = () => {
       <StyledRightIconButton >
         <Iconify
           icon="solar:full-screen-square-outline"
-          className=" "
         />
       </StyledRightIconButton>
       <StyledRightIconButton>

@@ -36,7 +36,9 @@ export const StyledMainContent = styled(Box)<{ component?: React.ElementType }>(
 }));
 
 // 主内容容器
-export const StyledMainContainer = styled(Container)<{ layoutMode: LayoutMode }>(({ theme, layoutMode }) => ({
+export const StyledMainContainer = styled(Container, {
+  shouldForwardProp: (prop) => prop !== 'layoutMode',
+})<{ layoutMode: LayoutMode }>(({ theme, layoutMode }) => ({
   height: `calc(100vh - ${theme.customLayout.headerHeight}px)`,
   transition: 'all 0.3s ease',
 }));

@@ -14,5 +14,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  plugins: [vitePluginAppLoading({ title: '建业管理平台' }), react(), UnoCSS()],
+  plugins: [vitePluginAppLoading({
+    title: '建业管理',
+    desc: 'JianYe Management',
+  }), react(), UnoCSS()],
 })

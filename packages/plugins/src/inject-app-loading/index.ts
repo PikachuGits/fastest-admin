@@ -67,6 +67,15 @@ async function getLoadingRawByHtmlTemplate(
 /**
  * 插件参数类型
  */
+export interface ThemeColors {
+  primary?: string;
+  light?: string;
+  dark?: string;
+}
+
+/**
+ * 插件参数类型
+ */
 export interface PluginOptions {
   /** 可选：自定义模板路径，相对 process.cwd() 或绝对路径 */
   loadingTemplate?: string;
@@ -74,8 +83,12 @@ export interface PluginOptions {
   defaultTemplatePath?: string;
   /** 可选：HTML 中的标题变量 <%= LOADING_APP_TITLE %> 替换值 */
   title?: string;
+
+  desc?: string;
   /** 可选：Vite 环境变量对象，用于获取 VITE_APP_NAMESPACE */
   env?: Record<string, any>;
+  /** 可选：自定义主题色 */
+  themeColors?: ThemeColors;
 }
 
 /**
@@ -92,14 +105,27 @@ export function vitePluginAppLoading(options: PluginOptions = {}): Plugin {
     async buildStart() {
       try {
         const title = options.title ?? process.env.LOADING_APP_TITLE ?? 'Loading...';
+        const desc = options.desc ?? process.env.LOADING_APP_TITLE_DESC ?? '';
         const rawTemplate = await getLoadingRawByHtmlTemplate(
           options.loadingTemplate,
           options.defaultTemplatePath,
         );
         if (rawTemplate) {
-          loadingHtmlContent = replaceTemplateVars(rawTemplate, {
+          const themeColors = options.themeColors ?? {};
+          const themeStyle = `
+<style id="app-loading-theme-colors">
+  :root {
+    --palette-primary-main: ${themeColors.primary ?? '#2196f3'};
+    --palette-primary-light: ${themeColors.light ?? '#64b5f6'};
+    --palette-primary-dark: ${themeColors.dark ?? '#1976d2'};
+  }
+</style>
+`;
+          const replacedTemplate = replaceTemplateVars(rawTemplate, {
             LOADING_APP_TITLE: title,
+            LOADING_APP_TITLE_DESC: desc
           });
+          loadingHtmlContent = themeStyle + replacedTemplate;
         } else {
           loadingHtmlContent = undefined; // 确保没有模板时 content 为 undefined
         }

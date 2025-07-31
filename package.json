@@ -48,8 +48,8 @@
     }
   },
   "scripts": {
-    "dev:web": "bun turbo run dev --filter=./apps/web",
-    "dev:admin": "bun turbo run dev --filter=./apps/admin",
+    "dev:web": "bun turbo run build --filter=@fastest/plugins && bun turbo run dev --filter=./apps/web",
+    "dev:admin": "bun turbo run build --filter=@fastest/plugins && bun turbo run dev --filter=./apps/admin",
     "build:web": "bun turbo run build --filter=./apps/web",
     "build:admin": "bun turbo run build --filter=./apps/admin",
     "build:plugins": "bun turbo run build --filter=@fastest/plugins",

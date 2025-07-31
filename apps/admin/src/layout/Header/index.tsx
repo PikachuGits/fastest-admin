@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
       position="fixed"
       color="transparent"
     >
-      <StyledToolbar disableGutters={false}>
+      <StyledToolbar disableGutters={true}>
         {isMobile && (
           <StyledIconButton
             color="inherit"
@@ -63,10 +63,9 @@ const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
 
         <StyledMainBox>
           <Grid container spacing={2}>
-            <Grid size={isMobile ? 2 : 4}>
+            <Grid size={isMobile ? 2 : 4} className="flex justify-start items-center">
               <LeftHeaderGrid />
             </Grid>
-
             <Grid size={isMobile ? 10 : 8} className="flex justify-end">
               <RightHeaderGrid />
             </Grid>

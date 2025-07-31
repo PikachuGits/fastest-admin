@@ -1,116 +1,196 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style data-app-loading="inject-css">
+    /* 默认样式 (亮色模式) */
+    .rsbuild-inject-app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #f4f7f9;
+        /* 亮色模式背景色 */
+        transition: background-color 0.3s ease;
+        /* 添加背景色过渡效果 */
+    }
 
-    <style data-app-loading="inject-css">
-        /* 默认样式 (亮色模式) */
-        .rsbuild-inject-app-loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #f4f7f9; /* 亮色模式背景色 */
-            transition: background-color 0.3s ease; /* 添加背景色过渡效果 */
+    .rsbuild-inject-app-title {
+        --animate-delay: 0.2s;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        /* 亮色模式标题颜色 */
+        color: var(--color-light-loading-title, rgba(255, 255, 255, 0.1));
+        /* 添加颜色过渡效果 */
+    }
+
+    .rsbuild-inject-app-title span:last-child {
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+
+    /* 暗夜模式样式 (当 html 标签有 .dark 类时生效) */
+    .dark .rsbuild-inject-app-loading {
+        background-color: #0d0d10;
+        /* 暗夜模式背景色 */
+    }
+
+    .dark .rsbuild-inject-app-title {
+        /* color: #fff; */
+        color: var(--color-dark-loading-title, rgba(0, 0, 0, 0.1));
+        /* 暗夜模式标题颜色 */
+    }
+
+
+    /* 动画相关的样式，通常不需要为暗夜模式单独设置 */
+    .square-container {
+        width: 160px;
+        height: 160px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        will-change: transform, opacity;
+        animation: breathe 3s infinite ease-in-out;
+        animation-delay: 0s;
+        animation-fill-mode: backwards;
+    }
+
+    .square-outer,
+    .square-inner {
+        border-style: solid;
+        box-sizing: border-box;
+        position: absolute;
+        border-radius: 28%;
+        will-change: transform, opacity, border-radius;
+        animation-delay: 0s;
+        animation-fill-mode: backwards;
+        /* border-color: rgba(227, 117, 59, 0.8); */
+        border-color: var(--color-dark-loading-square, rgba(255, 255, 255, 0.8));
+        /* 动画元素的颜色，如果不需要在暗夜模式下改变，可以保持不变 */
+    }
+
+    .square-outer {
+        width: 160px;
+        height: 160px;
+        border-width: 4px;
+        animation: outerRotateScale 3s infinite ease-in-out;
+    }
+
+    .square-inner {
+        width: 120px;
+        height: 120px;
+        border-width: 8px;
+        animation: innerRotateScale 3s infinite ease-in-out;
+    }
+
+    .rsbuild-inject-app-loading.hidden {
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.8s ease-out;
+    }
+
+    /* Keyframes 保持不变 */
+    @keyframes outerRotateScale {
+        0% {
+            transform: rotate(0deg) scale(1);
+            opacity: 0.25;
         }
 
-        .rsbuild-inject-app-title {
-            margin-top: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            color: rgba(227, 117, 59, 0.8); /* 亮色模式标题颜色 */
-            transition: color 0.3s ease; /* 添加颜色过渡效果 */
-        }
-
-        /* 暗夜模式样式 (当 html 标签有 .dark 类时生效) */
-        .dark .rsbuild-inject-app-loading {
-            background-color: #0d0d10; /* 暗夜模式背景色 */
-        }
-
-        .dark .rsbuild-inject-app-title {
-            color: #fff; /* 暗夜模式标题颜色 */
-        }
-
-        /* 动画相关的样式，通常不需要为暗夜模式单独设置 */
-        .square-container {
-            width: 160px;
-            height: 160px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            will-change: transform, opacity;
-            animation: breathe 3s infinite ease-in-out;
-            animation-delay: 0s;
-            animation-fill-mode: backwards;
-        }
-
-        .square-outer,
-        .square-inner {
-            border-style: solid;
-            box-sizing: border-box;
-            position: absolute;
+        40% {
+            transform: rotate(270deg) scale(0.714);
             border-radius: 28%;
-            will-change: transform, opacity, border-radius;
-            animation-delay: 0s;
-            animation-fill-mode: backwards;
-            border-color: rgba(227, 117, 59, 0.24); /* 动画元素的颜色，如果不需要在暗夜模式下改变，可以保持不变 */
+            opacity: 1;
         }
 
-        .square-outer {
-            width: 160px;
-            height: 160px;
-            border-width: 4px;
-            animation: outerRotateScale 3s infinite ease-in-out;
+        60% {
+            transform: rotate(270deg) scale(0.714);
+            border-radius: 50%;
+            opacity: 1;
         }
 
-        .square-inner {
-            width: 120px;
-            height: 120px;
-            border-width: 8px;
-            animation: innerRotateScale 3s infinite ease-in-out;
+        80% {
+            transform: rotate(0) scale(1);
+            border-radius: 50%;
         }
 
-        .rsbuild-inject-app-loading.hidden {
-            pointer-events: none;
-            visibility: hidden;
-            opacity: 0;
-            transition: all 0.8s ease-out;
+        100% {
+            transform: rotate(0deg) scale(1);
+            border-radius: 28%;
+            opacity: 0.25;
+        }
+    }
+
+    @keyframes innerRotateScale {
+        0% {
+            transform: rotate(0deg) scale(1);
+            border-radius: 28%;
+            opacity: 1;
         }
 
-        /* Keyframes 保持不变 */
-        @keyframes outerRotateScale {
-            0% { transform: rotate(0deg) scale(1); opacity: 0.25; }
-            40% { transform: rotate(270deg) scale(0.714); border-radius: 28%; opacity: 1; }
-            60% { transform: rotate(270deg) scale(0.714); border-radius: 50%; opacity: 1; }
-            80% { transform: rotate(0) scale(1); border-radius: 50%; }
-            100% { transform: rotate(0deg) scale(1); border-radius: 28%; opacity: 0.25; }
+        40% {
+            transform: rotate(-270deg) scale(1.4);
+            border-radius: 28%;
+            opacity: 0.25;
         }
 
-        @keyframes innerRotateScale {
-            0% { transform: rotate(0deg) scale(1); border-radius: 28%; opacity: 1; }
-            40% { transform: rotate(-270deg) scale(1.4); border-radius: 28%; opacity: 0.25; }
-            60% { transform: rotate(-270deg) scale(1.4); border-radius: 50%; opacity: 0.25; }
-            80% { transform: rotate(0deg) scale(1); border-radius: 50%; }
-            100% { transform: rotate(0deg) scale(1); border-radius: 28%; opacity: 1; }
+        60% {
+            transform: rotate(-270deg) scale(1.4);
+            border-radius: 50%;
+            opacity: 0.25;
         }
 
-        @keyframes breathe {
-            0% { transform: scale(1); opacity: 1; }
-            60% { transform: scale(0.9); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
+        80% {
+            transform: rotate(0deg) scale(1);
+            border-radius: 50%;
         }
-    </style>
-    <div class="rsbuild-inject-app-loading" id="__app-loading__">
-        <div class="square-container">
-            <span class="square-outer"></span>
-            <span class="square-inner"></span>
-            <img src="/logo.webp" style="width: 40%; height: 40%" alt="" />
-        </div>
-        <div class="rsbuild-inject-app-title">
-            <%= LOADING_APP_TITLE %>
-        </div>
+
+        100% {
+            transform: rotate(0deg) scale(1);
+            border-radius: 28%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes breathe {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        60% {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+</style>
+<div class="rsbuild-inject-app-loading" id="__app-loading__">
+    <div class="square-container">
+        <span class="square-outer"></span>
+        <span class="square-inner"></span>
+        <img src="/logo.webp" style="width: 40%; height: 40%" alt="" />
     </div>
+    <div class="rsbuild-inject-app-title  ">
+        <span class="animate__animated animate__zoomInUp">
+            <%= LOADING_APP_TITLE %>
+        </span>
+        <span class="animate__animated animate__zoomInUp animate__delay-1s">
+            <%= LOADING_APP_TITLE_DESC %>
+        </span>
+    </div>
+</div>

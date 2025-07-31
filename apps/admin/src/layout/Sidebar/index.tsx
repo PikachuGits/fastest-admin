@@ -9,6 +9,7 @@ import {
     StyledToggleButton,
     StyledSidebarNav
 } from "./sidebar.styles";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 // 类型断言确保 JSON 数据符合 NavData 接口
 const menuData = menuDataRaw as NavData;
@@ -23,6 +24,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
     const [isHovering, setIsHovering] = useState(false);
     const { updateLayoutConfig, layoutConfig } = useAppTheme();
     const sidebarRef = useRef<HTMLDivElement>(null);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     // 计算菜单是否应该显示为收起状态
     const isMenuCollapsed = !open && !isHovering;
@@ -86,4 +90,3 @@ const Sidebar: React.FC<SidebarProps> = () => {
     );
 };
 
-export default Sidebar;

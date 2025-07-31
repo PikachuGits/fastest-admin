@@ -16,9 +16,10 @@ const App = () => {
    * 移除全局加载
    */
   useEffect(() => {
+    document.title = '建业管理平台';
     setTimeout(() => {
       unmountGlobalLoading();
-    }, 0);
+    }, 1000);
   }, []);
 
   return (
