@@ -4,7 +4,6 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import DemoIndexPage from "@/pages/demo";
 import ThemeTestPage from "@/pages/demo/theme-test";
-import SettingsPanelDemo from "@/layout/component/SettingsPanelDemo";
 import DrawerHeaderDemo from "@/layout/component/DrawerHeaderDemo";
 import Icon from "@/pages/Icon";
 
@@ -32,10 +31,6 @@ export const router = createBrowserRouter([
       {
         path: "/demo/theme-test",
         element: <ThemeTestPage />,
-      },
-      {
-        path: "/demo/settings-panel",
-        element: <SettingsPanelDemo />,
       },
       {
         path: "/demo/drawer-header",

@@ -1,5 +1,5 @@
 import { Box, Drawer, List } from "@mui/material";
-import SettingsPanel from './SettingsPanel';
+// import SettingsPanel from './SettingsPanel';
 import { StyledRightIconButton } from "@/layout/Header/header.styles";
 import { Iconify } from "@fastest/components";
 import { useState } from "react";
@@ -28,7 +28,8 @@ const SettingButton = () => {
             // header={<DrawerHeader />}
             title="设置"
         >
-            <SettingsPanel />
+            <div>123</div>
+            {/* <SettingsPanel /> */}
         </DefaultDrawer>
     )
 }

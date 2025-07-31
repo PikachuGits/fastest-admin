@@ -17,5 +17,6 @@ export default defineConfig({
   plugins: [vitePluginAppLoading({
     title: '建业管理',
     desc: 'JianYe Management',
+    loadingTemplate: 'public/loading.html',
   }), react(), UnoCSS()],
 })
