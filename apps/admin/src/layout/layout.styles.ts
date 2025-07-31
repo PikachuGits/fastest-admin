@@ -25,6 +25,11 @@ export const StyledSidebarWrapper = styled(Box)(({ theme }) => ({
   width: `${theme.customLayout.sidebarWidth}px`,
   flexShrink: 0,
   transition: 'width 0.3s ease',
+  // 移动端隐藏侧边栏容器
+  [theme.breakpoints.down('md')]: {
+    width: 0,
+    display: 'none',
+  },
 }));
 
 // 主内容区域

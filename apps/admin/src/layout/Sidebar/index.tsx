@@ -9,7 +9,7 @@ import {
     StyledToggleButton,
     StyledSidebarNav
 } from "./sidebar.styles";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme, Drawer, Box } from "@mui/material";
 
 // 类型断言确保 JSON 数据符合 NavData 接口
 const menuData = menuDataRaw as NavData;
@@ -19,7 +19,7 @@ interface SidebarProps {
     onDrawerToggle: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onDrawerToggle }) => {
     const [open, setOpen] = useState(true);
     const [isHovering, setIsHovering] = useState(false);
     const { updateLayoutConfig, layoutConfig } = useAppTheme();
@@ -54,6 +54,47 @@ const Sidebar: React.FC<SidebarProps> = () => {
         setIsHovering(false);
     };
 
+    // 渲染菜单内容的公共函数
+    const renderMenuContent = () => (
+        <MenuList
+            data={menuData}
+            collapsed={isMenuCollapsed}
+            config={{
+                // 收起时不显示默认展开项
+                defaultOpenItems: isMenuCollapsed ? [] : undefined,
+            }}
+        />
+    );
+
+    // 移动端模式：使用抽屉
+    if (isMobile) {
+        return (
+            <Drawer
+                variant="temporary"
+                open={mobileOpen}
+                onClose={onDrawerToggle}
+                ModalProps={{
+                    keepMounted: true, // 更好的移动端性能
+                }}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        width: 300,
+                        boxSizing: 'border-box',
+                        top: 0,
+                        height: '100vh',
+                        borderRight: (theme) => `1px solid ${theme.customLayout.outlined?.borderColor}`,
+                        background: (theme) => theme.palette.background.default,
+                    },
+                }}
+            >
+                <Box sx={{ padding: (theme) => theme.spacing(2, 1, 2, 1) }}>
+                    {renderMenuContent()}
+                </Box>
+            </Drawer>
+        );
+    }
+
+    // 桌面端模式：固定侧边栏
     return (
         <StyledSidebarContainer
             ref={sidebarRef}
@@ -77,16 +118,10 @@ const Sidebar: React.FC<SidebarProps> = () => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <MenuList
-                    data={menuData}
-                    collapsed={isMenuCollapsed}
-                    config={{
-                        // 收起时不显示默认展开项
-                        defaultOpenItems: isMenuCollapsed ? [] : undefined,
-                    }}
-                />
+                {renderMenuContent()}
             </StyledSidebarNav>
         </StyledSidebarContainer>
     );
 };
 
+export default Sidebar;
