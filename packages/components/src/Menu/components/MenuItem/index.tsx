@@ -40,6 +40,7 @@ export const MenuItem = ({
   parentSelected = false,
   hasSubItems = false,
   open = false,
+  collapsed = true,
   onToggle,
   onClick,
   numberBadge,
@@ -73,6 +74,7 @@ export const MenuItem = ({
       hasSubItems={hasSubItems}
       onClick={handleClick}
       disabled={disabled}
+      collapsed={collapsed}
       data-level={level == 0 ? "false" : "true"}
       className="fast-menu-item-container-sub-child"
     >
@@ -88,36 +90,44 @@ export const MenuItem = ({
           />
         </ListItemIcon>
       )}
-
       {/* 菜单项文本内容 Menu item text content */}
-      <StyledListItemText
+      {!collapsed ? (
+        <StyledListItemText
+          primary={
+            primary && (
+              <span className="text-sm truncate">{primary}</span>
+            )
+          }
+          secondary={
+            secondary && (
+              <span className="inline-block text-xs truncate w-full">
+                {secondary}
+              </span>
+            )
+          }
+        />
+      ) : <StyledListItemText
         primary={
           primary && (
             <span className="text-sm truncate">{primary}</span>
           )
         }
-        secondary={
-          secondary && (
-            <span className="inline-block text-xs truncate w-full">
-              {secondary}
-            </span>
-          )
-        }
-      />
+      />}
 
       {/* 右侧操作区域：徽章和箭头 Right action area: badge and arrow */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        {/* 数字徽章 Number badge */}
-        {numberBadge && <NumberChip number={numberBadge} color={badgeColor} />}
-        {/* 展开/折叠箭头 Expand/collapse arrow */}
-        {hasSubItems && (
-          <StyledArrowIcon
-            icon="eva:arrow-ios-downward-fill"
-            open={open}
-            className="icon-arrow"
-          />
-        )}
-      </Box>
+      {!collapsed && (
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {/* 数字徽章 Number badge */}
+          {numberBadge && <NumberChip number={numberBadge} color={badgeColor} />}
+          {/* 展开/折叠箭头 Expand/collapse arrow */}
+          {hasSubItems && (
+            <StyledArrowIcon
+              icon="eva:arrow-ios-downward-fill"
+              open={open}
+              className="icon-arrow"
+            />
+          )}
+        </Box>)}
     </StyledListItemButton>
   );
 };

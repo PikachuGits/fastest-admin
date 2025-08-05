@@ -16,7 +16,7 @@ const baseThemeOptions = {
   customLayout: {
     headerHeight: 64,
     sidebarWidth: 300,
-    sidebarCollapsedWidth: 64,
+    sidebarCollapsedWidth: 87,
     footerHeight: 48,
     contentPadding: 24,
     showSidebar: true,

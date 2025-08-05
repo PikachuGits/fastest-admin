@@ -27,8 +27,8 @@ export const StyledSidebarContainer = styled(Box)(({ theme }) => ({
 // 侧边栏切换按钮
 export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
     position: 'absolute',
-    border: '1px solid rgba(0, 0, 0, 0.1)',
-    top: 0,
+    border: `1px solid ${theme.customLayout.outlined?.borderColor}`,
+    top: 8,
     right: 0,
     background: theme.palette.background.default,
     display: 'flex',
@@ -48,7 +48,7 @@ export const StyledSidebarNav = styled(Box)(({ theme }) => ({
     width: 'inherit',
     height: `calc(100vh - ${theme.customLayout.headerHeight}px)`,
     flexShrink: 0,
-    padding: theme.spacing(2, 1, 2, 1),
+    padding: theme.spacing(2, 0.5, 2, 0.5),
     position: "fixed",
     top: `${theme.customLayout.headerHeight}px`,
     overflowY: "auto",

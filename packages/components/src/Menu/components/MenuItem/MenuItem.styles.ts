@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Iconify } from "@fastest/components";
 import { type NumberChipColor } from "../NumberChip";
+import { transform } from "typescript";
 
 // ==================== 类型定义 Type Definitions ====================
 
@@ -35,6 +36,8 @@ export interface MenuItemProps {
     hasSubItems?: boolean;
     /** 是否展开（仅当有子项时有效） Whether expanded (only valid when has sub-items) */
     open?: boolean;
+    /** 是否收起状态 Whether in collapsed state */
+    collapsed?: boolean;
     /** 展开/折叠切换回调函数 Toggle expand/collapse callback function */
     onToggle?: () => void;
     /** 点击回调函数 Click callback function */
@@ -59,23 +62,37 @@ export interface MenuItemProps {
  * Provides basic styles for menu items, including selected state, level indentation, etc.
  */
 export const StyledListItemButton = styled(ListItemButton, {
-    shouldForwardProp: (prop) => !['level', 'selected', 'hasSubItems', 'parentSelected'].includes(prop as string),
+    shouldForwardProp: (prop) => !['level', 'selected', 'hasSubItems', 'parentSelected', "collapsed"].includes(prop as string),
 })<{
     level?: number;
     selected?: boolean;
     hasSubItems?: boolean;
     parentSelected?: boolean;
-}>(({ theme, level = 0, selected, hasSubItems, parentSelected }) => ({
+    collapsed?: boolean;
+}>(({ theme, level = 0, selected, hasSubItems, parentSelected, collapsed }) => ({
     // 基础布局样式 Basic layout styles
     marginTop: level ? theme.spacing(0.5) : 0,
     padding: " 4px 8px 4px 12px",
-    minHeight: 44,
     borderRadius: theme.spacing(1),
+    minHeight: 44,
     // 设置容器查询上下文
     overflow: 'visible', // 默认值
     // 容器查询：当元素自身宽度小于100px时
     '@container sidebar (max-width: 100px)': {
-        overflow: 'hidden',
+        "& .MuiListItemText-root": {
+            fontSize: "12px",
+            transform: 'scale(0.7)',
+            padding: 0,
+        },
+        "& .MuiListItemIcon-root": {
+            marginRight: 0,
+        },
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        padding: theme.spacing(0.5, 0.5, 0, 0.5),
+        minHeight: 0
     },
     // 选中状态样式 Selected state styles
     ...((selected || parentSelected) && {
@@ -125,6 +142,9 @@ export const StyledListItemButton = styled(ListItemButton, {
     "& .MuiListItemIcon-root": {
         minWidth: 24,
         marginRight: theme.spacing(1.5),
+        '@container sidebar (max-width: 100px)': {
+            marginRight: 0,
+        },
     },
     // 次文本样式 Secondary text styles
     "& .MuiListItemText-secondary": {

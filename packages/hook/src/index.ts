@@ -19,3 +19,5 @@ export type {
   UseLayoutConfigReturn,
   UseAppLayoutReturn,
 } from './layout';
+
+export { useDeviceType } from './useDeviceType'

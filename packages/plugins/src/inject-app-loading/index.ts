@@ -111,13 +111,22 @@ export function vitePluginAppLoading(options: PluginOptions = {}): Plugin {
         );
         if (rawTemplate) {
           const themeColors = options.themeColors ?? {};
-
+          const themeStyle = `
+<style id="app-loading-theme-colors">
+  :root {
+    --palette-primary-main: ${themeColors.primary ?? '#2196f3'};
+    --palette-primary-light: ${themeColors.light ?? '#64b5f6'};
+    --palette-primary-dark: ${themeColors.dark ?? '#1976d2'};
+  }
+</style>
+`;
+          
           // 预处理主题脚本，避免在 transformIndexHtml 中进行异步操作
           const isBuild = process.env.NODE_ENV === 'production';
           const { version } = await readPackageJSON(process.cwd());
           const envRaw = isBuild ? 'prod' : 'dev';
           const cacheNameKey = `'${appNamespace}-${version}-${envRaw}-preferences-theme'`;
-
+          
           const themeScript = `
           <script data-app-loading="theme-injector">
             try {
@@ -132,14 +141,14 @@ export function vitePluginAppLoading(options: PluginOptions = {}): Plugin {
             }
           </script>
         `;
-
+          
           const replacedTemplate = replaceTemplateVars(rawTemplate, {
             LOADING_APP_TITLE: title,
             LOADING_APP_TITLE_DESC: desc
           });
-
+          
           // 将主题脚本、样式和模板内容组合在一起
-          loadingHtmlContent = themeScript + replacedTemplate;
+          loadingHtmlContent = themeScript + themeStyle + replacedTemplate;
         } else {
           loadingHtmlContent = undefined;
         }
@@ -149,11 +158,50 @@ export function vitePluginAppLoading(options: PluginOptions = {}): Plugin {
       }
     },
 
-    // transformIndexHtml 钩子用于注入预处理好的内容
+    // transformIndexHtml 钩子用于注入内容，包括暗夜模式脚本
     transformIndexHtml(html: string): string {
       if (!loadingHtmlContent) {
-        return html;
+        return html; // 如果没有加载到内容，则不修改 HTML
       }
+
+      // 暗夜模式主题适配脚本
+      // 这个脚本需要在 loadingHtmlContent 之前被注入，否则 loading 动画本身无法应用主题
+      const injectThemeScript = async (): Promise<string> => {
+        // 检查是否是构建模式，以便确定 cacheName 中的环境标识
+        // 注意：在 transformIndexHtml 中，我们无法直接知道 buildStart 时的 isBuild 状态
+        // 一个更可靠的方式是让 Vite 的 VITE_NODE_ENV 来判断
+        const isBuild = process.env.VITE_NODE_ENV === 'production'; // 假设 VITE_NODE_ENV 被设置
+        const { version } = await readPackageJSON(process.cwd()); // 在这里读取 package.json
+        const envRaw = isBuild ? 'prod' : 'dev';
+        const cacheNameKey = `'${appNamespace}-${version}-${envRaw}-preferences-theme'`;
+
+        return `
+          <script data-app-loading="theme-injector">
+            try {
+              var theme = localStorage.getItem(${cacheNameKey});
+              if (theme && /dark/.test(theme)) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (e) {
+              console.warn('[vite-plugin-app-loading] Failed to apply theme:', e);
+            }
+          </script>
+        `;
+      };
+
+      // 这里需要一个异步的处理方式，但 transformIndexHtml 是同步的。
+      // 因此，我们可以将暗夜模式脚本与 loadingHtmlContent 一起在 buildStart 中预先构建好。
+      // 或者，我们可以将它变成一个同步的字符串。下面采用同步字符串的方式，假设 VITE_NODE_ENV 已经设置好。
+
+      // 重新设计逻辑：将暗夜模式脚本与 loadingHtmlContent 一起在 buildStart 中处理
+      // 这样 transformIndexHtml 只需要注入一个已准备好的字符串
+      // 见下面的 方式二。
+      // 如果坚持在这里动态生成，需要异步处理，通常不推荐给 transformIndexHtml
+
+      // 为了保持 buildStart 的简单性，我们回到将暗夜模式脚本与 loadingHtmlContent 一起在 buildStart 预处理的方式。
+      // 所以这里 transformIndexHtml 只需注入 loadingHtmlContent
 
       const insertBefore = '</body>';
       if (html.includes(insertBefore)) {

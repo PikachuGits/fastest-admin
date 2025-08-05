@@ -10,6 +10,8 @@
     "dependencies": {
         "@fastest/types": "workspace:*",
         "@fastest/utils": "workspace:*",
-        "@iconify/react": "catalog:"
+        "@fastest/hook": "workspace:*",
+        "@iconify/react": "catalog:",
+        "zustand": "catalog:"
     }
 }

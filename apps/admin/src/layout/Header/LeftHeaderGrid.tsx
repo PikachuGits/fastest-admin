@@ -19,10 +19,8 @@ export const LeftHeaderGrid = () => {
       <RotatingBorderAvatar src="/logo.png" />
       {
         !isMobile && (
-          <Box sx={{ display: "flex", alignItems: "center", marginLeft: '10px' }}>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              建业管理平台
-            </Typography>
+          <Box className="font-bold text-[18px]" sx={{ display: "flex", alignItems: "center", marginLeft: '10px', }}>
+            建业管理平台
           </Box>
         )
       }

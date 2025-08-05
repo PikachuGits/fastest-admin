@@ -9,7 +9,7 @@ import type { LayoutConfig, UseLayoutConfigReturn } from "./types";
 export const DEFAULT_LAYOUT_CONFIG: LayoutConfig = {
   headerHeight: 64,
   sidebarWidth: 300,
-  sidebarCollapsedWidth: 80,
+  sidebarCollapsedWidth: 87,
   footerHeight: 60,
   contentPadding: 24,
   showSidebar: true,

@@ -15,11 +15,11 @@ export const RightHeaderGrid = () => {
         {
           isDarkMode ? <Iconify
             icon={"solar:sun-2-bold-duotone"}
-            className="animate-fade-in animate-fade-out  animate-duration-1000"
+            className=""
           /> :
             <Iconify
               icon={"solar:cloudy-moon-bold"}
-              className="animate-fade-in animate-fade-out animate-duration-1000"
+              className=""
             />
         }
       </StyledRightIconButton>

@@ -6,6 +6,7 @@ import DemoIndexPage from "@/pages/demo";
 import ThemeTestPage from "@/pages/demo/theme-test";
 import DrawerHeaderDemo from "@/layout/component/DrawerHeaderDemo";
 import Icon from "@/pages/Icon";
+import SidebarTest from "@/pages/SidebarTest";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/demo/drawer-header",
         element: <DrawerHeaderDemo />,
+      },
+      {
+        path: "/sidebar-test",
+        element: <SidebarTest />,
       },
     ],
   },

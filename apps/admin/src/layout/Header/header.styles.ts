@@ -10,7 +10,7 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
 export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   height: theme.customLayout.headerHeight,
   // 可以在这里添加自定义样式
-  padding: theme.spacing(0, 1, 0, 0),
+  padding: theme.spacing(0, 1, 0, 1),
   borderBottom: `1px solid ${theme.palette.divider}`,
 
 }));

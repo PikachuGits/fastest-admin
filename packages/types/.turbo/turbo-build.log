@@ -1,2 +1,795 @@
 
 [0m[2m[35m$[0m [2m[1mtsc[0m
+[96m../../apps/admin/src/app/providers/theme.ts[0m:[93m8[0m:[93m8[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/theme/design-tokens' or its corresponding type declarations.
+
+[7m8[0m } from '@/theme/design-tokens';
+[7m [0m [91m       ~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m2[0m:[93m20[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/layout' or its corresponding type declarations.
+
+[7m2[0m import Layout from "@/layout";
+[7m [0m [91m                   ~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m3[0m:[93m18[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/pages/Home' or its corresponding type declarations.
+
+[7m3[0m import Home from "@/pages/Home";
+[7m [0m [91m                 ~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m4[0m:[93m19[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/pages/About' or its corresponding type declarations.
+
+[7m4[0m import About from "@/pages/About";
+[7m [0m [91m                  ~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m5[0m:[93m27[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/pages/demo' or its corresponding type declarations.
+
+[7m5[0m import DemoIndexPage from "@/pages/demo";
+[7m [0m [91m                          ~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m6[0m:[93m27[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/pages/demo/theme-test' or its corresponding type declarations.
+
+[7m6[0m import ThemeTestPage from "@/pages/demo/theme-test";
+[7m [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m7[0m:[93m30[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/layout/component/DrawerHeaderDemo' or its corresponding type declarations.
+
+[7m7[0m import DrawerHeaderDemo from "@/layout/component/DrawerHeaderDemo";
+[7m [0m [91m                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/app/routes/router.tsx[0m:[93m8[0m:[93m18[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/pages/Icon' or its corresponding type declarations.
+
+[7m8[0m import Icon from "@/pages/Icon";
+[7m [0m [91m                 ~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/layout/component/Setting/index.tsx[0m:[93m3[0m:[93m39[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/layout/Header/header.styles' or its corresponding type declarations.
+
+[7m3[0m import { StyledRightIconButton } from "@/layout/Header/header.styles";
+[7m [0m [91m                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/layout/Header/RightHeaderGrid.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/app/providers' or its corresponding type declarations.
+
+[7m3[0m import { useAppTheme } from "@/app/providers";
+[7m [0m [91m                            ~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/layout/Sidebar/index.tsx[0m:[93m3[0m:[93m29[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/app/providers/ThemeProvider' or its corresponding type declarations.
+
+[7m3[0m import { useAppTheme } from "@/app/providers/ThemeProvider";
+[7m [0m [91m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/layout/Sidebar/index.tsx[0m:[93m4[0m:[93m29[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/store' or its corresponding type declarations.
+
+[7m4[0m import { useAppStore } from "@/store";
+[7m [0m [91m                            ~~~~~~~~~[0m
+
+[96m../../apps/admin/src/pages/Home/index.tsx[0m:[93m3[0m:[93m30[0m - [91merror[0m[90m TS2307: [0mCannot find module '@fastest/components/src/Sidebar/test/mockData' or its corresponding type declarations.
+
+[7m3[0m import { mockMenuData } from '@fastest/components/src/Sidebar/test/mockData';
+[7m [0m [91m                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/src/server/userService.ts[0m:[93m2[0m:[93m21[0m - [91merror[0m[90m TS2307: [0mCannot find module '@/server/request' or its corresponding type declarations.
+
+[7m2[0m import request from '@/server/request';
+[7m [0m [91m                    ~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/uno.config.ts[0m:[93m8[0m:[93m35[0m - [91merror[0m[90m TS2307: [0mCannot find module './src/app/providers/lightTheme' or its corresponding type declarations.
+
+[7m8[0m import { lightDesignTokens } from './src/app/providers/lightTheme'
+[7m [0m [91m                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/admin/uno.config.ts[0m:[93m9[0m:[93m34[0m - [91merror[0m[90m TS2307: [0mCannot find module './src/app/providers/darkTheme' or its corresponding type declarations.
+
+[7m9[0m import { darkDesignTokens } from './src/app/providers/darkTheme'
+[7m [0m [91m                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../../apps/web/src/app/App.tsx[0m:[93m6[0m:[93m10[0m - [91merror[0m[90m TS2305: [0mModule '"@fastest/components"' has no exported member 'SidebarDemo'.
+
+[7m6[0m import { SidebarDemo } from "@fastest/components";
+[7m [0m [91m         ~~~~~~~~~~~[0m
+
+[96m../../apps/web/src/app/App.tsx[0m:[93m7[0m:[93m31[0m - [91merror[0m[90m TS2307: [0mCannot find module '../TestComponent' or its corresponding type declarations.
+
+[7m7[0m import { TestComponent } from '../TestComponent';
+[7m [0m [91m                              ~~~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/index.ts[0m:[93m4[0m:[93m1[0m - [91merror[0m[90m TS2308: [0mModule "./Menu" has already exported a member named 'MenuItem'. Consider explicitly re-exporting to resolve the ambiguity.
+
+[7m4[0m export * from "./Sidebar";
+[7m [0m [91m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m12[0m:[93m5[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m12[0m     description: '查看系统概览和统计信息',
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m22[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType '{ text: string; type: string; }' is not assignable to type 'string | number | undefined'.
+
+[7m22[0m     badge: {
+[7m  [0m [91m    ~~~~~[0m
+
+  [96m../components/src/Sidebar/types.ts[0m:[93m13[0m:[93m3[0m
+    [7m13[0m   badge?: number | string;
+    [7m  [0m [96m  ~~~~~[0m
+    The expected type comes from property 'badge' which is declared here on type 'MenuItem'
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m40[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m40[0m         description: '查看所有用户列表',
+[7m  [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m48[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m48[0m         description: '添加新用户到系统',
+[7m  [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m58[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType '{ text: string; type: string; }' is not assignable to type 'string | number | undefined'.
+
+[7m58[0m         badge: {
+[7m  [0m [91m        ~~~~~[0m
+
+  [96m../components/src/Sidebar/types.ts[0m:[93m13[0m:[93m3[0m
+    [7m13[0m   badge?: number | string;
+    [7m  [0m [96m  ~~~~~[0m
+    The expected type comes from property 'badge' which is declared here on type 'MenuItem'
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m78[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m78[0m         description: '管理文章和博客内容',
+[7m  [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m86[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m86[0m         description: '管理图片、视频等媒体文件',
+[7m  [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m104[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m104[0m         description: '查看销售数据和趋势',
+[7m   [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m112[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m112[0m         description: '查看用户活跃度和行为',
+[7m   [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m130[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m130[0m         description: '基本系统配置',
+[7m   [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m140[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType '{ text: string; type: string; }' is not assignable to type 'string | number | undefined'.
+
+[7m140[0m         badge: {
+[7m   [0m [91m        ~~~~~[0m
+
+  [96m../components/src/Sidebar/types.ts[0m:[93m13[0m:[93m3[0m
+    [7m13[0m   badge?: number | string;
+    [7m  [0m [96m  ~~~~~[0m
+    The expected type comes from property 'badge' which is declared here on type 'MenuItem'
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m150[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'description' does not exist in type 'MenuItem'.
+
+[7m150[0m         description: '第三方服务集成设置',
+[7m   [0m [91m        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m159[0m:[93m3[0m - [91merror[0m[90m TS2561: [0mObject literal may only specify known properties, but 'admin' does not exist in type 'Record<UserRole, UserInfo>'. Did you mean to write 'Admin'?
+
+[7m159[0m   admin: {
+[7m   [0m [91m  ~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m190[0m:[93m60[0m - [91merror[0m[90m TS2345: [0mArgument of type '"admin"' is not assignable to parameter of type 'UserRole | (() => UserRole)'.
+
+[7m190[0m   const [currentUser, setCurrentUser] = useState<UserRole>('admin');
+[7m   [0m [91m                                                           ~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m231[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType '{ menuItems: MenuItem[]; userInfo: UserInfo; theme: "dark" | "light"; onMenuClick: (item: MenuItem) => void; onThemeChange: (newTheme: "dark" | "light") => void; ... 8 more ...; version: string; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+  Property 'userInfo' does not exist on type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+
+[7m231[0m         userInfo={users[currentUser]}
+[7m   [0m [91m        ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/examples/BasicExample.tsx[0m:[93m310[0m:[93m54[0m - [91merror[0m[90m TS2367: [0mThis comparison appears to be unintentional because the types '"light"' and '"dark"' have no overlap.
+
+[7m310[0m                 color: theme === 'dark' ? 'white' : (theme === 'dark' ? '#ffffff' : '#000000'),
+[7m   [0m [91m                                                     ~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/index.ts[0m:[93m32[0m:[93m15[0m - [91merror[0m[90m TS2724: [0m'"./SidebarHeader"' has no exported member named 'SidebarHeaderProps'. Did you mean 'SidebarHeader'?
+
+[7m32[0m export type { SidebarHeaderProps } from './SidebarHeader';
+[7m  [0m [91m              ~~~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarContent/index.ts[0m:[93m1[0m:[93m10[0m - [91merror[0m[90m TS2305: [0mModule '"./SidebarContent"' has no exported member 'default'.
+
+[7m1[0m export { default as SidebarContent } from './SidebarContent';
+[7m [0m [91m         ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarContent/index.ts[0m:[93m2[0m:[93m15[0m - [91merror[0m[90m TS2724: [0m'"./SidebarContent"' has no exported member named 'SidebarContentProps'. Did you mean 'SidebarContent'?
+
+[7m2[0m export type { SidebarContentProps } from './SidebarContent';
+[7m [0m [91m              ~~~~~~~~~~~~~~~~~~~[0m
+
+  [96m../components/src/Sidebar/SidebarContent/SidebarContent.tsx[0m:[93m18[0m:[93m14[0m
+    [7m18[0m export const SidebarContent: React.FC<SidebarContentProps> = ({
+    [7m  [0m [96m             ~~~~~~~~~~~~~~[0m
+    'SidebarContent' is declared here.
+
+[96m../components/src/Sidebar/SidebarContent/SidebarContent.tsx[0m:[93m100[0m:[93m13[0m - [91merror[0m[90m TS2322: [0mType '{ item: MenuItem; level: number; isSelected: boolean; isOpen: boolean; hasChildren: boolean | undefined; enableDrag: boolean; showDebugInfo: boolean; onClick: (item: MenuItem) => void; onToggleSubMenu: (itemId: string) => void; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuItemProps'.
+  Property 'isSelected' does not exist on type 'IntrinsicAttributes & SidebarMenuItemProps'.
+
+[7m100[0m             isSelected={isSelected}
+[7m   [0m [91m            ~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarFooter/SidebarFooter.tsx[0m:[93m48[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'isCollapsed' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m48[0m     isCollapsed,
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarFooter/SidebarFooter.tsx[0m:[93m52[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'debugState' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m52[0m     debugState,
+[7m  [0m [91m    ~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarFooter/SidebarFooter.tsx[0m:[93m53[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'cacheState' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m53[0m     cacheState,
+[7m  [0m [91m    ~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarFooter/SidebarFooter.tsx[0m:[93m56[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'userInfo' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m56[0m     userInfo,
+[7m  [0m [91m    ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarFooter/SidebarFooter.tsx[0m:[93m59[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'updateDebugInfo' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m59[0m     updateDebugInfo,
+[7m  [0m [91m    ~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarHeader/SidebarHeader.tsx[0m:[93m119[0m:[93m39[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'UserRole'.
+
+[7m119[0m                   {getRoleDisplayName(currentRole)}
+[7m   [0m [91m                                      ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarHeader/SidebarHeader.tsx[0m:[93m150[0m:[93m41[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string' is not assignable to parameter of type 'UserRole'.
+
+[7m150[0m                     {getRoleDisplayName(currentRole)}
+[7m   [0m [91m                                        ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenu/SidebarMenu.tsx[0m:[93m207[0m:[93m17[0m - [91merror[0m[90m TS2322: [0mType '{ customStyles: CSSProperties | undefined; }' is not assignable to type 'IntrinsicAttributes & SidebarFooterProps'.
+  Property 'customStyles' does not exist on type 'IntrinsicAttributes & SidebarFooterProps'.
+
+[7m207[0m                 customStyles={customStyles.footer}
+[7m   [0m [91m                ~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m3[0m:[93m10[0m - [91merror[0m[90m TS1484: [0m'MenuItem' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+
+[7m3[0m import { MenuItem, UserRole } from '../types';
+[7m [0m [91m         ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m3[0m:[93m20[0m - [91merror[0m[90m TS1484: [0m'UserRole' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+
+[7m3[0m import { MenuItem, UserRole } from '../types';
+[7m [0m [91m                   ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m53[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'isCollapsed' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m53[0m     isCollapsed,
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m54[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'activeMenuId' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m54[0m     activeMenuId,
+[7m  [0m [91m    ~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m55[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'expandedMenuIds' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m55[0m     expandedMenuIds,
+[7m  [0m [91m    ~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m58[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'searchQuery' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m58[0m     searchQuery,
+[7m  [0m [91m    ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m63[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'userInfo' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m63[0m     userInfo,
+[7m  [0m [91m    ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m66[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'debugState' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m66[0m     debugState,
+[7m  [0m [91m    ~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m69[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'setActiveMenu' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m69[0m     setActiveMenu,
+[7m  [0m [91m    ~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m70[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'toggleMenuExpansion' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m70[0m     toggleMenuExpansion,
+[7m  [0m [91m    ~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m71[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'setDragState' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m71[0m     setDragState,
+[7m  [0m [91m    ~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m72[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'addTab' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m72[0m     addTab,
+[7m  [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m73[0m:[93m5[0m - [91merror[0m[90m TS2339: [0mProperty 'updateDebugInfo' does not exist on type 'SidebarState & SidebarActions'.
+
+[7m73[0m     updateDebugInfo,
+[7m  [0m [91m    ~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m91[0m:[93m40[0m - [91merror[0m[90m TS2339: [0mProperty 'roles' does not exist on type 'MenuItem'.
+
+[7m91[0m   const isVisible = hasPermission(item.roles);
+[7m  [0m [91m                                       ~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m106[0m:[93m10[0m - [91merror[0m[90m TS2339: [0mProperty 'description' does not exist on type 'MenuItem'.
+
+[7m106[0m     item.description?.toLowerCase().includes(searchQuery.toLowerCase());
+[7m   [0m [91m         ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m136[0m:[93m18[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'TabState'.
+
+[7m136[0m     if (tabState.enabled && item.path) {
+[7m   [0m [91m                 ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m148[0m:[93m82[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'TabState'.
+
+[7m148[0m   }, [disabled, isVisible, debugState.enabled, hasChildren, isExpanded, tabState.enabled, item, updateDebugInfo, setActiveMenu, toggleMenuExpansion, onToggleSubmenu, addTab, onClick]);
+[7m   [0m [91m                                                                                 ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m167[0m:[93m20[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'DragState'.
+
+[7m167[0m     if (!dragState.enabled) {
+[7m   [0m [91m                   ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m191[0m:[93m20[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'DragState'.
+
+[7m191[0m     if (!dragState.enabled) return;
+[7m   [0m [91m                   ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m196[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'DragState'.
+
+[7m196[0m   }, [dragState.enabled]);
+[7m   [0m [91m                ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m208[0m:[93m20[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'DragState'.
+
+[7m208[0m     if (!dragState.enabled || !dragState.draggedItem) return;
+[7m   [0m [91m                   ~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m208[0m:[93m42[0m - [91merror[0m[90m TS2551: [0mProperty 'draggedItem' does not exist on type 'DragState'. Did you mean 'draggedItemId'?
+
+[7m208[0m     if (!dragState.enabled || !dragState.draggedItem) return;
+[7m   [0m [91m                                         ~~~~~~~~~~~[0m
+
+  [96m../components/src/Sidebar/types.ts[0m:[93m27[0m:[93m3[0m
+    [7m27[0m   draggedItemId?: string;
+    [7m  [0m [96m  ~~~~~~~~~~~~~[0m
+    'draggedItemId' is declared here.
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m210[0m:[93m35[0m - [91merror[0m[90m TS2551: [0mProperty 'draggedItem' does not exist on type 'DragState'. Did you mean 'draggedItemId'?
+
+[7m210[0m     const draggedItem = dragState.draggedItem;
+[7m   [0m [91m                                  ~~~~~~~~~~~[0m
+
+  [96m../components/src/Sidebar/types.ts[0m:[93m27[0m:[93m3[0m
+    [7m27[0m   draggedItemId?: string;
+    [7m  [0m [96m  ~~~~~~~~~~~~~[0m
+    'draggedItemId' is declared here.
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m245[0m:[93m91[0m - [91merror[0m[90m TS2339: [0mProperty 'type' does not exist on type 'string | number'.
+  Property 'type' does not exist on type 'string'.
+
+[7m245[0m         <span className={`sidebar-menu-item__badge sidebar-menu-item__badge--${item.badge.type || 'default'}`}>
+[7m   [0m [91m                                                                                          ~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m246[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'text' does not exist on type 'string | number'.
+  Property 'text' does not exist on type 'string'.
+
+[7m246[0m           {item.badge.text}
+[7m   [0m [91m                      ~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m273[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'description' does not exist on type 'MenuItem'.
+
+[7m273[0m           {item.description && (
+[7m   [0m [91m                ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m274[0m:[93m75[0m - [91merror[0m[90m TS2339: [0mProperty 'description' does not exist on type 'MenuItem'.
+
+[7m274[0m             <div className="sidebar-menu-item__tooltip-description">{item.description}</div>
+[7m   [0m [91m                                                                          ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m276[0m:[93m17[0m - [91merror[0m[90m TS2339: [0mProperty 'shortcut' does not exist on type 'MenuItem'.
+
+[7m276[0m           {item.shortcut && (
+[7m   [0m [91m                ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m277[0m:[93m72[0m - [91merror[0m[90m TS2339: [0mProperty 'shortcut' does not exist on type 'MenuItem'.
+
+[7m277[0m             <div className="sidebar-menu-item__tooltip-shortcut">{item.shortcut}</div>
+[7m   [0m [91m                                                                       ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[0m:[93m351[0m:[93m30[0m - [91merror[0m[90m TS2339: [0mProperty 'enabled' does not exist on type 'DragState'.
+
+[7m351[0m         draggable={dragState.enabled && !disabled}
+[7m   [0m [91m                             ~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m2[0m:[93m52[0m - [91merror[0m[90m TS2307: [0mCannot find module '@testing-library/react' or its corresponding type declarations.
+
+[7m2[0m import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+[7m [0m [91m                                                   ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m5[0m:[93m10[0m - [91merror[0m[90m TS1484: [0m'MenuItem' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+
+[7m5[0m import { MenuItem, UserRole } from '../types';
+[7m [0m [91m         ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m5[0m:[93m20[0m - [91merror[0m[90m TS1484: [0m'UserRole' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+
+[7m5[0m import { MenuItem, UserRole } from '../types';
+[7m [0m [91m                   ~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m14[0m:[93m5[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'roles' does not exist in type 'MenuItem'.
+
+[7m14[0m     roles: ['admin', 'user'],
+[7m  [0m [91m    ~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m28[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'roles' does not exist in type 'MenuItem'.
+
+[7m28[0m         roles: ['admin'],
+[7m  [0m [91m        ~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m35[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'roles' does not exist in type 'MenuItem'.
+
+[7m35[0m         roles: ['admin'],
+[7m  [0m [91m        ~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m44[0m:[93m5[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'roles' does not exist in type 'MenuItem'.
+
+[7m44[0m     roles: ['admin', 'user'],
+[7m  [0m [91m    ~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m57[0m:[93m1[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m57[0m jest.mock('../store/useSidebarStore', () => ({
+[7m  [0m [91m~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m90[0m:[93m21[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m90[0m     toggleCollapse: jest.fn(),
+[7m  [0m [91m                    ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m91[0m:[93m18[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m91[0m     setPosition: jest.fn(),
+[7m  [0m [91m                 ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m92[0m:[93m15[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m92[0m     setTheme: jest.fn(),
+[7m  [0m [91m              ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m93[0m:[93m20[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m93[0m     setActiveMenu: jest.fn(),
+[7m  [0m [91m                   ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m94[0m:[93m26[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m94[0m     toggleMenuExpansion: jest.fn(),
+[7m  [0m [91m                         ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m95[0m:[93m21[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m95[0m     setSearchQuery: jest.fn(),
+[7m  [0m [91m                    ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m96[0m:[93m23[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m96[0m     addSearchHistory: jest.fn(),
+[7m  [0m [91m                      ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m97[0m:[93m25[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m97[0m     clearSearchHistory: jest.fn(),
+[7m  [0m [91m                        ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m98[0m:[93m19[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m98[0m     setDragState: jest.fn(),
+[7m  [0m [91m                  ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m99[0m:[93m13[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m99[0m     addTab: jest.fn(),
+[7m  [0m [91m            ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m100[0m:[93m16[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m100[0m     removeTab: jest.fn(),
+[7m   [0m [91m               ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m101[0m:[93m19[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m101[0m     setActiveTab: jest.fn(),
+[7m   [0m [91m                  ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m102[0m:[93m18[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m102[0m     setUserInfo: jest.fn(),
+[7m   [0m [91m                 ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m103[0m:[93m22[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m103[0m     updateDebugInfo: jest.fn(),
+[7m   [0m [91m                     ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m104[0m:[93m17[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m104[0m     clearCache: jest.fn(),
+[7m   [0m [91m                ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m109[0m:[93m1[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m109[0m jest.mock('../hooks/useDeviceType', () => ({
+[7m   [0m [91m~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m118[0m:[93m1[0m - [91merror[0m[90m TS2582: [0mCannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m118[0m describe('SidebarMenu', () => {
+[7m   [0m [91m~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m124[0m:[93m3[0m - [91merror[0m[90m TS2304: [0mCannot find name 'beforeEach'.
+
+[7m124[0m   beforeEach(() => {
+[7m   [0m [91m  ~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m125[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m125[0m     jest.clearAllMocks();
+[7m   [0m [91m    ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m128[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m128[0m   it('应该正确渲染侧边栏菜单', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m132[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m132[0m     expect(screen.getByRole('navigation')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m135[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m135[0m     expect(screen.getByText('仪表板')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m136[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m136[0m     expect(screen.getByText('用户管理')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m137[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m137[0m     expect(screen.getByText('设置')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m140[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m140[0m   it('应该正确显示用户信息', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m144[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m144[0m     expect(screen.getByText('测试用户')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m147[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m147[0m     expect(screen.getByText('test@example.com')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m150[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m150[0m   it('应该支持菜单项点击', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m151[0m:[93m25[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m151[0m     const onMenuClick = jest.fn();
+[7m   [0m [91m                        ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m152[0m:[93m43[0m - [91merror[0m[90m TS2322: [0mType '{ onMenuClick: any; menuItems: MenuItem[]; userInfo: { id: string; name: string; email: string; avatar: string; role: UserRole; }; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+  Property 'onMenuClick' does not exist on type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+
+[7m152[0m     render(<SidebarMenu {...defaultProps} onMenuClick={onMenuClick} />);
+[7m   [0m [91m                                          ~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m158[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m158[0m     expect(onMenuClick).toHaveBeenCalledWith(mockMenuItems[0]);
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m161[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m161[0m   it('应该支持搜索功能', async () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m166[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m166[0m     expect(searchInput).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m173[0m:[93m7[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m173[0m       expect(searchInput).toHaveValue('用户');
+[7m   [0m [91m      ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m177[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m177[0m   it('应该支持主题切换', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m178[0m:[93m27[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m178[0m     const onThemeChange = jest.fn();
+[7m   [0m [91m                          ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m183[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m183[0m     expect(themeButton).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m189[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m189[0m     expect(onThemeChange).toHaveBeenCalled();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m192[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m192[0m   it('应该支持展开/收起功能', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m193[0m:[93m30[0m - [91merror[0m[90m TS2304: [0mCannot find name 'jest'.
+
+[7m193[0m     const onToggleCollapse = jest.fn();
+[7m   [0m [91m                             ~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m194[0m:[93m43[0m - [91merror[0m[90m TS2322: [0mType '{ onToggleCollapse: any; menuItems: MenuItem[]; userInfo: { id: string; name: string; email: string; avatar: string; role: UserRole; }; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+  Property 'onToggleCollapse' does not exist on type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+
+[7m194[0m     render(<SidebarMenu {...defaultProps} onToggleCollapse={onToggleCollapse} />);
+[7m   [0m [91m                                          ~~~~~~~~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m198[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m198[0m     expect(toggleButton).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m204[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m204[0m     expect(onToggleCollapse).toHaveBeenCalled();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m207[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m207[0m   it('应该正确处理子菜单', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m212[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m212[0m     expect(userManagementItem).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m218[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m218[0m     expect(screen.getByText('用户列表')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m219[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m219[0m     expect(screen.getByText('创建用户')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m222[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m222[0m   it('应该支持权限控制', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m235[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m235[0m     expect(screen.getByText('仪表板')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m236[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m236[0m     expect(screen.getByText('设置')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m239[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m239[0m     expect(screen.queryByText('用户管理')).not.toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m242[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m242[0m   it('应该支持加载状态', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m243[0m:[93m43[0m - [91merror[0m[90m TS2322: [0mType '{ loading: boolean; menuItems: MenuItem[]; userInfo: { id: string; name: string; email: string; avatar: string; role: UserRole; }; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+  Property 'loading' does not exist on type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+
+[7m243[0m     render(<SidebarMenu {...defaultProps} loading={true} />);
+[7m   [0m [91m                                          ~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m246[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m246[0m     expect(screen.getByText('加载中...')).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m249[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m249[0m   it('应该支持错误状态', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m251[0m:[93m43[0m - [91merror[0m[90m TS2322: [0mType '{ error: string; menuItems: MenuItem[]; userInfo: { id: string; name: string; email: string; avatar: string; role: UserRole; }; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+  Property 'error' does not exist on type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+
+[7m251[0m     render(<SidebarMenu {...defaultProps} error={errorMessage} />);
+[7m   [0m [91m                                          ~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m254[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m254[0m     expect(screen.getByText(errorMessage)).toBeInTheDocument();
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m257[0m:[93m3[0m - [91merror[0m[90m TS2582: [0mCannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
+[7m257[0m   it('应该支持自定义样式', () => {
+[7m   [0m [91m  ~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m264[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType '{ className: string; style: { backgroundColor: string; }; menuItems: MenuItem[]; userInfo: { id: string; name: string; email: string; avatar: string; role: UserRole; }; }' is not assignable to type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & SidebarMenuProps & RefAttributes<SidebarMenuRef>'.
+
+[7m264[0m         className={customClassName}
+[7m   [0m [91m        ~~~~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m270[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m270[0m     expect(sidebar).toHaveClass(customClassName);
+[7m   [0m [91m    ~~~~~~[0m
+
+[96m../components/src/Sidebar/test/SidebarMenu.test.tsx[0m:[93m271[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'expect'.
+
+[7m271[0m     expect(sidebar).toHaveStyle('background-color: red');
+[7m   [0m [91m    ~~~~~~[0m
+
+
+Found 146 errors in 19 files.
+
+Errors  Files
+     1  ../../apps/admin/src/app/providers/theme.ts[90m:8[0m
+     7  ../../apps/admin/src/app/routes/router.tsx[90m:2[0m
+     1  ../../apps/admin/src/layout/component/Setting/index.tsx[90m:3[0m
+     1  ../../apps/admin/src/layout/Header/RightHeaderGrid.tsx[90m:3[0m
+     2  ../../apps/admin/src/layout/Sidebar/index.tsx[90m:3[0m
+     1  ../../apps/admin/src/pages/Home/index.tsx[90m:3[0m
+     1  ../../apps/admin/src/server/userService.ts[90m:2[0m
+     2  ../../apps/admin/uno.config.ts[90m:8[0m
+     2  ../../apps/web/src/app/App.tsx[90m:6[0m
+     1  ../components/src/index.ts[90m:4[0m
+    16  ../components/src/Sidebar/examples/BasicExample.tsx[90m:12[0m
+     1  ../components/src/Sidebar/index.ts[90m:32[0m
+     2  ../components/src/Sidebar/SidebarContent/index.ts[90m:1[0m
+     1  ../components/src/Sidebar/SidebarContent/SidebarContent.tsx[90m:100[0m
+     5  ../components/src/Sidebar/SidebarFooter/SidebarFooter.tsx[90m:48[0m
+     2  ../components/src/Sidebar/SidebarHeader/SidebarHeader.tsx[90m:119[0m
+     1  ../components/src/Sidebar/SidebarMenu/SidebarMenu.tsx[90m:207[0m
+    30  ../components/src/Sidebar/SidebarMenuItem/SidebarMenuItem.tsx[90m:3[0m
+    69  ../components/src/Sidebar/test/SidebarMenu.test.tsx[90m:2[0m

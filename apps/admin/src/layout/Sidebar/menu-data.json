@@ -4,7 +4,7 @@
             "subheader": "Marketing",
             "items": [
                 {
-                    "title": "Landing",
+                    "title": "工作中心",
                     "path": "#landing",
                     "icon": "solar:home-angle-bold-duotone",
                     "info": [
@@ -17,7 +17,7 @@
                     "caption": "Display only admin roleDisplay only admin roleDisplay only admin roleDisplay only admin role"
                 },
                 {
-                    "title": "Services",
+                    "title": "用户管理",
                     "path": "#services",
                     "icon": "solar:home-angle-bold-duotone",
                     "roles": [
@@ -26,7 +26,7 @@
                     ]
                 },
                 {
-                    "title": "Blog",
+                    "title": "公司管理",
                     "path": "#blog",
                     "icon": "solar:home-angle-bold-duotone",
                     "info": [
@@ -52,7 +52,7 @@
             ]
         },
         {
-            "subheader": "Travel",
+            "subheader": "权限管理",
             "items": [
                 {
                     "title": "About",
