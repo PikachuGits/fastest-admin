@@ -20,7 +20,7 @@
  * - Maintain 100% backward compatibility
  */
 
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useRef } from 'react';
 import { useMenuState } from './useMenuState';
 import type { UseMenuOptions, UseMenuReturn, MenuItem } from '../types/public';
 import type { NavData, NavSection, NavItem } from '../types';
@@ -30,9 +30,19 @@ import type { NavData, NavSection, NavItem } from '../types';
 /**
  * 将简化的MenuItem转换为内部NavItem格式
  * Convert simplified MenuItem to internal NavItem format
+ * 
+ * 使用缓存优化，避免重复转换相同的MenuItem
+ * Use caching optimization to avoid repeated conversion of the same MenuItem
  */
+const menuItemToNavItemCache = new WeakMap<MenuItem, NavItem>();
+
 const convertMenuItemToNavItem = (item: MenuItem): NavItem => {
-  return {
+  // 检查缓存
+  if (menuItemToNavItemCache.has(item)) {
+    return menuItemToNavItemCache.get(item)!;
+  }
+  
+  const navItem: NavItem = {
     title: item.title,
     path: item.path || `#${item.key}`,
     icon: typeof item.icon === 'string' ? item.icon : undefined,
@@ -40,20 +50,38 @@ const convertMenuItemToNavItem = (item: MenuItem): NavItem => {
     roles: item.roles,
     children: item.children?.map(convertMenuItemToNavItem),
   };
+  
+  // 缓存结果
+  menuItemToNavItemCache.set(item, navItem);
+  return navItem;
 };
 
 /**
  * 将简化的items转换为内部NavData格式
  * Convert simplified items to internal NavData format
+ * 
+ * 使用缓存优化，避免重复转换相同的items数组
+ * Use caching optimization to avoid repeated conversion of the same items array
  */
+const itemsToNavDataCache = new WeakMap<MenuItem[], NavData>();
+
 const convertItemsToNavData = (items: MenuItem[]): NavData => {
-  const navItems: NavSection[] = [
-    {
-      items: items.map(convertMenuItemToNavItem),
-    },
-  ];
+  // 检查缓存
+  if (itemsToNavDataCache.has(items)) {
+    return itemsToNavDataCache.get(items)!;
+  }
   
-  return { navItems };
+  const navData: NavData = {
+    navItems: [
+      {
+        items: items.map(convertMenuItemToNavItem),
+      },
+    ],
+  };
+  
+  // 缓存结果
+  itemsToNavDataCache.set(items, navData);
+  return navData;
 };
 
 /**
@@ -75,18 +103,42 @@ const convertPathToKey = (path: string): string => {
 /**
  * 在MenuItem树中查找指定key的项
  * Find item with specified key in MenuItem tree
+ * 
+ * 使用缓存优化查找性能
+ * Use caching to optimize search performance
  */
+const menuItemSearchCache = new Map<string, WeakMap<MenuItem[], MenuItem | null>>();
+
 const findMenuItemByKey = (items: MenuItem[], targetKey: string): MenuItem | null => {
+  // 检查缓存
+  if (!menuItemSearchCache.has(targetKey)) {
+    menuItemSearchCache.set(targetKey, new WeakMap());
+  }
+  
+  const keyCache = menuItemSearchCache.get(targetKey)!;
+  if (keyCache.has(items)) {
+    return keyCache.get(items)!;
+  }
+  
+  // 执行查找
+  let result: MenuItem | null = null;
   for (const item of items) {
     if (item.key === targetKey) {
-      return item;
+      result = item;
+      break;
     }
     if (item.children) {
       const found = findMenuItemByKey(item.children, targetKey);
-      if (found) return found;
+      if (found) {
+        result = found;
+        break;
+      }
     }
   }
-  return null;
+  
+  // 缓存结果
+  keyCache.set(items, result);
+  return result;
 };
 
 // ==================== 主Hook Main Hook ====================
@@ -110,13 +162,26 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     onItemToggle,
   } = options;
   
+  // 使用ref缓存稳定的引用，避免不必要的重新计算
+  const stableItemsRef = useRef<MenuItem[]>(items);
+  const stableCallbacksRef = useRef({ onItemSelect, onItemToggle });
+  
+  // 更新稳定引用
+  if (items !== stableItemsRef.current) {
+    stableItemsRef.current = items;
+  }
+  stableCallbacksRef.current = { onItemSelect, onItemToggle };
+  
   // ==================== 数据转换 Data Conversion ====================
   
   /**
    * 将简化的items转换为内部NavData格式
    * Convert simplified items to internal NavData format
+   * 
+   * 使用稳定引用避免不必要的重新计算
+   * Use stable reference to avoid unnecessary recalculation
    */
-  const navData = useMemo(() => convertItemsToNavData(items), [items]);
+  const navData = useMemo(() => convertItemsToNavData(stableItemsRef.current), [stableItemsRef.current]);
   
   /**
    * 转换默认选中项
@@ -157,12 +222,15 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   /**
    * 将内部选中项转换为简化格式
    * Convert internal selected item to simplified format
+   * 
+   * 使用缓存优化，避免重复查找
+   * Use caching optimization to avoid repeated searches
    */
   const selectedItem = useMemo(() => {
     if (!internalSelectedItem) return null;
     const key = convertPathToKey(internalSelectedItem);
-    return findMenuItemByKey(items, key);
-  }, [internalSelectedItem, items]);
+    return findMenuItemByKey(stableItemsRef.current, key);
+  }, [internalSelectedItem, stableItemsRef.current]);
   
   /**
    * 将内部展开状态转换为简化格式
@@ -184,26 +252,32 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   /**
    * 处理菜单项选择
    * Handle menu item selection
+   * 
+   * 使用稳定引用和缓存优化
+   * Use stable references and caching optimization
    */
   const handleItemSelect = useCallback(
     (key: string) => {
       const path = convertKeyToPath(key);
-      const menuItem = findMenuItemByKey(items, key);
+      const menuItem = findMenuItemByKey(stableItemsRef.current, key);
       
       if (menuItem) {
         // 调用内部处理函数
         internalHandleItemClick(path);
         
         // 调用外部回调
-        onItemSelect?.(menuItem, key);
+        stableCallbacksRef.current.onItemSelect?.(menuItem, key);
       }
     },
-    [items, internalHandleItemClick, onItemSelect]
+    [internalHandleItemClick]
   );
   
   /**
    * 处理菜单项展开/折叠
    * Handle menu item toggle
+   * 
+   * 使用稳定引用优化
+   * Use stable references for optimization
    */
   const handleItemToggle = useCallback(
     (key: string, isOpen?: boolean) => {
@@ -217,9 +291,9 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
       
       // 调用外部回调
       const finalIsOpen = isOpen !== undefined ? isOpen : !openStates[path];
-      onItemToggle?.(key, finalIsOpen);
+      stableCallbacksRef.current.onItemToggle?.(key, finalIsOpen);
     },
-    [toggleOpen, setOpenState, openStates, onItemToggle]
+    [toggleOpen, setOpenState, openStates]
   );
   
   /**
@@ -247,38 +321,54 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   /**
    * 展开所有菜单项
    * Expand all menu items
+   * 
+   * 使用稳定引用和批量更新优化
+   * Use stable references and batch updates for optimization
    */
   const expandAll = useCallback(() => {
-    const expandAllItems = (menuItems: MenuItem[]) => {
+    const pathsToExpand: string[] = [];
+    
+    const collectExpandablePaths = (menuItems: MenuItem[]) => {
       menuItems.forEach((item) => {
         if (item.children && item.children.length > 0) {
           const path = convertKeyToPath(item.key);
-          setOpenState(path, true);
-          expandAllItems(item.children);
+          pathsToExpand.push(path);
+          collectExpandablePaths(item.children);
         }
       });
     };
     
-    expandAllItems(items);
-  }, [items, setOpenState]);
+    collectExpandablePaths(stableItemsRef.current);
+    
+    // 批量设置状态
+    pathsToExpand.forEach(path => setOpenState(path, true));
+  }, [setOpenState]);
   
   /**
    * 折叠所有菜单项
    * Collapse all menu items
+   * 
+   * 使用稳定引用和批量更新优化
+   * Use stable references and batch updates for optimization
    */
   const collapseAll = useCallback(() => {
-    const collapseAllItems = (menuItems: MenuItem[]) => {
+    const pathsToCollapse: string[] = [];
+    
+    const collectCollapsiblePaths = (menuItems: MenuItem[]) => {
       menuItems.forEach((item) => {
         if (item.children && item.children.length > 0) {
           const path = convertKeyToPath(item.key);
-          setOpenState(path, false);
-          collapseAllItems(item.children);
+          pathsToCollapse.push(path);
+          collectCollapsiblePaths(item.children);
         }
       });
     };
     
-    collapseAllItems(items);
-  }, [items, setOpenState]);
+    collectCollapsiblePaths(stableItemsRef.current);
+    
+    // 批量设置状态
+    pathsToCollapse.forEach(path => setOpenState(path, false));
+  }, [setOpenState]);
   
   /**
    * 重置所有状态
@@ -314,8 +404,8 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
       [expandedItems]
     ),
     getItemByKey: useCallback(
-      (key: string) => findMenuItemByKey(items, key),
-      [items]
+      (key: string) => findMenuItemByKey(stableItemsRef.current, key),
+      []
     ),
   };
 };

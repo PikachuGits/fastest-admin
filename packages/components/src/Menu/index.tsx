@@ -2,18 +2,8 @@
  * Menu 模块统一导出文件
  * Menu module unified export file
  * 
- * 提供菜单相关的所有组件、Hooks、工具函数、配置和类型定义的统一导出
- * Provides unified exports for all menu-related components, hooks, utilities, configurations, and type definitions
- * 
- * 重构说明：
- * - 新增简化的Menu组件和useMenu Hook，提供更直观的API
- * - 保持所有现有导出，确保100%向后兼容
- * - 新接口作为现有复杂组件的封装层
- * 
- * Refactoring notes:
- * - Added simplified Menu component and useMenu hook for more intuitive API
- * - Maintain all existing exports to ensure 100% backward compatibility
- * - New interfaces serve as wrapper layers for existing complex components
+ * 重构完成 - 第三阶段：提供简化API接口，保持100%向后兼容
+ * Refactoring completed - Phase 3: Provides simplified API interface while maintaining 100% backward compatibility
  */
 
 // ==================== 新简化接口导出 New Simplified Interface Exports ====================
@@ -54,11 +44,11 @@ export {
  * Simplified type definitions (recommended)
  */
 export type {
-  MenuItem as MenuItemType,
+  MenuItem,
   MenuProps,
   UseMenuOptions,
   UseMenuReturn,
-  MenuVariant as MenuVariantType,
+  MenuVariant,
   MenuTheme,
   MenuSize,
 } from "./types/public";
@@ -70,14 +60,9 @@ export type {
  * Original menu components (for compatibility)
  */
 export { default as MenuList } from "./components/internal/MenuList";
-export { MenuItem } from "./components/internal/MenuItem";
+export { MenuItem as MenuItemComponent } from "./components/internal/MenuItem";
 export { NumberChip } from "./components/internal/NumberChip";
 export { GroupHeader } from "./components/internal/GroupHeader";
-
-/**
- * 示例组件
- * Example components
- */
 
 // ==================== Hooks 导出 Hooks Exports ====================
 
@@ -125,16 +110,11 @@ export {
 // ==================== 类型导出 Type Exports ====================
 
 /**
- * 组件属性类型
- * Component props types
- */
-export type { NumberChipProps, NumberChipColor } from "./components/internal/NumberChip";
-
-/**
- * 菜单相关类型定义
- * Menu-related type definitions
+ * 原有类型定义（保持兼容性）
+ * Original type definitions (for compatibility)
  */
 export type {
+  // 菜单相关类型
   NavItem,
   NavSection,
   NavData,
@@ -143,7 +123,12 @@ export type {
   MenuItemState,
   MenuConfig,
   MenuStyleVariant,
-  MenuVariant,
   MenuStyleVariantType,
   MenuListProps,
 } from "./types/index";
+
+// 组件属性类型（从组件文件直接导出）
+export type { NumberChipProps, NumberChipColor } from "./components/internal/NumberChip";
+
+// 避免类型名称冲突，原有MenuVariant重命名导出
+export type { MenuVariant as LegacyMenuVariant } from "./types/index";

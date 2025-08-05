@@ -18,7 +18,7 @@
  * - Maintain 100% backward compatibility
  */
 
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, memo } from 'react';
 import MenuList from './components/internal/MenuList';
 import { useMenuState } from './hooks/useMenuState';
 import type { MenuProps, MenuItem } from './types/public';
@@ -29,9 +29,19 @@ import type { NavData, NavSection, NavItem, MenuConfig } from './types';
 /**
  * 将简化的MenuItem转换为内部NavItem格式
  * Convert simplified MenuItem to internal NavItem format
+ * 
+ * 使用缓存优化，避免重复转换相同的MenuItem
+ * Use caching optimization to avoid repeated conversion of the same MenuItem
  */
+const menuItemCache = new WeakMap<MenuItem, NavItem>();
+
 const convertMenuItemToNavItem = (item: MenuItem): NavItem => {
-  return {
+  // 检查缓存
+  if (menuItemCache.has(item)) {
+    return menuItemCache.get(item)!;
+  }
+  
+  const navItem: NavItem = {
     title: item.title,
     path: item.path || `#${item.key}`,
     icon: typeof item.icon === 'string' ? item.icon : undefined,
@@ -39,20 +49,38 @@ const convertMenuItemToNavItem = (item: MenuItem): NavItem => {
     roles: item.roles,
     children: item.children?.map(convertMenuItemToNavItem),
   };
+  
+  // 缓存结果
+  menuItemCache.set(item, navItem);
+  return navItem;
 };
 
 /**
  * 将简化的items转换为内部NavData格式
  * Convert simplified items to internal NavData format
+ * 
+ * 使用缓存优化，避免重复转换相同的items数组
+ * Use caching optimization to avoid repeated conversion of the same items array
  */
+const navDataCache = new WeakMap<MenuItem[], NavData>();
+
 const convertItemsToNavData = (items: MenuItem[]): NavData => {
-  const navItems: NavSection[] = [
-    {
-      items: items.map(convertMenuItemToNavItem),
-    },
-  ];
+  // 检查缓存
+  if (navDataCache.has(items)) {
+    return navDataCache.get(items)!;
+  }
   
-  return { navItems };
+  const navData: NavData = {
+    navItems: [
+      {
+        items: items.map(convertMenuItemToNavItem),
+      },
+    ],
+  };
+  
+  // 缓存结果
+  navDataCache.set(items, navData);
+  return navData;
 };
 
 /**
@@ -90,10 +118,13 @@ const getInternalConfig = (props: MenuProps): MenuConfig => {
  * 简化的菜单组件，提供直观易用的API
  * Simplified menu component providing intuitive and easy-to-use API
  * 
+ * 使用React.memo进行性能优化，避免不必要的重新渲染
+ * Use React.memo for performance optimization to avoid unnecessary re-renders
+ * 
  * @param props - 简化的组件属性 Simplified component props
  * @returns 渲染的菜单组件 Rendered menu component
  */
-export const Menu: React.FC<MenuProps> = (props) => {
+const MenuComponent: React.FC<MenuProps> = (props) => {
   const {
     items,
     data,
@@ -147,6 +178,26 @@ export const Menu: React.FC<MenuProps> = (props) => {
   // ==================== 事件处理 Event Handling ====================
   
   /**
+   * 查找MenuItem的缓存函数
+   * Cached function for finding MenuItem
+   */
+  const findMenuItem = useCallback(
+    (items: MenuItem[], targetKey: string): MenuItem | null => {
+      for (const menuItem of items) {
+        if (menuItem.key === targetKey) {
+          return menuItem;
+        }
+        if (menuItem.children) {
+          const found = findMenuItem(menuItem.children, targetKey);
+          if (found) return found;
+        }
+      }
+      return null;
+    },
+    []
+  );
+  
+  /**
    * 处理菜单项点击事件
    * Handle menu item click events
    */
@@ -154,20 +205,6 @@ export const Menu: React.FC<MenuProps> = (props) => {
     (path: string, item: NavItem) => {
       // 从path反推出原始的key
       const key = path.replace('section-0.', '');
-      
-      // 查找对应的MenuItem
-      const findMenuItem = (items: MenuItem[], targetKey: string): MenuItem | null => {
-        for (const menuItem of items) {
-          if (menuItem.key === targetKey) {
-            return menuItem;
-          }
-          if (menuItem.children) {
-            const found = findMenuItem(menuItem.children, targetKey);
-            if (found) return found;
-          }
-        }
-        return null;
-      };
       
       if (items) {
         const menuItem = findMenuItem(items, key);
@@ -177,11 +214,12 @@ export const Menu: React.FC<MenuProps> = (props) => {
         }
       } else {
         // 如果使用data格式，直接调用回调
-        onItemClick?.({ key, title: item.title, path } as MenuItem, path);
-        onItemSelect?.({ key, title: item.title, path } as MenuItem, path);
+        const fallbackMenuItem = { key, title: item.title, path } as MenuItem;
+        onItemClick?.(fallbackMenuItem, path);
+        onItemSelect?.(fallbackMenuItem, path);
       }
     },
-    [items, onItemClick, onItemSelect]
+    [items, findMenuItem, onItemClick, onItemSelect]
   );
   
   /**
@@ -242,6 +280,103 @@ export const Menu: React.FC<MenuProps> = (props) => {
     />
   );
 };
+
+// ==================== 性能优化包装 Performance Optimization Wrapper ====================
+
+/**
+ * 使用React.memo包装组件，进行浅比较优化
+ * Wrap component with React.memo for shallow comparison optimization
+ * 
+ * 自定义比较函数，优化特定props的比较
+ * Custom comparison function to optimize comparison of specific props
+ */
+export const Menu = memo(MenuComponent, (prevProps, nextProps) => {
+  // 基础props比较
+  if (
+    prevProps.variant !== nextProps.variant ||
+    prevProps.theme !== nextProps.theme ||
+    prevProps.size !== nextProps.size ||
+    prevProps.collapsible !== nextProps.collapsible ||
+    prevProps.accordion !== nextProps.accordion ||
+    prevProps.defaultSelected !== nextProps.defaultSelected ||
+    prevProps.selectedItem !== nextProps.selectedItem ||
+    prevProps.className !== nextProps.className
+  ) {
+    return false;
+  }
+  
+  // 数组props的深度比较
+  if (prevProps.defaultExpanded?.length !== nextProps.defaultExpanded?.length) {
+    return false;
+  }
+  
+  if (prevProps.defaultExpanded && nextProps.defaultExpanded) {
+    for (let i = 0; i < prevProps.defaultExpanded.length; i++) {
+      if (prevProps.defaultExpanded[i] !== nextProps.defaultExpanded[i]) {
+        return false;
+      }
+    }
+  }
+  
+  if (prevProps.expandedItems?.length !== nextProps.expandedItems?.length) {
+    return false;
+  }
+  
+  if (prevProps.expandedItems && nextProps.expandedItems) {
+    for (let i = 0; i < prevProps.expandedItems.length; i++) {
+      if (prevProps.expandedItems[i] !== nextProps.expandedItems[i]) {
+        return false;
+      }
+    }
+  }
+  
+  // items数组的引用比较（如果引用相同，认为内容相同）
+  if (prevProps.items !== nextProps.items) {
+    return false;
+  }
+  
+  // data对象的引用比较
+  if (prevProps.data !== nextProps.data) {
+    return false;
+  }
+  
+  // 函数props的引用比较
+  if (
+    prevProps.onItemClick !== nextProps.onItemClick ||
+    prevProps.onItemSelect !== nextProps.onItemSelect ||
+    prevProps.onItemToggle !== nextProps.onItemToggle ||
+    prevProps.onToggle !== nextProps.onToggle
+  ) {
+    return false;
+  }
+  
+  // 样式对象的浅比较
+  if (prevProps.style !== nextProps.style) {
+    if (!prevProps.style && !nextProps.style) {
+      return true;
+    }
+    if (!prevProps.style || !nextProps.style) {
+      return false;
+    }
+    
+    const prevKeys = Object.keys(prevProps.style);
+    const nextKeys = Object.keys(nextProps.style);
+    
+    if (prevKeys.length !== nextKeys.length) {
+      return false;
+    }
+    
+    for (const key of prevKeys) {
+       const prevValue = prevProps.style[key as keyof React.CSSProperties];
+       const nextValue = nextProps.style[key as keyof React.CSSProperties];
+       if (prevValue !== nextValue) {
+         return false;
+       }
+     }
+  }
+  
+  return true;
+});
 
 // ==================== 默认导出 Default Export ====================
 

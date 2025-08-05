@@ -36,7 +36,7 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
    * Handle section header click event
    */
   const handleSubheaderClick = () => {
-    console.log('Section header clicked:', section.subheader, 'Current state:', isSubheaderOpen);
+    // Section header clicked - toggle subheader state
     setIsSubheaderOpen(!isSubheaderOpen);
   };
 
