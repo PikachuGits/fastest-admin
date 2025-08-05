@@ -1,5 +1,6 @@
 import { styled, List, type SxProps, type Theme } from '@mui/material';
-import type { NavData } from '../../types';
+import type { NavData } from '../../../types';
+import { menuTheme } from '../../../styles/theme';
 
 // ==================== 类型定义 Type Definitions ====================
 
@@ -35,9 +36,17 @@ export interface MenuListProps {
  * 定义菜单列表的基础样式和布局
  * Defines basic styles and layout for the menu list
  */
-export const StyledListBox = styled(List)(({ theme }) => ({
-  width: '100%',
-  maxWidth: 360,
-  bgcolor: 'background.paper',
-  padding: 0,
-}));
+export const StyledListBox = styled(List)(({ theme }) => {
+  const { spacing, colors } = menuTheme;
+  
+  return {
+    width: '100%',
+    maxWidth: spacing.width.default,
+    backgroundColor: colors.background.paper,
+    padding: 0,
+    
+    // 容器查询支持 Container query support
+    containerType: 'inline-size',
+    containerName: 'sidebar',
+  };
+});

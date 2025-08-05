@@ -1,5 +1,5 @@
 import { type SxProps, type Theme } from '@mui/material';
-import type { NavSection, OpenStatesRecord } from '../../types';
+import type { NavSection, OpenStatesRecord } from '../../../types';
 
 // ==================== 类型定义 Type Definitions ====================
 

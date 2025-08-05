@@ -1,4 +1,5 @@
 import type { MenuConfig } from '../types';
+import { menuTheme } from '../styles/theme';
 
 /**
  * 菜单变体配置
@@ -63,11 +64,11 @@ export interface MenuStyleVariant {
 // 标准单列样式
 export const standardStyle: MenuStyleVariant = {
   width: '100%',
-  minWidth: 300,
-  maxWidth: 300,
+  minWidth: menuTheme.spacing.width.min,
+  maxWidth: menuTheme.spacing.width.default,
   layout: 'single',
-  itemHeight: 44,
-  spacing: 8,
+  itemHeight: menuTheme.spacing.size.itemHeight,
+  spacing: menuTheme.spacing.unit,
   showIcons: true,
   showBadges: true,
   collapsible: true,
@@ -75,11 +76,11 @@ export const standardStyle: MenuStyleVariant = {
 
 // 收起状态样式
 export const collapsedStyle: MenuStyleVariant = {
-  width: 64,
-  maxWidth: 64,
+  width: menuTheme.spacing.width.collapsed,
+  maxWidth: menuTheme.spacing.width.collapsed,
   layout: 'single',
-  itemHeight: 44,
-  spacing: 4,
+  itemHeight: menuTheme.spacing.size.itemHeight,
+  spacing: menuTheme.spacing.unit / 2,
   showIcons: true,
   showBadges: false, // 收起时不显示徽章
   collapsible: false,
@@ -88,10 +89,10 @@ export const collapsedStyle: MenuStyleVariant = {
 // 双列样式
 export const doubleColumnStyle: MenuStyleVariant = {
   width: '100%',
-  maxWidth: 720,
+  maxWidth: menuTheme.spacing.width.max * 2.4,
   layout: 'double',
-  itemHeight: 40,
-  spacing: 6,
+  itemHeight: menuTheme.spacing.size.itemHeightCompact,
+  spacing: menuTheme.spacing.unit * 0.75,
   showIcons: true,
   showBadges: true,
   collapsible: true,
@@ -100,10 +101,10 @@ export const doubleColumnStyle: MenuStyleVariant = {
 // 网格样式
 export const gridStyle: MenuStyleVariant = {
   width: '100%',
-  maxWidth: 800,
+  maxWidth: menuTheme.spacing.width.max * 2.67,
   layout: 'grid',
-  itemHeight: 80,
-  spacing: 12,
+  itemHeight: menuTheme.spacing.size.itemHeight * 1.8,
+  spacing: menuTheme.spacing.unit * 1.5,
   showIcons: true,
   showBadges: true,
   collapsible: false,

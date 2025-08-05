@@ -17,14 +17,14 @@
 
 import React, { useState, useCallback, type ReactElement } from 'react';
 import { List, styled } from '@mui/material';
-import menuData from '../../data/menu-data.json';
-import '../../styles/index.less';
+import menuData from '../../../data/menu-data.json';
+import '../../../styles/index.less';
 
 // 导入拆分的模块
 // Import separated modules
-import type { NavData, NavSection, OpenStatesRecord, NavItem } from '../../types';
+import type { NavData, NavSection, OpenStatesRecord, NavItem } from '../../../types';
 import type { MenuListProps } from './MenuList.styles';
-import { useMenuState } from '../../hooks/useMenuState';
+import { useMenuState } from '../../../hooks/useMenuState';
 import { MenuSectionRenderer } from './MenuSectionRenderer';
 
 // ==================== 样式组件 Styled Components ====================

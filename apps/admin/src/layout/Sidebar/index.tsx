@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
-import { MenuList } from "@fastest/components";
+import { MenuList, Menu } from "@fastest/components";
 import { useAppTheme } from "@/app/providers/ThemeProvider";
 import { useAppStore } from "@/store";
 import menuDataRaw from './menu-data.json';
@@ -59,14 +59,19 @@ const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onDrawerToggle }) => {
 
     // 渲染菜单内容的公共函数
     const renderMenuContent = () => (
-        <MenuList
+        <Menu
             data={menuData}
-            collapsed={isMenuCollapsed}
-            config={{
-                // 收起时不显示默认展开项
-                defaultOpenItems: isMenuCollapsed ? [] : undefined,
-            }}
+            variant="sidebar"
+            theme="light"
         />
+        // <MenuList
+        //     data={menuData}
+        //     collapsed={isMenuCollapsed}
+        //     config={{
+        //         // 收起时不显示默认展开项
+        //         defaultOpenItems: isMenuCollapsed ? [] : undefined,
+        //     }}
+        // />
     );
 
     // 移动端模式：使用抽屉

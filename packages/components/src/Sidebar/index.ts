@@ -1,2 +1,3 @@
 export { default as SidebarMenu } from './SidebarMenu';
-export type { SidebarMenuProps, SidebarMenuRef } from './types'; 
+export { default as SidebarDemo } from './SidebarDemo';
+export type { SidebarMenuProps, SidebarMenuRef } from './types';

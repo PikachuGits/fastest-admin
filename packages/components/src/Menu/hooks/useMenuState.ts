@@ -27,41 +27,23 @@ export const useMenuState = (data: NavData, config?: MenuConfig) => {
    * 初始化菜单展开状态
    * Initialize menu open states
    * 
-   * 根据配置和默认规则初始化所有菜单项的展开状态
-   * Initializes open states for all menu items based on configuration and default rules
+   * 简化的初始化逻辑：只处理配置中指定的展开项
+   * Simplified initialization logic: only handle expanded items specified in config
    */
   const initializeOpenStates = useCallback((navData: NavData): OpenStatesRecord => {
     const states: OpenStatesRecord = {};
 
-    /**
-     * 递归处理菜单项
-     * Recursively process menu items
-     */
-    const processItems = (items: any[], path = "") => {
-      items.forEach((item, index) => {
-        if (!item) return; // 空值检查 Null check
-        
-        const itemPath = path ? `${path}.${index}` : `${index}`;
-
-        if (item.children && item.children.length > 0) {
-          // 根据配置或默认规则设置展开状态
-          // Set open state based on configuration or default rules
-          const shouldOpen = config?.defaultOpenItems?.includes(itemPath) ||
-                           (!config?.defaultOpenItems && (path === "" || item.title === "Level"));
-          states[itemPath] = shouldOpen;
-          processItems(item.children, itemPath);
-        }
+    // 如果有配置的默认展开项，直接使用
+    // If there are configured default open items, use them directly
+    if (config?.defaultOpenItems) {
+      config.defaultOpenItems.forEach(itemPath => {
+        states[itemPath] = true;
       });
-    };
+      return states;
+    }
 
-    // 处理所有分组
-    // Process all sections
-    navData.navItems.forEach((section, sectionIndex) => {
-      if (section?.items) {
-        processItems(section.items, `section-${sectionIndex}`);
-      }
-    });
-
+    // 默认情况下，不展开任何项（用户可以手动展开）
+    // By default, don't expand any items (users can manually expand)
     return states;
   }, [config]);
 
@@ -69,8 +51,8 @@ export const useMenuState = (data: NavData, config?: MenuConfig) => {
    * 查找默认选中项
    * Find default selected item
    * 
-   * 根据配置或默认规则确定初始选中的菜单项
-   * Determines initially selected menu item based on configuration or default rules
+   * 简化的默认选中逻辑：优先使用配置，否则返回空
+   * Simplified default selection logic: prioritize config, otherwise return empty
    */
   const findDefaultSelected = useCallback((navData: NavData): string => {
     // 优先使用配置中指定的默认选中项
@@ -79,25 +61,9 @@ export const useMenuState = (data: NavData, config?: MenuConfig) => {
       return config.defaultSelectedItem;
     }
 
-    // 默认选中逻辑：查找标题为"Level"的菜单项
-    // Default selection logic: find menu item with title "Level"
-    for (let sectionIndex = 0; sectionIndex < navData.navItems.length; sectionIndex++) {
-      const section = navData.navItems[sectionIndex];
-      if (!section?.items) continue;
-
-      for (let itemIndex = 0; itemIndex < section.items.length; itemIndex++) {
-        const item = section.items[itemIndex];
-        if (!item) continue;
-
-        if (item.title === "Level") {
-          return `section-${sectionIndex}.${itemIndex}`;
-        }
-      }
-    }
-    
-    // 如果没有找到特定项，默认选中第一个菜单项
-    // If no specific item found, default to first menu item
-    return "section-0.0";
+    // 默认情况下不选中任何项，让用户主动选择
+    // By default, don't select any item, let users actively choose
+    return "";
   }, [config]);
 
   // ==================== 状态定义 State Definitions ====================
@@ -134,36 +100,34 @@ export const useMenuState = (data: NavData, config?: MenuConfig) => {
    * 处理菜单项点击
    * Handle menu item click
    * 
-   * 实现手风琴效果：收起其他同级菜单，展开选中项的父级路径
-   * Implements accordion effect: collapse other sibling menus, expand parent path of selected item
+   * 简化的点击处理：只设置选中状态，不强制修改展开状态
+   * Simplified click handling: only set selection state, don't force modify open states
    * 
    * @param itemKey - 菜单项路径键 Menu item path key
    */
   const handleItemClick = useCallback((itemKey: string) => {
     setSelectedItem(itemKey);
     
-    // 获取选中项的路径层级
-    // Get path levels of selected item
+    // 可选：确保选中项的父级路径是展开的
+    // Optional: ensure parent path of selected item is expanded
     const pathParts = itemKey.split('.');
-    const newOpenStates: OpenStatesRecord = {};
-    
-    // 首先关闭所有菜单项
-    // First close all menu items
-    Object.keys(openStates).forEach(key => {
-      newOpenStates[key] = false;
-    });
-    
-    // 展开选中项的完整父级路径
-    // Expand complete parent path of selected item
-    for (let i = 1; i < pathParts.length; i++) {
-      const parentPath = pathParts.slice(0, i + 1).join('.');
-      if (openStates.hasOwnProperty(parentPath)) {
-        newOpenStates[parentPath] = true;
-      }
+    if (pathParts.length > 1) {
+      setOpenStates(prev => {
+        const newStates = { ...prev };
+        
+        // 只展开必要的父级路径，不关闭其他项
+        // Only expand necessary parent paths, don't close other items
+        for (let i = 1; i < pathParts.length; i++) {
+          const parentPath = pathParts.slice(0, i + 1).join('.');
+          if (newStates.hasOwnProperty(parentPath)) {
+            newStates[parentPath] = true;
+          }
+        }
+        
+        return newStates;
+      });
     }
-    
-    setOpenStates(newOpenStates);
-  }, [openStates]);
+  }, []);
 
   /**
    * 设置特定菜单项的展开状态

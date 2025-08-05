@@ -1,5 +1,6 @@
 import { styled, List, type SxProps, type Theme } from '@mui/material';
-import type { NavItem, OpenStatesRecord } from '../../types';
+import type { NavItem, OpenStatesRecord } from '../../../types';
+import { menuTheme } from '../../../styles/theme';
 
 // ==================== 类型定义 Type Definitions ====================
 
@@ -38,25 +39,38 @@ export interface MenuItemRendererProps {
  * 为菜单项提供基础容器样式，支持多层级嵌套
  * Provides basic container styles for menu items, supporting multi-level nesting
  */
-export const StyledContainerBox = styled('div')(({ theme }) => ({}));
+export const StyledContainerBox = styled('div')(({ theme }) => {
+  const { colors, spacing, animations } = menuTheme;
 
-export const StyledContainerBoxLevelSx: SxProps<Theme> = ({
-  background: "rgba(255, 255, 255, 0.1)",
-  backdropFilter: "blur(10px)",
-  WebkitBackdropFilter: "blur(10px)",
-  marginBottom: (theme) => theme.spacing(1),
-  borderRadius: 1,
-  transition: (theme) =>
-    theme.transitions.create("all", {
+  return {
+    // 基础样式 Basic styles
+    background: colors.background.glass,
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    marginBottom: theme.spacing(1),
+    borderRadius: spacing.size.borderRadius,
+    padding: theme.spacing(0.5),
+
+    // 动画效果 Animation effects
+    transition: theme.transitions.create("all", {
       duration: theme.transitions.duration.standard,
       easing: theme.transitions.easing.easeInOut,
     }),
-  zIndex: (theme) => theme.zIndex.appBar + 10,
-  boxShadow: (theme) => theme.shadows[3],
-  padding: (theme) => theme.spacing(0.5),
-  containerType: 'inline-size',
-  containerName: 'sidebar',
+
+    // 层级和阴影 Z-index and shadow
+    zIndex: theme.zIndex.appBar + 10,
+    boxShadow: theme.shadows[3],
+
+    // 容器查询支持 Container query support
+    containerType: 'inline-size',
+    containerName: 'sidebar',
+  };
 });
+
+export const StyledContainerBoxLevelSx: SxProps<Theme> = {
+  // 这个样式对象已经被上面的styled组件替代
+  // This style object has been replaced by the styled component above
+};
 /**
  * 子菜单容器样式
  * Sub-menu container styles
@@ -64,9 +78,16 @@ export const StyledContainerBoxLevelSx: SxProps<Theme> = ({
  * 为子菜单项提供适当的缩进和间距
  * Provides appropriate indentation and spacing for sub-menu items
  */
-export const StyledSubMenuList = styled(List)(({ theme }) => ({
-  paddingLeft: theme.spacing(2),
-  paddingTop: 0,
-  paddingBottom: 0,
-}));
+export const StyledSubMenuList = styled(List)(({ theme }) => {
+  const { spacing } = menuTheme;
+
+  return {
+    paddingLeft: theme.spacing(2),
+    paddingTop: 0,
+    paddingBottom: 0,
+
+    // 继承容器查询上下文 Inherit container query context
+    containerType: 'inherit',
+  };
+});
 

@@ -14,7 +14,7 @@
 import React, { type ReactElement } from 'react';
 import { Collapse, List } from '@mui/material';
 import { MenuItem } from '../MenuItem';
-import { parseInfoBadge, getBadgeColor, hasChildren } from '../../utils/menuHelpers';
+import { parseInfoBadge, getBadgeColor, hasChildren } from '../../../utils/menuHelpers';
 import {
   StyledContainerBox,
   StyledSubMenuList,
@@ -46,12 +46,6 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
   // ==================== 状态计算 State Calculations ====================
 
   /**
-   * 检查当前菜单项是否被选中
-   * Check if current menu item is selected
-   */
-  const isSelected = selectedItem === itemPath;
-
-  /**
    * 检查当前菜单项是否展开
    * Check if current menu item is expanded
    */
@@ -62,27 +56,6 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
    * Check if item has sub-menu items
    */
   const hasSubItems = hasChildren(item);
-
-  /**
-   * 检查是否有子菜单被选中（父级选中状态）
-   * Check if any sub-menu item is selected (parent selected state)
-   * 
-   * 检查选中项的路径是否包含当前项的路径，实现完整路径上所有父级的选中效果
-   * Check if selected item path contains current item path, implementing selection effect for all parents in complete path
-   */
-  const isParentSelected = hasSubItems && selectedItem.startsWith(itemPath + '.') && selectedItem !== itemPath;
-
-  /**
-   * 解析徽章数字
-   * Parse badge number from item info
-   */
-  const badge = parseInfoBadge(item.info);
-
-  /**
-   * 获取图标（如果存在）
-   * Get icon if exists
-   */
-  const actualIcon = item.icon ? item.icon : undefined;
 
   // ==================== 渲染函数 Render Functions ====================
 
@@ -138,18 +111,14 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
     >
       {/* 主菜单项 Main menu item */}
       <MenuItem
-        icon={actualIcon as any}
-        primary={item.title}
-        secondary={item.caption}
+        item={item}
+        itemPath={itemPath}
         level={level}
-        selected={isSelected}
-        parentSelected={isParentSelected}
+        selectedItem={selectedItem}
         hasSubItems={hasSubItems}
         open={isOpen}
         onToggle={hasSubItems ? () => onToggleOpen(itemPath) : undefined}
         onClick={() => onItemClick(itemPath)}
-        numberBadge={badge}
-        badgeColor={getBadgeColor(badge)}
         disabled={false}
       />
 
