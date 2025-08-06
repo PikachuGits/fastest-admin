@@ -19,7 +19,7 @@
  */
 
 import React, { useMemo, useCallback, memo } from 'react';
-import MenuList from './components/internal/MenuList';
+import MenuList from './components/private/MenuList';
 import { useMenuState } from './hooks/useMenuState';
 import type { MenuProps, MenuItem } from './types/public';
 import type { NavData, NavSection, NavItem, MenuConfig } from './types';
@@ -266,6 +266,37 @@ const MenuComponent: React.FC<MenuProps> = (props) => {
     return { ...baseStyle, ...style };
   }, [variant, style]);
   
+  // ==================== 受控状态处理 Controlled State Handling ====================
+  
+  /**
+   * 处理受控状态的转换
+   * Handle controlled state conversion
+   */
+  const controlledState = useMemo(() => {
+    if (!selectedItem && !expandedItems) {
+      // 非受控模式
+      return {};
+    }
+    
+    const state: any = {};
+    
+    // 处理选中状态
+    if (selectedItem) {
+      state.selectedItem = `section-0.${selectedItem}`;
+    }
+    
+    // 处理展开状态
+    if (expandedItems) {
+      const openStates: Record<string, boolean> = {};
+      expandedItems.forEach(key => {
+        openStates[`section-0.${key}`] = true;
+      });
+      state.openStates = openStates;
+    }
+    
+    return state;
+  }, [selectedItem, expandedItems]);
+  
   // ==================== 组件渲染 Component Render ====================
   
   return (
@@ -277,6 +308,7 @@ const MenuComponent: React.FC<MenuProps> = (props) => {
       onItemToggle={handleItemToggle}
       className={menuClassName}
       style={menuStyle}
+      {...controlledState}
     />
   );
 };

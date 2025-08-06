@@ -37,7 +37,6 @@ export const MenuItem = ({
   itemPath,
   selectedItem,
   level = 0,
-  hasSubItems = false,
   open = false,
   collapsed = true,
   onToggle,
@@ -51,6 +50,12 @@ export const MenuItem = ({
    * Check if current menu item is selected
    */
   const isSelected = selectedItem === itemPath;
+
+  /**
+   * 检查是否有子菜单项
+   * Check if item has sub-menu items
+   */
+  const hasSubItems = hasChildren(item);
 
   /**
    * 检查是否有子菜单被选中（父级选中状态）

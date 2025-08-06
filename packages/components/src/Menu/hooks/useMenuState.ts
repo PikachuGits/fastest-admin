@@ -141,6 +141,16 @@ export const useMenuState = (data: NavData, config?: MenuConfig) => {
   }, []);
 
   /**
+   * 批量设置多个菜单项的展开状态
+   * Batch set multiple menu items' open states
+   * 
+   * @param updates - 状态更新对象 State updates object
+   */
+  const batchSetOpenStates = useCallback((updates: Record<string, boolean>) => {
+    setOpenStates((prev) => ({ ...prev, ...updates }));
+  }, []);
+
+  /**
    * 重置所有状态到初始值
    * Reset all states to initial values
    */
@@ -166,6 +176,8 @@ export const useMenuState = (data: NavData, config?: MenuConfig) => {
     handleItemClick,
     /** 设置菜单项展开状态 Set menu item open state */
     setOpenState,
+    /** 批量设置菜单项展开状态 Batch set menu items open states */
+    batchSetOpenStates,
     /** 设置选中的菜单项 Set selected menu item */
     setSelectedItem,
     /** 重置所有状态 Reset all states */

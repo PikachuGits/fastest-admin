@@ -173,7 +173,7 @@ export interface MenuStyleVariant {
  * 定义预设的菜单配置变体
  * Defines preset menu configuration variants
  */
-export type MenuVariant = 'default' | 'collapsed' | 'double' | 'admin' | 'guest';
+export type MenuVariant = 'default' | 'collapsed' | 'double';
 
 /**
  * 菜单样式变体类型

@@ -57,6 +57,7 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
             openStates={openStates}
             onToggleOpen={onToggleOpen}
             onItemClick={onItemClick}
+            collapsed={collapsed}
           />
         ))}
       </List>

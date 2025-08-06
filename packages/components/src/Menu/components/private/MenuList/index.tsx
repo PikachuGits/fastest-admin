@@ -54,21 +54,32 @@ const MenuList: React.FC<MenuListProps> = (props) => {
   // ==================== 状态管理 State Management ====================
 
   /**
-   * 使用自定义 Hook 管理菜单状态
-   * Use custom Hook to manage menu state
+   * 使用自定义 Hook 管理菜单状态（仅在非受控模式下使用）
+   * Use custom Hook to manage menu state (only in uncontrolled mode)
    */
-  const { openStates, selectedItem, toggleOpen, handleItemClick } = useMenuState(
+  const internalState = useMenuState(
     props.data || (menuData as NavData),
     props.config
   );
 
   /**
+   * 确定当前使用的状态（受控 vs 非受控）
+   * Determine current state to use (controlled vs uncontrolled)
+   */
+  const isControlled = props.selectedItem !== undefined || props.openStates !== undefined;
+  const currentSelectedItem = isControlled ? props.selectedItem : internalState.selectedItem;
+  const currentOpenStates = isControlled ? (props.openStates || {}) : internalState.openStates;
+
+  /**
    * 处理收起状态的菜单展开状态
    * Handle menu open states for collapsed state
+   * 
+   * 注意：collapsed 状态应该只影响视觉显示，不应该阻止状态管理
+   * Note: collapsed state should only affect visual display, not prevent state management
    */
   const effectiveOpenStates = props.collapsed
-    ? {} // 收起状态时，所有菜单项都关闭
-    : openStates;
+    ? {} // 收起状态时，视觉上所有菜单项都关闭，但状态仍然保持
+    : currentOpenStates;
 
   // ==================== 事件处理 Event Handlers ====================
 
@@ -77,7 +88,10 @@ const MenuList: React.FC<MenuListProps> = (props) => {
    * Handle menu item click events (adapter function)
    */
   const handleMenuItemClickAdapter = (itemKey: string) => {
-    handleItemClick(itemKey);
+    // 在非受控模式下更新内部状态
+    if (!isControlled) {
+      internalState.handleItemClick(itemKey);
+    }
     // 调用外部回调，传递路径和空的 item 对象（因为 MenuSectionRenderer 不提供完整的 item 对象）
     // Call external callback, passing path and empty item object (since MenuSectionRenderer doesn't provide complete item object)
     props.onItemClick?.(itemKey, {} as NavItem);
@@ -88,8 +102,11 @@ const MenuList: React.FC<MenuListProps> = (props) => {
    * Handle menu item toggle events
    */
   const handleMenuItemToggle = (path: string) => {
-    toggleOpen(path);
-    const isOpen = !openStates[path];
+    // 在非受控模式下更新内部状态
+    if (!isControlled) {
+      internalState.toggleOpen(path);
+    }
+    const isOpen = !currentOpenStates[path];
     props.onItemToggle?.(path, isOpen);
   };
 
@@ -113,9 +130,9 @@ const MenuList: React.FC<MenuListProps> = (props) => {
           key={`section-${index}`}
           section={section}
           sectionIndex={index}
-          selectedItem={selectedItem}
+          selectedItem={currentSelectedItem || ''}
           openStates={effectiveOpenStates}
-          onToggleOpen={props.collapsed ? () => { } : handleMenuItemToggle}
+          onToggleOpen={handleMenuItemToggle}
           onItemClick={handleMenuItemClickAdapter}
           collapsed={props.collapsed}
         />
@@ -127,7 +144,7 @@ const MenuList: React.FC<MenuListProps> = (props) => {
 
   // 从props中排除自定义属性，避免传递给DOM元素
   // Exclude custom properties from props to avoid passing to DOM element
-  const { data, config, collapsed, onItemClick, onItemToggle, ...listProps } = props;
+  const { data, config, collapsed, onItemClick, onItemToggle, selectedItem, openStates, ...listProps } = props;
 
   return (
     <StyledListBox

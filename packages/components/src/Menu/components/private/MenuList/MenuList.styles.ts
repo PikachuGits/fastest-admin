@@ -25,6 +25,10 @@ export interface MenuListProps {
   className?: string;
   /** MUI 样式属性 MUI style props */
   sx?: SxProps<Theme>;
+  /** 受控模式：当前选中的菜单项 Controlled mode: currently selected menu item */
+  selectedItem?: string;
+  /** 受控模式：展开状态映射 Controlled mode: open states mapping */
+  openStates?: Record<string, boolean>;
 }
 
 // ==================== 样式组件 Styled Components ====================

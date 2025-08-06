@@ -12,11 +12,11 @@ import { menuTheme } from "../../../styles/theme";
 // ==================== 类型定义 Type Definitions ====================
 
 /**
- * MenuItem 组件属性接口（优化版）
- * MenuItem component props interface (optimized)
+ * MenuItem 组件属性接口（精简版）
+ * MenuItem component props interface (simplified)
  * 
- * 简化props传递，将计算逻辑内置到组件中
- * Simplified props passing with built-in calculation logic
+ * 精简props传递，移除冗余状态，统一使用状态管理
+ * Simplified props passing, removed redundant states, unified state management
  */
 export interface MenuItemProps {
     /** 菜单项数据 Menu item data */
@@ -27,8 +27,6 @@ export interface MenuItemProps {
     selectedItem: string;
     /** 菜单层级深度 Menu nesting level depth */
     level?: number;
-    /** 是否有子菜单项 Whether the item has sub-items */
-    hasSubItems?: boolean;
     /** 是否展开（仅当有子项时有效） Whether expanded (only valid when has sub-items) */
     open?: boolean;
     /** 是否收起状态 Whether in collapsed state */

@@ -41,7 +41,7 @@ const convertMenuItemToNavItem = (item: MenuItem): NavItem => {
   if (menuItemToNavItemCache.has(item)) {
     return menuItemToNavItemCache.get(item)!;
   }
-  
+
   const navItem: NavItem = {
     title: item.title,
     path: item.path || `#${item.key}`,
@@ -50,7 +50,7 @@ const convertMenuItemToNavItem = (item: MenuItem): NavItem => {
     roles: item.roles,
     children: item.children?.map(convertMenuItemToNavItem),
   };
-  
+
   // 缓存结果
   menuItemToNavItemCache.set(item, navItem);
   return navItem;
@@ -70,7 +70,7 @@ const convertItemsToNavData = (items: MenuItem[]): NavData => {
   if (itemsToNavDataCache.has(items)) {
     return itemsToNavDataCache.get(items)!;
   }
-  
+
   const navData: NavData = {
     navItems: [
       {
@@ -78,7 +78,7 @@ const convertItemsToNavData = (items: MenuItem[]): NavData => {
       },
     ],
   };
-  
+
   // 缓存结果
   itemsToNavDataCache.set(items, navData);
   return navData;
@@ -114,12 +114,12 @@ const findMenuItemByKey = (items: MenuItem[], targetKey: string): MenuItem | nul
   if (!menuItemSearchCache.has(targetKey)) {
     menuItemSearchCache.set(targetKey, new WeakMap());
   }
-  
+
   const keyCache = menuItemSearchCache.get(targetKey)!;
   if (keyCache.has(items)) {
     return keyCache.get(items)!;
   }
-  
+
   // 执行查找
   let result: MenuItem | null = null;
   for (const item of items) {
@@ -135,7 +135,7 @@ const findMenuItemByKey = (items: MenuItem[], targetKey: string): MenuItem | nul
       }
     }
   }
-  
+
   // 缓存结果
   keyCache.set(items, result);
   return result;
@@ -161,19 +161,19 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     onItemSelect,
     onItemToggle,
   } = options;
-  
+
   // 使用ref缓存稳定的引用，避免不必要的重新计算
   const stableItemsRef = useRef<MenuItem[]>(items);
   const stableCallbacksRef = useRef({ onItemSelect, onItemToggle });
-  
+
   // 更新稳定引用
   if (items !== stableItemsRef.current) {
     stableItemsRef.current = items;
   }
   stableCallbacksRef.current = { onItemSelect, onItemToggle };
-  
+
   // ==================== 数据转换 Data Conversion ====================
-  
+
   /**
    * 将简化的items转换为内部NavData格式
    * Convert simplified items to internal NavData format
@@ -182,7 +182,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
    * Use stable reference to avoid unnecessary recalculation
    */
   const navData = useMemo(() => convertItemsToNavData(stableItemsRef.current), [stableItemsRef.current]);
-  
+
   /**
    * 转换默认选中项
    * Convert default selected item
@@ -190,7 +190,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   const internalDefaultSelected = useMemo(() => {
     return defaultSelected ? convertKeyToPath(defaultSelected) : undefined;
   }, [defaultSelected]);
-  
+
   /**
    * 转换默认展开项
    * Convert default expanded items
@@ -198,9 +198,9 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   const internalDefaultExpanded = useMemo(() => {
     return defaultExpanded.map(convertKeyToPath);
   }, [defaultExpanded]);
-  
+
   // ==================== 内部状态管理 Internal State Management ====================
-  
+
   /**
    * 使用内部的useMenuState Hook
    * Use internal useMenuState hook
@@ -211,14 +211,15 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     toggleOpen,
     handleItemClick: internalHandleItemClick,
     setOpenState,
+    batchSetOpenStates,
     resetStates,
   } = useMenuState(navData, {
     defaultSelectedItem: internalDefaultSelected,
     defaultOpenItems: internalDefaultExpanded,
   });
-  
+
   // ==================== 状态转换 State Conversion ====================
-  
+
   /**
    * 将内部选中项转换为简化格式
    * Convert internal selected item to simplified format
@@ -231,7 +232,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     const key = convertPathToKey(internalSelectedItem);
     return findMenuItemByKey(stableItemsRef.current, key);
   }, [internalSelectedItem, stableItemsRef.current]);
-  
+
   /**
    * 将内部展开状态转换为简化格式
    * Convert internal open states to simplified format
@@ -246,9 +247,9 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     });
     return expanded;
   }, [openStates]);
-  
+
   // ==================== 事件处理 Event Handling ====================
-  
+
   /**
    * 处理菜单项选择
    * Handle menu item selection
@@ -260,18 +261,18 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     (key: string) => {
       const path = convertKeyToPath(key);
       const menuItem = findMenuItemByKey(stableItemsRef.current, key);
-      
+
       if (menuItem) {
         // 调用内部处理函数
         internalHandleItemClick(path);
-        
+
         // 调用外部回调
         stableCallbacksRef.current.onItemSelect?.(menuItem, key);
       }
     },
     [internalHandleItemClick]
   );
-  
+
   /**
    * 处理菜单项展开/折叠
    * Handle menu item toggle
@@ -282,20 +283,20 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   const handleItemToggle = useCallback(
     (key: string, isOpen?: boolean) => {
       const path = convertKeyToPath(key);
-      
+
       if (isOpen !== undefined) {
         setOpenState(path, isOpen);
       } else {
         toggleOpen(path);
       }
-      
+
       // 调用外部回调
       const finalIsOpen = isOpen !== undefined ? isOpen : !openStates[path];
       stableCallbacksRef.current.onItemToggle?.(key, finalIsOpen);
     },
     [toggleOpen, setOpenState, openStates]
   );
-  
+
   /**
    * 展开指定菜单项
    * Expand specified menu item
@@ -306,7 +307,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     },
     [handleItemToggle]
   );
-  
+
   /**
    * 折叠指定菜单项
    * Collapse specified menu item
@@ -317,7 +318,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     },
     [handleItemToggle]
   );
-  
+
   /**
    * 展开所有菜单项
    * Expand all menu items
@@ -327,7 +328,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
    */
   const expandAll = useCallback(() => {
     const pathsToExpand: string[] = [];
-    
+
     const collectExpandablePaths = (menuItems: MenuItem[]) => {
       menuItems.forEach((item) => {
         if (item.children && item.children.length > 0) {
@@ -337,13 +338,21 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
         }
       });
     };
-    
+
     collectExpandablePaths(stableItemsRef.current);
-    
-    // 批量设置状态
-    pathsToExpand.forEach(path => setOpenState(path, true));
-  }, [setOpenState]);
-  
+
+    // 批量设置状态 - 一次性更新所有状态
+    if (pathsToExpand.length > 0) {
+      const updates: Record<string, boolean> = {};
+      pathsToExpand.forEach(path => {
+        updates[path] = true;
+      });
+      
+      // 使用批量更新方法，一次性更新所有状态
+      batchSetOpenStates(updates);
+    }
+  }, [batchSetOpenStates]);
+
   /**
    * 折叠所有菜单项
    * Collapse all menu items
@@ -353,7 +362,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
    */
   const collapseAll = useCallback(() => {
     const pathsToCollapse: string[] = [];
-    
+
     const collectCollapsiblePaths = (menuItems: MenuItem[]) => {
       menuItems.forEach((item) => {
         if (item.children && item.children.length > 0) {
@@ -363,13 +372,21 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
         }
       });
     };
-    
+
     collectCollapsiblePaths(stableItemsRef.current);
-    
-    // 批量设置状态
-    pathsToCollapse.forEach(path => setOpenState(path, false));
-  }, [setOpenState]);
-  
+
+    // 批量设置状态 - 一次性更新所有状态
+    if (pathsToCollapse.length > 0) {
+      const updates: Record<string, boolean> = {};
+      pathsToCollapse.forEach(path => {
+        updates[path] = false;
+      });
+      
+      // 使用批量更新方法，一次性更新所有状态
+      batchSetOpenStates(updates);
+    }
+  }, [batchSetOpenStates]);
+
   /**
    * 重置所有状态
    * Reset all states
@@ -377,14 +394,14 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
   const reset = useCallback(() => {
     resetStates();
   }, [resetStates]);
-  
+
   // ==================== 返回值 Return Value ====================
-  
+
   return {
     // 状态 States
     selectedItem,
     expandedItems,
-    
+
     // 操作方法 Operation Methods
     selectItem: handleItemSelect,
     toggleItem: handleItemToggle,
@@ -393,7 +410,7 @@ export const useMenu = (options: UseMenuOptions = {}): UseMenuReturn => {
     expandAll,
     collapseAll,
     reset,
-    
+
     // 工具方法 Utility Methods
     isItemSelected: useCallback(
       (key: string) => selectedItem?.key === key,

@@ -42,6 +42,7 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
   openStates,
   onToggleOpen,
   onItemClick,
+  collapsed = false,
 }) => {
   // ==================== 状态计算 State Calculations ====================
 
@@ -86,17 +87,18 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
           className="fast-menu-item-container-sub"
         >
           {item.children.map((child, childIndex) => (
-            <MenuItemRenderer
-              key={`${itemPath}.${childIndex}`}
-              item={child}
-              itemPath={`${itemPath}.${childIndex}`}
-              level={level + 1}
-              selectedItem={selectedItem}
-              openStates={openStates}
-              onToggleOpen={onToggleOpen}
-              onItemClick={onItemClick}
-            />
-          ))}
+          <MenuItemRenderer
+            key={`${itemPath}.${childIndex}`}
+            item={child}
+            itemPath={`${itemPath}.${childIndex}`}
+            level={level + 1}
+            selectedItem={selectedItem}
+            openStates={openStates}
+            onToggleOpen={onToggleOpen}
+            onItemClick={onItemClick}
+            collapsed={collapsed}
+          />
+        ))}
         </List>
       </Collapse>
     );
@@ -115,11 +117,11 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
         itemPath={itemPath}
         level={level}
         selectedItem={selectedItem}
-        hasSubItems={hasSubItems}
         open={isOpen}
+        collapsed={collapsed}
         onToggle={hasSubItems ? () => onToggleOpen(itemPath) : undefined}
         onClick={() => onItemClick(itemPath)}
-        disabled={false}
+        disabled={item.disabled || false}
       />
 
       {/* 子菜单项 Sub-menu items */}
