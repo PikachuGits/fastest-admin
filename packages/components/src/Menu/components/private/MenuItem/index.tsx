@@ -1,166 +1,169 @@
 /**
- * MenuItem 组件
- * MenuItem Component
- * 
- * 用于显示单个菜单项的图标、主次文本、徽章和展开/折叠箭头
- * Used to display individual menu items with icon, primary/secondary text, badge, and expand/collapse arrow
+ * MenuItem 组件（重构版）
+ * MenuItem Component (Refactored)
+ *
+ * 使用自定义 Hooks 和子组件的现代化菜单项组件
+ * Modern menu item component using custom hooks and sub-components
  */
 
-import { ListItemIcon, Box } from "@mui/material";
-import { Iconify } from "@fastest/components";
-import { NumberChip } from "../NumberChip";
-import { parseInfoBadge, getBadgeColor, hasChildren } from "../../../utils/menuHelpers";
-import {
-  StyledListItemButton,
-  StyledListItemText,
-  StyledArrowIcon,
-  type MenuItemProps,
-} from "./MenuItem.styles";
+import React from "react";
+import { StyledListItemButton } from "../../../styles/MenuItem.styles";
+import { useMenuItemLogic } from "../../../hooks/useMenuItemLogic";
+import { useMenuItemStyles } from "../../../hooks/useMenuItemStyles";
+import { useMenuItemAccessibility } from "../../../hooks/useMenuItemAccessibility";
+import { MenuItemIcon } from "./MenuItemIcon";
+import { MenuItemContent } from "./MenuItemContent";
+import { MenuItemActions } from "./MenuItemActions";
+import type { NavItem } from "../../../types";
+import type { SxProps, Theme } from "@mui/material";
 import "../../../styles/index.less";
 
+// ==================== 类型定义 Type Definitions ====================
 
+/**
+ * MenuItem 组件属性接口（重构版）
+ * MenuItem component props interface (refactored)
+ */
+export interface MenuItemProps {
+  /** 菜单项数据 Menu item data */
+  item: NavItem;
+  /** 菜单项路径 Menu item path */
+  itemPath: string;
+  /** 菜单层级 Menu level */
+  level?: number;
+  /** 是否展开 Whether expanded */
+  open?: boolean;
+  /** 切换回调 Toggle callback */
+  onToggle?: () => void;
+  /** 点击回调 Click callback */
+  onClick?: () => void;
+  /** 是否禁用 Whether disabled */
+  disabled?: boolean;
+  /** 自定义样式 Custom styles */
+  sx?: SxProps<Theme>;
+  /** CSS 类名 CSS class name */
+  className?: string;
+}
 
 // ==================== 主组件 Main Component ====================
 
 /**
- * MenuItem 主组件（优化版）
- * Main MenuItem component (optimized)
- * 
- * 渲染单个菜单项，内部计算状态，简化props传递
- * Renders a single menu item with internal state calculation and simplified props
- * 
+ * MenuItem 主组件（重构版）
+ * Main MenuItem component (refactored)
+ *
+ * 使用现代化架构的菜单项组件，具有更好的可维护性和性能
+ * Menu item component with modern architecture for better maintainability and performance
+ *
  * @param props - 组件属性 Component props
  * @returns 渲染的菜单项 Rendered menu item
  */
-export const MenuItem = ({
-  item,
-  itemPath,
-  selectedItem,
-  level = 0,
-  open = false,
-  collapsed = true,
-  onToggle,
-  onClick,
-  disabled = false,
-}: MenuItemProps) => {
-  // ==================== 内部状态计算 Internal State Calculations ====================
+export const MenuItem: React.FC<MenuItemProps> = React.memo(
+  ({
+    item,
+    itemPath,
+    level = 0,
+    open = false,
+    onToggle,
+    onClick,
+    disabled = false,
+    sx,
+    className = "fast-menu-item-container-sub-child",
+  }) => {
+    // ==================== 业务逻辑 Hook Business Logic Hook ====================
 
-  /**
-   * 检查当前菜单项是否被选中
-   * Check if current menu item is selected
-   */
-  const isSelected = selectedItem === itemPath;
+    /**
+     * 使用自定义 Hook 处理菜单项业务逻辑
+     * Use custom hook to handle menu item business logic
+     */
+    const {
+      isSelected,
+      hasSubItems,
+      isParentSelected,
+      collapsed,
+      badge,
+      badgeColor,
+      iconName,
+      handleClick,
+    } = useMenuItemLogic({
+      item,
+      itemPath,
+      level,
+      open,
+      disabled,
+      onClick,
+      onToggle,
+    });
 
-  /**
-   * 检查是否有子菜单项
-   * Check if item has sub-menu items
-   */
-  const hasSubItems = hasChildren(item);
+    // ==================== 样式计算 Hook Styles Calculation Hook ====================
 
-  /**
-   * 检查是否有子菜单被选中（父级选中状态）
-   * Check if any sub-menu item is selected (parent selected state)
-   */
-  const isParentSelected = hasSubItems && selectedItem.startsWith(itemPath + '.') && selectedItem !== itemPath;
+    /**
+     * 使用自定义 Hook 计算样式
+     * Use custom hook to calculate styles
+     */
+    const { iconStyles, textStyles, containerStyles } = useMenuItemStyles({
+      isSelected,
+      isParentSelected,
+      hasSubItems,
+      collapsed,
+      disabled,
+      level,
+    });
 
-  /**
-   * 解析徽章数字
-   * Parse badge number from item info
-   */
-  const badge = parseInfoBadge(item.info);
+    // ==================== 无障碍性 Hook Accessibility Hook ====================
 
-  /**
-   * 获取图标（如果存在）
-   * Get icon if exists
-   */
-  const actualIcon = item.icon ? item.icon : undefined;
+    /**
+     * 使用自定义 Hook 处理无障碍性
+     * Use custom hook to handle accessibility
+     */
+    const { ariaProps, keyboardHandlers } = useMenuItemAccessibility({
+      isSelected,
+      hasSubItems,
+      open,
+      disabled,
+      itemPath,
+      title: item.title,
+      caption: item.caption,
+      onClick: handleClick,
+    });
 
-  /**
-   * 获取徽章颜色
-   * Get badge color
-   */
-  const badgeColor = getBadgeColor(badge);
-  // ==================== 事件处理 Event Handlers ====================
+    // ==================== 组件渲染 Component Render ====================
 
-  /**
-   * 处理菜单项点击事件
-   * Handle menu item click event
-   * 
-   * 根据是否有子项决定是切换展开状态还是触发点击事件
-   * Decides whether to toggle expand state or trigger click event based on whether has sub-items
-   */
-  const handleClick = () => {
-    if (hasSubItems && onToggle) {
-      onToggle();
-    } else if (onClick) {
-      onClick();
-    }
-  };
+    return (
+      <StyledListItemButton
+        level={level}
+        selected={isSelected}
+        parentSelected={isParentSelected}
+        hasSubItems={hasSubItems}
+        onClick={handleClick}
+        disabled={disabled}
+        collapsed={collapsed}
+        data-level={level === 0 ? "false" : "true"}
+        className={className}
+        sx={sx}
+        {...ariaProps}
+        {...keyboardHandlers}
+      >
+        {/* 菜单项图标 Menu item icon */}
+        {iconName && <MenuItemIcon iconName={iconName} sx={iconStyles} />}
 
-  // ==================== 组件渲染 Component Render ====================
-
-  return (
-    <StyledListItemButton
-      level={level}
-      selected={isSelected}
-      parentSelected={isParentSelected}
-      hasSubItems={hasSubItems}
-      onClick={handleClick}
-      disabled={disabled}
-      collapsed={collapsed}
-      data-level={level == 0 ? "false" : "true"}
-      className="fast-menu-item-container-sub-child"
-    >
-      {/* 菜单项图标 Menu item icon */}
-      {actualIcon && (
-        <ListItemIcon>
-          <Iconify
-            icon={actualIcon as any}
-            className="w-full h-full"
-            sx={{
-              color: (isSelected || isParentSelected) ? "#2E7D32" : disabled ? "#BDBDBD" : "#757575",
-            }}
-          />
-        </ListItemIcon>
-      )}
-      {/* 菜单项文本内容 Menu item text content */}
-      {!collapsed ? (
-        <StyledListItemText
-          primary={
-            item.title && (
-              <span className="text-sm truncate">{item.title}</span>
-            )
-          }
-          secondary={
-            item.caption && (
-              <span className="inline-block text-xs truncate w-full">
-                {item.caption}
-              </span>
-            )
-          }
+        {/* 菜单项文本内容 Menu item text content */}
+        <MenuItemContent
+          title={item.title}
+          caption={item.caption}
+          collapsed={collapsed}
+          sx={textStyles}
         />
-      ) : <StyledListItemText
-        primary={
-          item.title && (
-            <span className="text-sm truncate">{item.title}</span>
-          )
-        }
-      />}
 
-      {/* 右侧操作区域：徽章和箭头 Right action area: badge and arrow */}
-      {!collapsed && (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          {/* 数字徽章 Number badge */}
-          {badge && <NumberChip number={badge} color={badgeColor} />}
-          {/* 展开/折叠箭头 Expand/collapse arrow */}
-          {hasSubItems && (
-            <StyledArrowIcon
-              icon="eva:arrow-ios-downward-fill"
-              open={open}
-              className="icon-arrow"
-            />
-          )}
-        </Box>)}
-    </StyledListItemButton>
-  );
-};
+        {/* 右侧操作区域 Right action area */}
+        <MenuItemActions
+          badge={badge}
+          badgeColor={badgeColor}
+          hasSubItems={hasSubItems}
+          open={open}
+        />
+      </StyledListItemButton>
+    );
+  }
+);
+
+MenuItem.displayName = "MenuItem";

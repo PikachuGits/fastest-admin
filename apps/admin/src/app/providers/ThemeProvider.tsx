@@ -1,15 +1,10 @@
 // src/app/providers/ThemeProvider.tsx
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme"; // 你定义的主题
-import { useViewTransitionToggle } from '@fastest/hook';
-import { useLayoutConfig } from '@fastest/hook';
-import type { ThemeContextProps, AppThemeProviderProps } from './types';
+import { useViewTransitionToggle } from "@fastest/hook";
+import { useLayoutConfig } from "@fastest/hook";
+import type { ThemeContextProps, AppThemeProviderProps } from "./types";
 
 // 创建上下文
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
@@ -21,15 +16,14 @@ export const useAppTheme = () => {
   return ctx;
 };
 
-
 // Provider 组件
-export function AppThemeProvider({ children, initialLayoutConfig }: AppThemeProviderProps) {
+export function AppThemeProvider({
+  children,
+  initialLayoutConfig,
+}: AppThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const {
-    layoutConfig,
-    updateLayoutConfig,
-    resetLayoutConfig,
-  } = useLayoutConfig(initialLayoutConfig);
+  const { layoutConfig, updateLayoutConfig, resetLayoutConfig } =
+    useLayoutConfig(initialLayoutConfig);
 
   const toggleTheme = useViewTransitionToggle(isDarkMode, setIsDarkMode);
   // useViewTransitionToggle hook 内部已经处理了类名切换逻辑
@@ -41,7 +35,7 @@ export function AppThemeProvider({ children, initialLayoutConfig }: AppThemeProv
       ...base,
       customLayout: {
         ...base.customLayout,
-        ...layoutConfig
+        ...layoutConfig,
       },
     };
   }, [isDarkMode, layoutConfig]);

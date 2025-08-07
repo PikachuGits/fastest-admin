@@ -1,49 +1,62 @@
 /**
  * 菜单项渲染组件
  * Menu item renderer component
+ *
+ * 使用 Zustand 进行状态管理的菜单项渲染组件
+ * Menu item renderer component using Zustand for state management
  */
 
-/**
- * MenuItemRenderer 组件
- * MenuItemRenderer Component
- * 
- * 负责渲染单个菜单项及其子菜单项，支持多层级嵌套
- * Responsible for rendering individual menu items and their sub-items, supporting multi-level nesting
- */
-
-import React, { type ReactElement } from 'react';
-import { Collapse, List } from '@mui/material';
-import { MenuItem } from '../MenuItem';
-import { parseInfoBadge, getBadgeColor, hasChildren } from '../../../utils/menuHelpers';
+import React from "react";
+import { Collapse, List } from "@mui/material";
+import { MenuItem } from "../MenuItem";
+import { hasChildren } from "../../../utils/menuHelpers";
+import { useMenuStoreContext } from "../../../context/MenuStoreContext";
+import type { NavItem } from "../../../types";
 import {
   StyledContainerBox,
-  StyledSubMenuList,
   StyledContainerBoxLevelSx,
-  type MenuItemRendererProps,
-} from './MenuItemRenderer.styles';
+} from "../../../styles/MenuItemRenderer.styles";
+
+// ==================== 类型定义 Type Definitions ====================
+
+/**
+ * MenuItemRenderer 组件属性接口（简化版）
+ * MenuItemRenderer component props interface (simplified)
+ */
+interface MenuItemRendererProps {
+  item: NavItem;
+  itemPath: string;
+  level?: number;
+}
 
 // ==================== 主组件 Main Component ====================
 
 /**
  * 菜单项渲染组件
  * Menu item renderer component
- * 
- * 负责渲染单个菜单项及其子菜单项，支持多层级嵌套
- * Responsible for rendering individual menu items and their sub-items, supports multi-level nesting
- * 
- * @param props - 组件属性 Component props
+ *
+ * 使用 Zustand 进行状态管理的菜单项渲染组件
+ * Menu item renderer component using Zustand for state management
+ *
+ * @param props - 简化的组件属性 Simplified component props
  * @returns 渲染的菜单项元素 Rendered menu item element
  */
 export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
   item,
   itemPath,
   level = 0,
-  selectedItem,
-  openStates,
-  onToggleOpen,
-  onItemClick,
-  collapsed = false,
 }) => {
+  // ==================== 状态管理 State Management ====================
+
+  /**
+   * 从 Context 获取当前实例的 store
+   * Get current instance store from Context
+   */
+  const store = useMenuStoreContext();
+  const openStates = store((state) => state.openStates);
+  const handleItemClick = store((state) => state.handleItemClick);
+  const handleItemToggle = store((state) => state.handleItemToggle);
+
   // ==================== 状态计算 State Calculations ====================
 
   /**
@@ -63,10 +76,10 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
   /**
    * 递归渲染子菜单项
    * Recursively render sub-menu items
-   * 
+   *
    * 使用 Collapse 组件实现展开/收起动画效果
    * Uses Collapse component for expand/collapse animation effects
-   * 
+   *
    * @returns 子菜单项的 JSX 元素或 null Sub-menu items JSX element or null
    */
   const renderSubItems = () => {
@@ -83,22 +96,20 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
         <List
           component="div"
           disablePadding
-          sx={{ paddingLeft: (theme) => theme.spacing(1.5) }}
+          sx={{
+            paddingLeft: (theme) => theme.spacing(1.5),
+            paddingTop: (theme) => theme.spacing(0.5),
+          }}
           className="fast-menu-item-container-sub"
         >
           {item.children.map((child, childIndex) => (
-          <MenuItemRenderer
-            key={`${itemPath}.${childIndex}`}
-            item={child}
-            itemPath={`${itemPath}.${childIndex}`}
-            level={level + 1}
-            selectedItem={selectedItem}
-            openStates={openStates}
-            onToggleOpen={onToggleOpen}
-            onItemClick={onItemClick}
-            collapsed={collapsed}
-          />
-        ))}
+            <MenuItemRenderer
+              key={`${itemPath}.${childIndex}`}
+              item={child}
+              itemPath={`${itemPath}.${childIndex}`}
+              level={level + 1}
+            />
+          ))}
         </List>
       </Collapse>
     );
@@ -109,21 +120,20 @@ export const MenuItemRenderer: React.FC<MenuItemRendererProps> = ({
   return (
     <StyledContainerBox
       key={itemPath}
-      sx={level === 0 ? StyledContainerBoxLevelSx : undefined}
+      sx={{
+        ...(level === 0 ? StyledContainerBoxLevelSx : undefined),
+      }}
     >
       {/* 主菜单项 Main menu item */}
       <MenuItem
         item={item}
         itemPath={itemPath}
         level={level}
-        selectedItem={selectedItem}
         open={isOpen}
-        collapsed={collapsed}
-        onToggle={hasSubItems ? () => onToggleOpen(itemPath) : undefined}
-        onClick={() => onItemClick(itemPath)}
+        onToggle={hasSubItems ? () => handleItemToggle(itemPath) : undefined}
+        onClick={() => handleItemClick(itemPath)}
         disabled={item.disabled || false}
       />
-
       {/* 子菜单项 Sub-menu items */}
       {renderSubItems()}
     </StyledContainerBox>

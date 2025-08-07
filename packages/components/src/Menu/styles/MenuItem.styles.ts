@@ -6,8 +6,9 @@ import {
     type Theme,
 } from "@mui/material";
 import { Iconify } from "@fastest/components";
-import { type NumberChipColor } from "../NumberChip";
-import { menuTheme } from "../../../styles/theme";
+import { type NumberChipColor } from "../components/private/NumberChip";
+import { createMenuTheme } from "../styles/theme";
+import type { NavItem, MenuItemState, OpenStatesRecord } from '../types';
 
 // ==================== 类型定义 Type Definitions ====================
 
@@ -20,7 +21,7 @@ import { menuTheme } from "../../../styles/theme";
  */
 export interface MenuItemProps {
     /** 菜单项数据 Menu item data */
-    item: import('../../../types').NavItem;
+    item: NavItem;
     /** 菜单项路径 Menu item path */
     itemPath: string;
     /** 当前选中项路径 Currently selected item path */
@@ -59,12 +60,13 @@ export const StyledListItemButton = styled(ListItemButton, {
     parentSelected?: boolean;
     collapsed?: boolean;
 }>(({ theme, level = 0, selected, hasSubItems, parentSelected, collapsed }) => {
+    const menuTheme = createMenuTheme(theme);
     const { colors, spacing, animations, breakpoints, utils } = menuTheme;
     const levelStyles = utils.getLevelStyles(level);
     
     return {
         // 基础布局样式 Basic layout styles
-        marginTop: level ? theme.spacing(0.5) : 0,
+        // marginTop: level ? theme.spacing(0.5) : 0,
         padding: spacing.padding.item,
         borderRadius: spacing.size.borderRadius,
         minHeight: spacing.size.itemHeight,
@@ -93,13 +95,14 @@ export const StyledListItemButton = styled(ListItemButton, {
         
         // 选中状态样式 Selected state styles
         ...((selected || parentSelected) && {
-            // 一级菜单项（level=0）使用主题绿色
+            // 一级菜单项（level=0）使用主题色
             ...(level === 0 && {
                 backgroundColor: colors.background.selected,
+                
                 color: colors.text.selected,
                 fontWeight: levelStyles.fontWeight,
                 "&:hover": {
-                    backgroundColor: colors.primary.hover,
+                    backgroundColor: colors.background.focus,
                 },
                 "& .MuiListItemText-primary": {
                     color: `${colors.text.selected} !important`,
@@ -119,17 +122,17 @@ export const StyledListItemButton = styled(ListItemButton, {
                 }),
                 ...(parentSelected && {
                     backgroundColor: colors.primary.light,
-                    color: colors.primary.text,
+                    color: colors.primary.main,
                     fontWeight: 600,
                     "&:hover": {
-                        backgroundColor: colors.primary.hover,
+                        backgroundColor: colors.background.focus,
                     },
                     "& .MuiListItemText-primary": {
-                        color: `${colors.primary.text} !important`,
+                        color: `${colors.primary.main} !important`,
                         fontWeight: "600 !important",
                     },
                     "& .MuiListItemText-root": {
-                        color: colors.primary.text,
+                        color: colors.primary.main,
                     },
                 }),
             }),
@@ -159,7 +162,8 @@ export const StyledListItemButton = styled(ListItemButton, {
  * 定义菜单项文本的布局和样式，包括主文本和次文本
  * Defines layout and styles for menu item text, including primary and secondary text
  */
-export const StyledListItemText = styled(ListItemText)(() => {
+export const StyledListItemText = styled(ListItemText)(({ theme }) => {
+    const menuTheme = createMenuTheme(theme);
     const { spacing, colors } = menuTheme;
     
     return {
@@ -183,7 +187,7 @@ export const StyledListItemText = styled(ListItemText)(() => {
         "& .MuiListItemText-primary": {
             fontSize: "14px",
             fontWeight: "inherit", // 继承父级的字重设置
-            color: "inherit", // 继承父级的颜色设置
+            color: colors.text.primary, // 继承父级的颜色设置
         }
     };
 });
@@ -198,6 +202,7 @@ export const StyledListItemText = styled(ListItemText)(() => {
 export const StyledArrowIcon = styled(Iconify, {
     shouldForwardProp: (prop) => prop !== "open",
 })<{ open: boolean }>(({ theme, open }) => {
+    const menuTheme = createMenuTheme(theme);
     const { spacing, colors, animations, utils } = menuTheme;
     
     return {

@@ -1,6 +1,6 @@
 import { styled, List, type SxProps, type Theme } from '@mui/material';
-import type { NavData } from '../../../types';
-import { menuTheme } from '../../../styles/theme';
+import type { NavData } from '../types';
+import { menuTheme } from '../styles/theme';
 
 // ==================== 类型定义 Type Definitions ====================
 

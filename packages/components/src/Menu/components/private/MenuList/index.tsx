@@ -1,31 +1,28 @@
 /**
  * MenuList 主组件
  * Main MenuList component
- * 
- * 这是一个重构后的菜单列表组件，采用模块化设计：
- * - 类型定义统一到 ../../types/index.ts
- * - 工具函数独立到 ../../utils/menuHelpers.ts  
- * - 状态管理独立到 ../../hooks/useMenuState.ts
- * - 渲染逻辑拆分到 MenuItemRenderer 和 MenuSectionRenderer
- * 
- * This is a refactored menu list component with modular design:
- * - Type definitions unified in ../../types/index.ts
- * - Utility functions separated to ../../utils/menuHelpers.ts
- * - State management separated to ../../hooks/useMenuState.ts
- * - Rendering logic split into MenuItemRenderer and MenuSectionRenderer
+ *
+ * 使用 Zustand 进行状态管理的菜单列表组件：
+ * - 使用 Zustand store 管理所有状态
+ * - 简化 props 接口，移除状态传递
+ * - 保持模块化设计和渲染逻辑
+ *
+ * Menu list component using Zustand for state management:
+ * - Use Zustand store to manage all states
+ * - Simplified props interface, removed state passing
+ * - Maintain modular design and rendering logic
  */
 
-import React, { useState, useCallback, type ReactElement } from 'react';
-import { List, styled } from '@mui/material';
-import menuData from '../../../data/menu-data.json';
-import '../../../styles/index.less';
+import React from "react";
+import { List, styled } from "@mui/material";
+import defaultMenuData from "../../../data/menu-data.json";
+import "../../../styles/index.less";
 
 // 导入拆分的模块
 // Import separated modules
-import type { NavData, NavSection, OpenStatesRecord, NavItem } from '../../../types';
-import type { MenuListProps } from './MenuList.styles';
-import { useMenuState } from '../../../hooks/useMenuState';
-import { MenuSectionRenderer } from './MenuSectionRenderer';
+import type { NavData, NavSection } from "../../../types";
+import { useMenuStoreContext } from "../../../context/MenuStoreContext";
+import { MenuSectionRenderer } from "./MenuSectionRenderer";
 
 // ==================== 样式组件 Styled Components ====================
 
@@ -38,91 +35,77 @@ const StyledListBox = styled(List)(({ theme }) => ({
   margin: 0,
 }));
 
+// ==================== 类型定义 Type Definitions ====================
+
+/**
+ * MenuList 组件属性接口（简化版）
+ * MenuList component props interface (simplified)
+ */
+interface MenuListProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
 // ==================== 主组件 Main Component ====================
 
 /**
  * MenuList 主组件
  * Main MenuList component
- * 
- * 菜单列表的主要组件，负责整体布局和状态管理
- * Main component for menu list, responsible for overall layout and state management
- * 
- * @param props - 组件属性，包含菜单配置和回调函数 Component props including menu configuration and callbacks
+ *
+ * 使用 Zustand 进行状态管理的菜单列表组件
+ * Menu list component using Zustand for state management
+ *
+ * @param props - 简化的组件属性 Simplified component props
  * @returns 渲染的菜单列表 Rendered menu list
  */
 const MenuList: React.FC<MenuListProps> = (props) => {
   // ==================== 状态管理 State Management ====================
 
   /**
-   * 使用自定义 Hook 管理菜单状态（仅在非受控模式下使用）
-   * Use custom Hook to manage menu state (only in uncontrolled mode)
+   * 从 Context 获取当前实例的 store
+   * Get current instance store from Context
    */
-  const internalState = useMenuState(
-    props.data || (menuData as NavData),
-    props.config
-  );
+  const store = useMenuStoreContext();
+  const data = store((state) => state.data);
+  const selectedItem = store((state) => state.selectedItem);
+  const openStates = store((state) => state.openStates);
+  const collapsed = store((state) => state.collapsed);
+  const handleItemClick = store((state) => state.handleItemClick);
+  const handleItemToggle = store((state) => state.handleItemToggle);
 
   /**
-   * 确定当前使用的状态（受控 vs 非受控）
-   * Determine current state to use (controlled vs uncontrolled)
+   * 获取菜单数据，优先使用 store 中的数据，如果没有则使用默认数据
+   * Get menu data, prioritize data from store, fallback to default data
    */
-  const isControlled = props.selectedItem !== undefined || props.openStates !== undefined;
-  const currentSelectedItem = isControlled ? props.selectedItem : internalState.selectedItem;
-  const currentOpenStates = isControlled ? (props.openStates || {}) : internalState.openStates;
+  const menuData = data || defaultMenuData;
 
   /**
    * 处理收起状态的菜单展开状态
    * Handle menu open states for collapsed state
-   * 
-   * 注意：collapsed 状态应该只影响视觉显示，不应该阻止状态管理
-   * Note: collapsed state should only affect visual display, not prevent state management
    */
-  const effectiveOpenStates = props.collapsed
-    ? {} // 收起状态时，视觉上所有菜单项都关闭，但状态仍然保持
-    : currentOpenStates;
+  const effectiveOpenStates = collapsed ? {} : openStates;
 
   // ==================== 事件处理 Event Handlers ====================
-
-  /**
-   * 处理菜单项点击事件（适配器函数）
-   * Handle menu item click events (adapter function)
-   */
-  const handleMenuItemClickAdapter = (itemKey: string) => {
-    // 在非受控模式下更新内部状态
-    if (!isControlled) {
-      internalState.handleItemClick(itemKey);
-    }
-    // 调用外部回调，传递路径和空的 item 对象（因为 MenuSectionRenderer 不提供完整的 item 对象）
-    // Call external callback, passing path and empty item object (since MenuSectionRenderer doesn't provide complete item object)
-    props.onItemClick?.(itemKey, {} as NavItem);
-  };
-
-  /**
-   * 处理菜单项展开/折叠事件
-   * Handle menu item toggle events
-   */
-  const handleMenuItemToggle = (path: string) => {
-    // 在非受控模式下更新内部状态
-    if (!isControlled) {
-      internalState.toggleOpen(path);
-    }
-    const isOpen = !currentOpenStates[path];
-    props.onItemToggle?.(path, isOpen);
-  };
+  // 事件处理逻辑已移至 Zustand store 中
+  // Event handling logic has been moved to Zustand store
 
   // ==================== 渲染函数 Render Functions ====================
 
   /**
    * 渲染菜单分组
    * Render menu sections
-   * 
+   *
    * 遍历菜单数据并渲染每个分组
    * Iterates through menu data and renders each section
    */
   const renderMenuSections = () => {
-    const data = props.data || (menuData as NavData);
+    // 添加空值检查，确保 navItems 存在
+    // Add null check to ensure navItems exists
+    if (!menuData?.navItems) {
+      return null;
+    }
 
-    return data.navItems.map((section: NavSection, index: number) => {
+    return menuData.navItems.map((section: NavSection, index: number) => {
       if (!section) return null; // 空值检查 Null check
 
       return (
@@ -130,11 +113,6 @@ const MenuList: React.FC<MenuListProps> = (props) => {
           key={`section-${index}`}
           section={section}
           sectionIndex={index}
-          selectedItem={currentSelectedItem || ''}
-          openStates={effectiveOpenStates}
-          onToggleOpen={handleMenuItemToggle}
-          onItemClick={handleMenuItemClickAdapter}
-          collapsed={props.collapsed}
         />
       );
     });
@@ -142,15 +120,10 @@ const MenuList: React.FC<MenuListProps> = (props) => {
 
   // ==================== 组件渲染 Component Render ====================
 
-  // 从props中排除自定义属性，避免传递给DOM元素
-  // Exclude custom properties from props to avoid passing to DOM element
-  const { data, config, collapsed, onItemClick, onItemToggle, selectedItem, openStates, ...listProps } = props;
-
   return (
     <StyledListBox
-      {...listProps}
       sx={{
-        height: '100%',
+        height: "100%",
         pb: (theme: any) => theme.spacing(2),
         ...props.style,
       }}

@@ -23,11 +23,13 @@ export interface NavItem {
   /** 图标标识符（可选）Icon identifier (optional) */
   icon?: string;
   /** 信息徽章 [信息键, 徽章值] Information badge [info key, badge value] */
-  info?: [string, string];
+  info?: [string, string] | string[];
   /** 访问权限角色列表（可选）Access permission roles list (optional) */
   roles?: string[];
   /** 菜单项描述文字（可选）Menu item description text (optional) */
   caption?: string;
+  /** 是否禁用（可选）Whether disabled (optional) */
+  disabled?: boolean;
   /** 子菜单项列表（可选）Sub-menu items list (optional) */
   children?: NavItem[];
 }

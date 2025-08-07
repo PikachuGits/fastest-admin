@@ -1,58 +1,77 @@
 /**
- * Menu 组件统一样式主题系统
- * Unified style theme system for Menu component
+ * Menu 组件统一样式主题系统（重新设计）
+ * Unified style theme system for Menu component (Redesigned)
  * 
- * 统一管理所有Menu相关的样式配置，包括颜色、间距、动画等
- * Centrally manages all Menu-related style configurations including colors, spacing, animations, etc.
+ * 基于 MUI 主题系统的动态主题配置，支持亮色/暗色模式切换
+ * Dynamic theme configuration based on MUI theme system, supports light/dark mode switching
  */
 
 import type { Theme } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 
-// ==================== 颜色主题 Color Theme ====================
+// ==================== 动态颜色主题 Dynamic Color Theme ====================
 
 /**
- * 菜单颜色配置
- * Menu color configuration
+ * 基于 MUI 主题的动态菜单颜色配置
+ * Dynamic menu color configuration based on MUI theme
+ * 
+ * 使用 MUI 主题的颜色令牌，确保与全局主题保持一致
+ * Uses MUI theme color tokens to ensure consistency with global theme
  */
-export const menuColors = {
-  // 主色调 Primary colors
+export const createMenuColors = (theme: Theme) => ({
+  // 主色调 - 直接使用 MUI 主题的 primary
+  // Primary colors - directly use MUI theme primary
   primary: {
-    main: '#2E7D32',
-    light: 'rgba(46, 125, 50, 0.08)',
-    hover: 'rgba(46, 125, 50, 0.12)',
-    text: '#2E7D32',
+    main: theme.palette.primary.main,
+    light: theme.palette.primary.light,
+    dark: theme.palette.primary.dark,
+    contrastText: theme.palette.primary.contrastText,
   },
   
-  // 背景色 Background colors
+  // 背景色 - 基于 MUI 主题动态生成
+  // Background colors - dynamically generated based on MUI theme
   background: {
     default: 'transparent',
-    paper: '#ffffff',
-    selected: 'rgba(46, 125, 50, 0.08)',
-    hover: 'rgba(0, 0, 0, 0.04)',
-    glass: 'rgba(255, 255, 255, 0.1)',
+    paper: theme.palette.background.paper,
+    selected: alpha(theme.palette.primary.main, 0.08), // 8% 透明度的主色
+    hover: theme.palette.action.hover,
+    focus: theme.palette.action.focus,
   },
   
-  // 文本色 Text colors
+  // 文本色 - 使用 MUI 主题的文本颜色
+  // Text colors - use MUI theme text colors
   text: {
-    primary: 'inherit',
-    secondary: '#666666',
-    selected: '#2E7D32',
-    disabled: '#999999',
+    primary: theme.palette.text.primary,
+    secondary: theme.palette.text.secondary,
+    selected: theme.palette.primary.main,
+    disabled: theme.palette.text.disabled,
   },
   
-  // 边框色 Border colors
+  // 边框色 - 基于 MUI 主题
+  // Border colors - based on MUI theme
   border: {
-    default: 'rgba(0, 0, 0, 0.12)',
-    focus: '#2E7D32',
+    default: theme.palette.divider,
+    focus: theme.palette.primary.main,
   },
   
-  // 图标色 Icon colors
+  // 图标色 - 语义化颜色定义
+  // Icon colors - semantic color definitions
   icon: {
-    default: '#666666',
-    selected: '#2E7D32',
-    arrow: '#999999',
+    default: theme.palette.text.secondary,
+    selected: theme.palette.primary.main,
+    arrow: theme.palette.text.disabled,
   },
-} as const;
+  
+  // 状态色 - 基于 MUI 动作状态
+  // State colors - based on MUI action states
+  action: {
+    active: theme.palette.action.active,
+    hover: theme.palette.action.hover,
+    selected: theme.palette.action.selected,
+    disabled: theme.palette.action.disabled,
+    disabledBackground: theme.palette.action.disabledBackground,
+  },
+} as const);
 
 // ==================== 间距配置 Spacing Configuration ====================
 
@@ -148,71 +167,79 @@ export const menuBreakpoints = {
   },
 } as const;
 
-// ==================== 层级样式 Level Styles ====================
+// ==================== 动态层级样式 Dynamic Level Styles ====================
 
 /**
- * 菜单层级样式配置
- * Menu level style configuration
+ * 基于主题的菜单层级样式配置
+ * Theme-based menu level style configuration
  */
-export const menuLevelStyles = {
-  // 层级0（顶级菜单）
-  level0: {
-    fontWeight: 600,
-    fontSize: '14px',
-    padding: '4px 8px 4px 12px',
-    backgroundColor: menuColors.background.selected,
-    color: menuColors.text.selected,
-  },
+export const createMenuLevelStyles = (theme: Theme) => {
+  const colors = createMenuColors(theme);
   
-  // 层级1+（子菜单）
-  levelN: {
-    fontWeight: 400,
-    fontSize: '14px',
-    padding: '4px 8px 4px 24px',
-    backgroundColor: 'transparent',
-    color: menuColors.text.primary,
-  },
-} as const;
+  return {
+    // 层级0（顶级菜单）
+    level0: {
+      fontWeight: 600,
+      fontSize: '14px',
+      padding: '4px 8px 4px 12px',
+      backgroundColor: colors.background.selected,
+      color: colors.text.selected,
+    },
+    
+    // 层级1+（子菜单）
+    levelN: {
+      fontWeight: 400,
+      fontSize: '14px',
+      padding: '4px 8px 4px 24px',
+      backgroundColor: 'transparent',
+      color: colors.text.primary,
+    },
+  } as const;
+};
 
-// ==================== 状态样式 State Styles ====================
+// ==================== 动态状态样式 Dynamic State Styles ====================
 
 /**
- * 菜单状态样式配置
- * Menu state style configuration
+ * 基于主题的菜单状态样式配置
+ * Theme-based menu state style configuration
  */
-export const menuStateStyles = {
-  // 默认状态 Default state
-  default: {
-    backgroundColor: menuColors.background.default,
-    color: menuColors.text.primary,
-  },
+export const createMenuStateStyles = (theme: Theme) => {
+  const colors = createMenuColors(theme);
   
-  // 悬停状态 Hover state
-  hover: {
-    backgroundColor: menuColors.background.hover,
-    transition: `background-color ${menuAnimations.duration.fast} ${menuAnimations.easing.standard}`,
-  },
-  
-  // 选中状态 Selected state
-  selected: {
-    backgroundColor: menuColors.background.selected,
-    color: menuColors.text.selected,
-    fontWeight: 600,
-  },
-  
-  // 父级选中状态 Parent selected state
-  parentSelected: {
-    backgroundColor: menuColors.primary.light,
-    color: menuColors.primary.text,
-  },
-  
-  // 禁用状态 Disabled state
-  disabled: {
-    color: menuColors.text.disabled,
-    cursor: 'not-allowed',
-    opacity: 0.6,
-  },
-} as const;
+  return {
+    // 默认状态 Default state
+    default: {
+      backgroundColor: colors.background.default,
+      color: colors.text.primary,
+    },
+    
+    // 悬停状态 Hover state
+    hover: {
+      backgroundColor: colors.background.hover,
+      transition: `background-color ${menuAnimations.duration.fast} ${menuAnimations.easing.standard}`,
+    },
+    
+    // 选中状态 Selected state
+    selected: {
+      backgroundColor: colors.background.selected,
+      color: colors.text.selected,
+      fontWeight: 600,
+    },
+    
+    // 父级选中状态 Parent selected state
+    parentSelected: {
+      backgroundColor: alpha(colors.primary.main, 0.12),
+      color: colors.primary.main,
+    },
+    
+    // 禁用状态 Disabled state
+    disabled: {
+      color: colors.text.disabled,
+      cursor: 'not-allowed',
+      opacity: 0.6,
+    },
+  } as const;
+};
 
 // ==================== 变体样式 Variant Styles ====================
 
@@ -249,19 +276,21 @@ export const menuVariantStyles = {
 // ==================== 工具函数 Utility Functions ====================
 
 /**
- * 获取层级样式
- * Get level styles
+ * 基于主题获取层级样式
+ * Get level styles based on theme
  */
-export const getLevelStyles = (level: number) => {
-  return level === 0 ? menuLevelStyles.level0 : menuLevelStyles.levelN;
+export const getLevelStyles = (theme: Theme, level: number) => {
+  const levelStyles = createMenuLevelStyles(theme);
+  return level === 0 ? levelStyles.level0 : levelStyles.levelN;
 };
 
 /**
- * 获取状态样式
- * Get state styles
+ * 基于主题获取状态样式
+ * Get state styles based on theme
  */
-export const getStateStyles = (state: keyof typeof menuStateStyles) => {
-  return menuStateStyles[state];
+export const getStateStyles = (theme: Theme, state: 'default' | 'hover' | 'selected' | 'parentSelected' | 'disabled') => {
+  const stateStyles = createMenuStateStyles(theme);
+  return stateStyles[state];
 };
 
 /**
@@ -294,27 +323,59 @@ export const createTransition = (properties: string[], duration = menuAnimations
   };
 };
 
-// ==================== 默认导出 Default Export ====================
+// ==================== 主题工厂函数 Theme Factory Function ====================
 
 /**
- * 完整的菜单主题配置
- * Complete menu theme configuration
+ * 创建完整的菜单主题配置
+ * Create complete menu theme configuration
+ * 
+ * 基于传入的 MUI 主题创建动态的菜单主题
+ * Creates dynamic menu theme based on the passed MUI theme
  */
-export const menuTheme = {
-  colors: menuColors,
+export const createMenuTheme = (theme: Theme) => ({
+  colors: createMenuColors(theme),
   spacing: menuSpacing,
   animations: menuAnimations,
   breakpoints: menuBreakpoints,
-  levelStyles: menuLevelStyles,
-  stateStyles: menuStateStyles,
+  levelStyles: createMenuLevelStyles(theme),
+  stateStyles: createMenuStateStyles(theme),
   variantStyles: menuVariantStyles,
+  utils: {
+    getLevelStyles: (level: number) => getLevelStyles(theme, level),
+    getStateStyles: (state: Parameters<typeof getStateStyles>[1]) => getStateStyles(theme, state),
+    getVariantStyles,
+    createContainerQuery,
+    createTransition,
+  },
+} as const);
+
+// ==================== 默认导出 Default Export ====================
+
+/**
+ * 兼容性导出 - 使用默认主题
+ * Compatibility export - using default theme
+ * 
+ * @deprecated 推荐使用 createMenuTheme(theme) 以获得完整的主题支持
+ * @deprecated Recommend using createMenuTheme(theme) for full theme support
+ */
+export const menuTheme = {
+  // 静态配置
+  spacing: menuSpacing,
+  animations: menuAnimations,
+  breakpoints: menuBreakpoints,
+  variantStyles: menuVariantStyles,
+  // 动态配置工厂函数
+  createColors: createMenuColors,
+  createLevelStyles: createMenuLevelStyles,
+  createStateStyles: createMenuStateStyles,
   utils: {
     getLevelStyles,
     getStateStyles,
     getVariantStyles,
     createContainerQuery,
     createTransition,
+    createMenuTheme,
   },
 } as const;
 
-export default menuTheme;
+export default createMenuTheme;

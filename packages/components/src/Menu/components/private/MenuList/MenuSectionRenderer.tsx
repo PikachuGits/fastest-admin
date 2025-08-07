@@ -1,34 +1,55 @@
 /**
  * 菜单分组渲染组件
  * Menu section renderer component
+ *
+ * 使用 Zustand 进行状态管理的菜单分组渲染组件
+ * Menu section renderer component using Zustand for state management
  */
 
-import React, { useState, type ReactElement } from 'react';
-import { Collapse, List } from '@mui/material';
-import { GroupHeader } from '../GroupHeader';
-import { MenuItemRenderer } from './MenuItemRenderer';
-import { type MenuSectionRendererProps } from './MenuSectionRenderer.styles';
+import React, { useState } from "react";
+import { Collapse, List } from "@mui/material";
+import { GroupHeader } from "../GroupHeader";
+import { MenuItemRenderer } from "./MenuItemRenderer";
+import { useMenuStoreContext } from "../../../context/MenuStoreContext";
+import type { NavSection } from "../../../types";
+
+// ==================== 类型定义 Type Definitions ====================
+
+/**
+ * MenuSectionRenderer 组件属性接口（简化版）
+ * MenuSectionRenderer component props interface (simplified)
+ */
+interface MenuSectionRendererProps {
+  section: NavSection;
+  sectionIndex: number;
+}
 
 /**
  * 菜单分组渲染组件
  * Menu section renderer component
- * 
- * 负责渲染菜单分组，包括分组标题和分组内的菜单项
- * Responsible for rendering menu sections, including section headers and menu items within sections
- * 
- * @param props - 组件属性
- * @returns 渲染的菜单分组元素
+ *
+ * 使用 Zustand 进行状态管理的菜单分组渲染组件
+ * Menu section renderer component using Zustand for state management
+ *
+ * @param props - 简化的组件属性 Simplified component props
+ * @returns 渲染的菜单分组元素 Rendered menu section element
  */
 export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
   section,
   sectionIndex,
-  selectedItem,
-  openStates,
-  onToggleOpen,
-  onItemClick,
-  collapsed = false,
 }) => {
-  // 分组标题的展开状态（独立于菜单项的展开状态）
+  // ==================== 状态管理 State Management ====================
+
+  /**
+   * 从 Context 获取当前实例的 store
+   * Get current instance store from Context
+   */
+  const store = useMenuStoreContext();
+  const collapsed = store((state) => state.collapsed);
+  /**
+   * 分组标题的展开状态（独立于菜单项的展开状态）
+   * Section header open state (independent of menu item open states)
+   */
   const [isSubheaderOpen, setIsSubheaderOpen] = useState(true);
 
   /**
@@ -53,11 +74,6 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
             item={item}
             itemPath={`section-${sectionIndex}.${itemIndex}`}
             level={0}
-            selectedItem={selectedItem}
-            openStates={openStates}
-            onToggleOpen={onToggleOpen}
-            onItemClick={onItemClick}
-            collapsed={collapsed}
           />
         ))}
       </List>
@@ -77,7 +93,12 @@ export const MenuSectionRenderer: React.FC<MenuSectionRendererProps> = ({
         </Collapse>
       )}
       {/* 分组内容（可折叠） */}
-      <Collapse sx={{ px: 0.5 }} in={collapsed ? true : isSubheaderOpen} timeout="auto" unmountOnExit>
+      <Collapse
+        sx={{ px: 0.5 }}
+        in={collapsed ? true : isSubheaderOpen}
+        timeout="auto"
+        unmountOnExit
+      >
         {renderSectionItems()}
       </Collapse>
     </div>

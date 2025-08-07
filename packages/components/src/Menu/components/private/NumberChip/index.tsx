@@ -3,7 +3,7 @@ import {
   StyledNumberChip,
   type NumberChipProps,
   type NumberChipColor,
-} from './NumberChip.styles';
+} from '../../../styles/NumberChip.styles';
 
 // ==================== 主组件 Main Component ====================
 

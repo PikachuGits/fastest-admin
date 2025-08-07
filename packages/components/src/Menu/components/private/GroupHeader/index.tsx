@@ -1,4 +1,4 @@
-import { StyledGroupHeader, StyledArrowIcon, type GroupHeaderProps } from "./GroupHeader.styles";
+import { StyledGroupHeader, StyledArrowIcon, type GroupHeaderProps } from "../../../styles/GroupHeader.styles";
 
 export const GroupHeader = ({ title, onClick, open = false }: GroupHeaderProps) => {
   return (
