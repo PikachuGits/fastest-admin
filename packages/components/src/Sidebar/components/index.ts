@@ -1,2 +1,2 @@
 export { default as MenuList } from "./MenuList";
-export { default as MenuInternalComponent } from "./MenuInternalComponent";
+export { default as MenuInternal } from "./MenuInternal";

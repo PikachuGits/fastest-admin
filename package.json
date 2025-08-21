@@ -10,7 +10,7 @@
       "apps/*"
     ],
     "catalog": {
-      "vite": "^7.0.4",
+      "vite": "^7.1.2",
       "@emotion/react": "^11.14.0",
       "@emotion/styled": "^11.14.1",
       "@mui/icons-material": "^7.2.0",
@@ -69,6 +69,6 @@
   "peerDependencies": {
     "turbo": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:"
+    "vite": "^7.1.2"
   }
 }

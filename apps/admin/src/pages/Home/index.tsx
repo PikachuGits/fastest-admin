@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { SidebarMenu, useMenuHelpers } from "@fastest/components";
+import { MenuDemo } from "@fastest/components";
 import {
   Box,
   Button,
@@ -136,11 +136,14 @@ const Home = () => {
       <Button onClick={() => setCollapsed(!collapsible)}>
         {collapsible ? "展开" : "收起"}
       </Button>
-      <SidebarMenu
+      <Box sx={{ width: "300px", height: "100vh" }}>
+        <MenuDemo />
+      </Box>
+      {/* <SidebarMenu
         id="SidebarMenu-1"
         items={menuItems}
         collapsible={collapsible}
-      />
+      /> */}
     </Box>
   );
 };

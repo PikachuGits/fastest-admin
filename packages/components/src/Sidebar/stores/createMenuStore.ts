@@ -1,5 +1,5 @@
 import { createStore } from 'zustand/vanilla';
-import type { MenuStoreState, InternalMenuItem, MenuData } from '../types';
+import type { MenuStoreState, InternalMenuItem, SidebarData } from '../types';
 import { normalizeMenuData, convertNavSectionsToMenuItems } from '../utils/convert';
 
 // 递归查找指定 key 的菜单项
@@ -14,16 +14,10 @@ const findItem = (items: InternalMenuItem[], key: string): InternalMenuItem | un
   return undefined;
 };
 
-// 辅助函数：将 data 标准化为 InternalMenuItem 数组
-const normalizeData = (data?: MenuData | InternalMenuItem[]): InternalMenuItem[] => {
+// 辅助函数：将 data 标准化为 InternalMenuItem 数组（仅支持 NavSection[]）
+const normalizeData = (data?: SidebarData): InternalMenuItem[] => {
   if (!data) return [];
-  
-  // 如果是旧格式的 InternalMenuItem[] 数组，直接返回
-  if (Array.isArray(data) && data.length > 0 && 'key' in data[0]) {
-    return data as InternalMenuItem[];
-  }
-  
-  // 否则标准化为 NavSection[]，然后转换为 InternalMenuItem[]
+
   const sections = normalizeMenuData(data);
   return convertNavSectionsToMenuItems(sections);
 };

@@ -3,14 +3,24 @@ import { useMenuHelpers } from "../hooks/useMenuHelpers";
 import { useMenuStore } from "../context/MenuStoreContext";
 import { useStore } from "zustand";
 import { List, ListItemText, styled } from "@mui/material";
-import { MenuBaseListSx } from "../styles/menu.sx";
-import { MenuSectionRenderer } from "./MenuSectionRenderer";
-import type { InternalMenuItem, MenuData } from "../types";
+import { MenuBaseLayerListSx } from "../styles/menu.sx";
+import { MenuListSection } from "./MenuListSection";
+import type { InternalMenuItem } from "../types";
 import {
   normalizeMenuData,
   convertNavSectionsToMenuItems,
 } from "../utils/convert";
 
+/**
+ * 菜单列表组件
+ * Menu list component
+ *
+ * 菜单列表组件，用于渲染菜单数据。
+ * Menu list component, used to render menu data.
+ *
+ * 这个组件是菜单系统的核心组件之一，负责将菜单数据渲染为可交互的列表。
+ * 它使用 Zustand 管理菜单状态，并根据菜单数据动态生成菜单项。
+ */
 const MenuList = (props: any) => {
   const store = useMenuStore(props.menuId);
   // ✅ 修复：使用响应式订阅而不是 getState()
@@ -41,30 +51,16 @@ const MenuList = (props: any) => {
       return null;
     }
 
-    // 标准化数据：支持新的 NavSection[]、NavData 格式和旧的数组格式
-    // Normalize data: support new NavSection[], NavData format and legacy array format
-    const normalizedSections: InternalMenuItem[] = (() => {
-      // 如果是旧格式的 InternalMenuItem[] 数组，直接返回
-      if (
-        Array.isArray(menuData) &&
-        menuData.length > 0 &&
-        menuData[0] &&
-        "key" in menuData[0]
-      ) {
-        return menuData as InternalMenuItem[];
-      }
+    // 仅支持 NavSection[]：标准化后转换为 InternalMenuItem[]
+    const sections = normalizeMenuData(menuData);
+    const normalizedSections: InternalMenuItem[] =
+      convertNavSectionsToMenuItems(sections);
 
-      // 否则标准化为 NavSection[]，然后转换为 InternalMenuItem[]
-      const sections = normalizeMenuData(menuData!);
-      return convertNavSectionsToMenuItems(sections);
-    })();
-
-    return normalizedSections?.map(
+    return normalizedSections.map(
       (section: InternalMenuItem, index: number) => {
         if (!section) return null; // 空值检查 Null check
-        console.log(section, "section");
         return (
-          <MenuSectionRenderer
+          <MenuListSection
             key={`section-${index}`}
             section={section}
             sectionIndex={index}
@@ -79,7 +75,7 @@ const MenuList = (props: any) => {
   return (
     <List
       sx={{
-        ...MenuBaseListSx,
+        ...MenuBaseLayerListSx,
         ...props.style,
       }}
       className={props.className}

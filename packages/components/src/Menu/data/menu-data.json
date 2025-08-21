@@ -2,6 +2,7 @@
     "navItems": [
         {
             "subheader": "Marketing",
+            "icon": "solar:home-angle-bold-duotone",
             "items": [
                 {
                     "title": "Landing",
@@ -53,6 +54,7 @@
         },
         {
             "subheader": "Travel",
+            "icon": "solar:home-angle-bold-duotone",
             "items": [
                 {
                     "title": "About",

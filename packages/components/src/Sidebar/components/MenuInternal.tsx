@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useMenuStore } from "../context/MenuStoreContext";
 import type { MenuInternalProps } from "../types";
 import MenuList from "./MenuList";
-
+import menuData from "../data";
 /**
  * @description MenuInternalComponent 是菜单的核心逻辑组件。
  * 它接收所有 props，通过 `useEffect` hooks 将这些 props 同步到 Zustand store 中，
@@ -19,7 +19,6 @@ import MenuList from "./MenuList";
 const MenuInternalComponent: React.FC<MenuInternalProps> = ({
   // 核心标识符
   menuId, // 每个菜单实例的唯一ID，用于从 store 注册表中获取正确的 store
-
   // 数据与配置
   items, // 菜单项的数据源
   variant = "sidebar", // 变体: 'sidebar' 或 'topbar'
@@ -63,8 +62,6 @@ const MenuInternalComponent: React.FC<MenuInternalProps> = ({
   // [Effect 1] 同步静态配置
   // 当菜单的外观和行为配置（如 variant, theme 等）发生变化时，更新 store。
   useEffect(() => {
-    console.log(collapsible, "useEffect");
-
     setVariant(variant);
     setTheme(theme);
     setSize(size);
@@ -96,7 +93,11 @@ const MenuInternalComponent: React.FC<MenuInternalProps> = ({
   // [Effect 3] 同步菜单数据
   // 当菜单项数据 `items` 发生变化时，更新 store。
   useEffect(() => {
-    setData(items);
+    if (items) {
+      setData(items);
+    } else {
+      setData(menuData);
+    }
   }, [items, setData]);
 
   // [Effect 4] 处理受控模式下的 `selectedItem`

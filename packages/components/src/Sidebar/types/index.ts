@@ -1,4 +1,5 @@
 import type { ReactNode, CSSProperties } from 'react';
+import type { SxProps, Theme } from '@mui/material';
 
 // ==================== 数据结构定义 (Data Structures) ====================
 
@@ -60,17 +61,11 @@ export interface NavSection {
 /**
  * @description 完整的导航数据结构。可以是包装格式或直接数组格式。
  */
-export interface NavData {
-  /**
-   * @description 导航项分组列表（包装格式）。
-   */
-  navItems: NavSection[];
-}
-
 /**
- * @description 导航数据的联合类型：支持包装格式和直接数组格式。
+ * @description 统一的导航数据类型：仅支持分组数组格式
+ * 例如：[{ subheader: 'xxx', items: [...] }, ...]
  */
-export type MenuData = NavData | NavSection[];
+export type SidebarData = NavSection[];
 
 /**
  * @description 内部使用的菜单项类型，扩展了基础菜单项。
@@ -95,6 +90,11 @@ export interface InternalMenuItem extends MenuItem {
    * @description 徽标，可用于显示通知数量等。
    */
   badge?: string | number;
+
+  /**
+   * @description 子菜单项（内部结构）。
+   */
+  children?: InternalMenuItem[];
 }
 
 // ==================== 状态管理 (Zustand Store) ====================
@@ -143,9 +143,9 @@ export interface MenuStoreState {
   expandedItems: string[];
 
   /**
-   * @description 菜单项的完整数据源。支持多种格式：NavData、NavSection[]、或扁平的 InternalMenuItem[]。
+   * @description 菜单项的数据源（仅支持 NavSection[]）。
    */
-  data?: MenuData | InternalMenuItem[];
+  data?: SidebarData;
 
   /**
    * @description 存储由外部传入的事件回调函数。
@@ -186,7 +186,7 @@ export interface MenuStoreState {
   /**
    * @description 设置菜单的数据源。
    */
-  setData: (d?: MenuData | InternalMenuItem[]) => void;
+  setData: (d?: SidebarData) => void;
 
   /**
    * @description 注册回调函数。
@@ -216,9 +216,9 @@ export interface MenuStoreState {
  */
 export interface MenuProps {
   /**
-   * @description 菜单项的数据源。支持多种格式：NavData、NavSection[]、或扁平的 InternalMenuItem[]。
+   * @description 菜单项的数据源（仅支持 NavSection[]）。
    */
-  items?: MenuData | InternalMenuItem[];
+  items?: SidebarData;
 
   /**
    * @description 菜单的变体，默认为 `'sidebar'`。
@@ -303,4 +303,13 @@ export interface MenuInternalProps extends MenuProps {
    * @description 菜单实例的唯一ID，用于在 store 注册表中定位正确的 store 实例。
    */
   menuId: string;
+}
+
+
+export interface GroupHeaderProps {
+  title: string;
+  onClick?: () => void;
+  open: boolean;
+  icon?: string;
+  sx?: SxProps<Theme>;
 }
