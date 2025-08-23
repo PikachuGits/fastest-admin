@@ -26,6 +26,7 @@
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@fastest/components": "workspace:*",
+    "@fastest/config": "workspace:*",
     "@fastest/plugins": "workspace:*",
     "@fastest/types": "workspace:*",
     "@fastest/ui": "workspace:*",
@@ -35,7 +36,7 @@
     "@types/react-dom": "catalog:",
     "@unocss/preset-uno": "catalog:",
     "@unocss/vite": "catalog:",
-    "@vitejs/plugin-react-swc": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
     "bun-types": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-react-hooks": "catalog:",

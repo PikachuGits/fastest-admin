@@ -1,0 +1,13 @@
+{
+    "name": "@fastest/config",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./vite.alias.js"
+    },
+    "files": [
+        "vite.alias.js",
+        "vite.alias.d.ts"
+    ]
+}

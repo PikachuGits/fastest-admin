@@ -1,6 +1,6 @@
 import { ListSubheader } from "@mui/material";
 import { Iconify, sxStyled } from "@fastest/components";
-import { MenuArrowIconSx, MenuSubHeaderSx } from "../../styles/Menu.sx";
+import { MenuArrowIconSx, MenuSubHeaderSx } from "@components/newMenu/styles/Menu.sx";
 
 export const SubHeader = ({
   title,

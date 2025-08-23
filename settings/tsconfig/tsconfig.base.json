@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "baseUrl": ".",
+        "paths": {
+            "@components/*": [
+                "../components/src/*"
+            ],
+            "@components": [
+                "../components/src"
+            ],
+            "@fastest/plugins": [
+                "../plugins/src"
+            ],
+            "@fastest/plugins/*": [
+                "../plugins/src/*"
+            ]
+        },
+        "jsx": "react-jsx",
+        "strict": true,
+        "skipLibCheck": true,
+        "noEmit": true
+    }
+}

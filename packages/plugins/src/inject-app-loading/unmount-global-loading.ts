@@ -18,7 +18,7 @@ export function unmountGlobalLoading() {
       '[data-app-loading^="inject"]',
     );
 
-    // 当过渡动画结束时，移除 loading 元素和所有注入的 loading 元素
+    // 当过渡动画结束时，移除 loading 元素和所有注入的 loading 元素 123123
     loadingElement.addEventListener(
       'transitionend',
       () => {
