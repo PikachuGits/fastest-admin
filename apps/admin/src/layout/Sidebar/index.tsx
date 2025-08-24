@@ -1,9 +1,9 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
-import { MenuList, Menu } from "@fastest/components";
+import { Menu } from "@fastest/components";
 import { useAppTheme } from "@/app/providers/ThemeProvider";
 import { useAppStore } from "@/store";
 import menuDataRaw from "./menu-data.json";
-import type { NavData } from "@fastest/components";
+// import type { NavData } from "@fastest/components";
 import {
   StyledArrowIcon,
   StyledSidebarContainer,
@@ -13,7 +13,7 @@ import {
 import { useMediaQuery, useTheme, Drawer, Box } from "@mui/material";
 
 // 类型断言确保 JSON 数据符合 NavData 接口
-const menuData = menuDataRaw as NavData;
+const menuData = menuDataRaw;
 
 interface SidebarProps {
   mobileOpen: boolean;
