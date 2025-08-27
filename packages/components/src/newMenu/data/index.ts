@@ -1,6 +1,6 @@
 export default [
     {
-        "subheader": "Marketing",
+        "subheader": "用户管理",
         "items": [
             {
                 "title": "Landing",
@@ -51,7 +51,7 @@ export default [
         ]
     },
     {
-        "subheader": "Travel",
+        "subheader": "系统管理",
         "items": [
             {
                 "title": "About",

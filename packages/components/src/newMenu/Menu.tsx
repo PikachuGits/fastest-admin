@@ -1,65 +1,66 @@
-import { Box, Collapse, List, ListItem, ListItemText } from "@mui/material";
-import { MenuBoxSx } from "./styles/Menu.sx";
-import { SubHeader } from "./components";
-import { Fragment, useState } from "react";
+import { Box, Collapse, List } from "@mui/material";
+import { MenuBoxSx, MenuItemSx, MenuSubBoxSx } from "./styles/Menu.sx";
+import { SubHeader, MenuItemGroup, MenuItemBox } from "./components";
+import { useState } from "react";
 import menuData from "./data";
+import { sxStyled } from "@components/utils/sx";
+import type { MenuSection } from "./types";
 
 export const Menu = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [expandedStates, setExpandedStates] = useState<Record<string, boolean>>(
+    {}
+  );
+
+  const data = menuData as unknown as MenuSection[];
 
   const handleClick = () => {
     console.log("handleClick", open);
     setOpen(!open);
   };
 
+  const handleItemClick = (item: any, index: number) => {
+    console.log("Menu item clicked:", item, index);
+    // 这里可以添加路由跳转或其他业务逻辑
+    // Here you can add routing navigation or other business logic
+  };
+
+  const handleToggleSubMenu = (itemPath: string) => {
+    setExpandedStates((prev) => ({
+      ...prev,
+      [itemPath]: !prev[itemPath],
+    }));
+  };
+
   return (
     <Box sx={{ ...MenuBoxSx }}>
       <List>
-        {menuData.map((item, index) => (
-          <Fragment key={index}>
+        {data.map((value, index) => (
+          <Box sx={sxStyled(MenuSubBoxSx)} key={index}>
             <SubHeader
-              title={item.subheader}
+              title={value.subheader}
               onToggle={handleClick}
               open={open}
               tabIndex={index}
             />
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <List>
-                {item.items.map((item, index) => (
-                  <ListItem key={index}>
-                    <ListItemText primary={item.title} />
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </Fragment>
+            <MenuItemBox open={open}>
+              {value.items.map((item, index) => {
+                return (
+                  <MenuItemGroup
+                    key={index}
+                    items={item}
+                    list={item.children || []}
+                    open={open}
+                    level={0}
+                    onItemClick={handleItemClick}
+                    expandedStates={expandedStates}
+                    onToggleSubMenu={handleToggleSubMenu}
+                  />
+                );
+              })}
+            </MenuItemBox>
+          </Box>
         ))}
-        {/* <SubHeader
-          title="SubHeader"
-          onToggle={handleClick}
-          open={open}
-          tabIndex={0}
-        />
-        <Collapse in={true} timeout="auto" unmountOnExit>
-          <List>
-            <ListItem>
-              <ListItemText primary="Item 1" />
-            </ListItem>
-          </List>
-        </Collapse>
-        <SubHeader
-          title="SubHeader"
-          onToggle={handleClick}
-          open={open}
-          tabIndex={1}
-        />
-        <Collapse in={true} timeout="auto" unmountOnExit>
-          <List>
-            <ListItem>
-              <ListItemText primary="Item 1" />
-            </ListItem>
-          </List>
-        </Collapse> */}
       </List>
     </Box>
   );

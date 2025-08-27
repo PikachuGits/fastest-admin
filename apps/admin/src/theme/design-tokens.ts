@@ -11,7 +11,7 @@ export const lightPalette: PaletteOptions = {
     // background: { default: 'rgba(244, 240, 234, 1)', paper: '#f5f5f5' },
     // background: { default: 'rgba(244, 240, 234, 1)', paper: '#f5f5f5' },
 
-    background: { default: '#ffffff', paper: '#f5f5f5' },
+    background: { default: '#ecf0f3', paper: '#f5f5f5' },
     text: {
         primary: '#212B36',
         secondary: '#637381',
