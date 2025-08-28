@@ -41,8 +41,16 @@ export interface MenuItemIconProps {
 export const MenuItemIcon: React.FC<MenuItemIconProps> = React.memo(
   ({ iconName, sx, className }) => {
     return (
-      <ListItemIcon className={className}>
-        <Iconify icon={iconName as any} sx={sx} />
+      <ListItemIcon
+        className={className}
+        sx={{
+          minWidth: "0",
+          height: "100%",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <Iconify icon={iconName as any} sx={{ ...sx, height: "100%" }} />
       </ListItemIcon>
     );
   }

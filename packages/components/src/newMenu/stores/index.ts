@@ -1,29 +1,48 @@
 import { create } from "zustand";
 
-type OpenState = {
-  openMap: Record<string, boolean>;
-  toggle: (id: string) => void;
-  setOpen: (id: string, open: boolean) => void;
-  isOpen: (id: string) => boolean;
+type MenuStore = {
+  expanded: Record<string, boolean>;
+  selected: string | null;
+  collapsed: boolean;
+  isMobile: boolean;
+  toggleExpand: (id: string) => void;
+  selectItem: (id: string) => void;
+  toggleCollapsed: () => void;
+  setCollapsed: (collapsed: boolean) => void;
+  setMobileMode: (isMobile: boolean) => void;
 };
 
-export const useMenuOpenStore = create<OpenState>((set, get) => ({
-  openMap: {},
-  toggle: (id) =>
-    set((s) => {
-      const next = !get().isOpen(id);
-      return { openMap: { ...s.openMap, [id]: next } };
-    }),
-  setOpen: (id, open) =>
-    set((s) => ({ openMap: { ...s.openMap, [id]: open } })),
-  isOpen: (id) => !!get().openMap[id],
+export const useMenuStore = create<MenuStore>((set) => ({
+  expanded: {},
+  selected: null,
+  collapsed: false,
+  isMobile: false,
+
+  toggleExpand: (id) =>
+    set((state) => ({
+      expanded: {
+        ...state.expanded,
+        [id]: !state.expanded[id],
+      },
+    })),
+
+  selectItem: (id) =>
+    set(() => ({
+      selected: id,
+    })),
+
+  toggleCollapsed: () =>
+    set((state) => ({
+      collapsed: !state.collapsed,
+    })),
+
+  setCollapsed: (collapsed) =>
+    set(() => ({
+      collapsed,
+    })),
+
+  setMobileMode: (isMobile) =>
+    set(() => ({
+      isMobile,
+    })),
 }));
-
-// Selectors
-export type OpenStore = OpenState;
-export const selectIsOpen = (id: string) => (s: OpenState) => s.isOpen(id);
-export const selectToggle = (s: OpenState) => s.toggle;
-export const selectSetOpen = (s: OpenState) => s.setOpen;
-
-
-

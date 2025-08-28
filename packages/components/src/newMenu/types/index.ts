@@ -10,6 +10,8 @@
  * Menu item interface
  */
 export interface MenuItem {
+  /** 菜单项唯一标识符 Menu item unique identifier */
+  id: number;
   /** 菜单项显示标题 Menu item display title */
   title: string;
   /** 菜单项路径或链接 Menu item path or link */
@@ -33,8 +35,12 @@ export interface MenuItem {
  * Menu section interface
  */
 export interface MenuSection {
+  /** 菜单项唯一标识符 Menu item unique identifier */
+  id: number;
   /** 分组标题（可选）Section title (optional) */
   subheader: string;
+  /** 分组图标（可选）Section icon (optional) */
+  icon?: string;
   /** 分组内的菜单项列表 Menu items list within the section */
   items: MenuItem[];
 }
@@ -54,13 +60,13 @@ export interface MenuData {
  * 侧边栏展开状态类型
  * Sidebar collapsed state type
  */
-export type SidebarCollapsedState = 'expanded' | 'collapsed';
+export type SidebarCollapsedState = "expanded" | "collapsed";
 
 /**
  * 设备类型
  * Device type
  */
-export type DeviceType = 'desktop' | 'mobile';
+export type DeviceType = "desktop" | "mobile";
 
 /**
  * 展开状态映射类型
@@ -111,11 +117,11 @@ export interface MenuStoreActions {
   toggleCollapsed: () => void;
   /** 设置侧边栏展开/收起状态 Set sidebar expanded/collapsed state */
   setCollapsed: (collapsed: boolean) => void;
-  
+
   // 设备模式控制 Device mode controls
   /** 设置移动设备模式 Set mobile device mode */
   setMobileMode: (isMobile: boolean) => void;
-  
+
   // 展开状态控制 Expanded state controls
   /** 切换菜单项展开状态 Toggle menu item expanded state */
   toggleExpanded: (itemPath: string) => void;
@@ -125,7 +131,7 @@ export interface MenuStoreActions {
   expandToPath: (targetPath: string) => void;
   /** 获取菜单项是否展开 Get whether menu item is expanded */
   isExpanded: (itemPath: string) => boolean;
-  
+
   // 选中状态控制 Selected state controls
   /** 设置选中的菜单项 Set selected menu item */
   setSelected: (itemPath: string) => void;
@@ -135,11 +141,11 @@ export interface MenuStoreActions {
   isSelected: (itemPath: string) => boolean;
   /** 获取菜单项是否处于选中路径中（父级选中） Get whether menu item is in selected path (parent selected) */
   isInSelectedPath: (itemPath: string) => boolean;
-  
+
   // 数据控制 Data controls
   /** 设置菜单数据 Set menu data */
   setMenuData: (data: MenuSection[]) => void;
-  
+
   // 辅助方法 Helper methods
   /** 获取菜单项的所有父级路径 Get all parent paths of menu item */
   getParentPaths: (itemPath: string) => string[];
@@ -211,11 +217,19 @@ export interface SubHeaderProps {
   /** 标题文本 Title text */
   title: string;
   /** 是否展开 Whether expanded */
-  expanded: boolean;
+  open?: boolean;
   /** 点击回调 Click callback */
-  onClick: () => void;
+  onToggle: () => void;
+  /** 图标名称 Icon name */
+  iconName?: string;
+  /** tab索引 Tab index */
+  tabIndex?: number;
   /** 自定义CSS类名 Custom CSS class name */
   className?: string;
+  /** 是否显示箭头图标 Whether to show arrow icon */
+  showArrow?: boolean;
+  /** 是否禁用 Whether disabled */
+  disabled?: boolean;
 }
 
 // ==================== 工具类型 Utility Types ====================
