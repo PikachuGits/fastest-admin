@@ -43,15 +43,24 @@ const Home = () => {
   const open = !sidebarCollapsed;
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 2,
+        border: "1px solid red",
+      }}
+    >
       <Button onClick={() => setCollapsed(!collapsible)}>
         {collapsible ? "展开" : "收起"}
       </Button>
       <Box
         sx={{
+          border: "1px solid red",
           width: sidebarCollapsed ? "100px" : "300px",
           height: "100vh",
           position: "relative",
+          transition: "width 0.4s cubic-bezier(0,1,1,.62)",
         }}
       >
         <StyledToggleButton onClick={toggleSidebarCollapsed}>
@@ -61,7 +70,7 @@ const Home = () => {
             className="icon-arrow"
           />
         </StyledToggleButton>
-        <MenuDemo collapsed={!sidebarCollapsed} />
+        <MenuDemo collapsed={sidebarCollapsed} />
       </Box>
       {/* <SidebarMenu
         id="SidebarMenu-1"

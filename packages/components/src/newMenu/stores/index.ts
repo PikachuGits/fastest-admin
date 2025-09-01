@@ -10,9 +10,10 @@ type MenuStore = {
   toggleCollapsed: () => void;
   setCollapsed: (collapsed: boolean) => void;
   setMobileMode: (isMobile: boolean) => void;
+  getExpanded: (id: string) => boolean;
 };
 
-export const useMenuStore = create<MenuStore>((set) => ({
+export const useMenuStore = create<MenuStore>((set, get) => ({
   expanded: {},
   selected: null,
   collapsed: true,
@@ -45,4 +46,13 @@ export const useMenuStore = create<MenuStore>((set) => ({
     set(() => ({
       isMobile,
     })),
+
+  getExpanded: (id) => {
+    const state = get();
+    // 当 collapsed 或 isMobile 为 true 时，返回 false
+    if (state.collapsed || state.isMobile) {
+      return false;
+    }
+    return state.expanded[id] || false;
+  },
 }));

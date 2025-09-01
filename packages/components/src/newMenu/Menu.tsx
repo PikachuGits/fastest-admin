@@ -21,11 +21,10 @@ export const Menu = (props: any) => {
     toggleExpand,
     selectItem,
     setCollapsed,
+    getExpanded,
   } = useMenuStore();
 
   useEffect(() => {
-    console.log(props.collapsed, "props.collapsed");
-
     setCollapsed(props.collapsed);
   }, [props.collapsed]);
 
@@ -33,7 +32,7 @@ export const Menu = (props: any) => {
 
   const handleSectionClick = (section: any) => {
     console.log("Section clicked:", section);
-    toggleExpand(section.id.toString());
+    toggleExpand(section.id);
   };
 
   const handleItemClick = (item: any) => {
@@ -57,13 +56,13 @@ export const Menu = (props: any) => {
             <SubHeader
               title={value.subheader}
               onToggle={() => handleSectionClick(value)}
-              open={!!expanded[value.id.toString()]}
+              open={getExpanded(value.id.toString())}
               tabIndex={index}
               iconName={value.icon}
             />
-            <MenuItemBox open={!!expanded[value.id.toString()]}>
+            <MenuItemBox open={getExpanded(value.id.toString())}>
               {value.items.map((item, itemIndex) => {
-                const isExpanded = !!expanded[item.id.toString()];
+                const isExpanded = getExpanded(item.id.toString());
                 const isSelected = selected === item.id.toString();
 
                 return (

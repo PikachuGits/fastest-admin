@@ -71,7 +71,7 @@ export const SubHeader = ({
       className={className}
       sx={sxStyled(
         MenuSubHeaderSx,
-        collapsed || isMobile ? {} : MenuSubHeaderAnimateSx
+        collapsed || isMobile ? MenuSubHeaderAnimateSx : {}
       )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -95,16 +95,16 @@ export const SubHeader = ({
           // },
         }}
       >
-        {(collapsed || isMobile) && showArrow && (
-          <Iconify
-            sx={sxStyled(MenuArrowIconSx, {})}
-            icon="eva:arrow-ios-downward-fill"
-            className={`icon-arrow ${open ? "expanded" : "collapsed"}`}
-          />
-        )}
+        <Iconify
+          sx={sxStyled(MenuArrowIconSx, {})}
+          icon="eva:arrow-ios-downward-fill"
+          className={` ${open ? "expanded" : "collapsed"} ${
+            collapsed || isMobile ? "display-none" : "icon-arrow "
+          }`}
+        />
         <Box
           className={`flex items-center w-full flex-wrap ${
-            collapsed || isMobile ? "justify-start" : "justify-center "
+            collapsed || isMobile ? "justify-center " : "justify-start"
           }`}
           sx={{
             width: "100%",
@@ -129,22 +129,18 @@ export const SubHeader = ({
             />
           )}
           <Box
-            className={`text-sm sx-text-primary flex justify-center items-center`}
+            className={` w-auto`}
             style={{
               transition: "opacity 0.2s ease-in-out",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              width: "auto",
             }}
           >
             <span
-              className={`${
-                collapsed || isMobile ? "scale-100 pl-2" : "scale-75"
-              }`}
-              style={{
-                display: "inline-block",
-              }}
+              className={`text-xs text-center ${
+                collapsed || isMobile ? "scale-75" : "scale-100 pl-2"
+              } `}
             >
               {title}
             </span>

@@ -111,10 +111,6 @@ const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onDrawerToggle }) => {
       sx={{
         width: (theme) => theme.customLayout.sidebarWidth,
         // 当悬停时临时展开宽度
-        ...(isHovering &&
-          sidebarCollapsed && {
-            width: 300,
-          }),
       }}
     >
       <StyledToggleButton onClick={toggleSidebarCollapsed}>
