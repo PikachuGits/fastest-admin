@@ -15,7 +15,7 @@ type MenuStore = {
 export const useMenuStore = create<MenuStore>((set) => ({
   expanded: {},
   selected: null,
-  collapsed: false,
+  collapsed: true,
   isMobile: false,
 
   toggleExpand: (id) =>

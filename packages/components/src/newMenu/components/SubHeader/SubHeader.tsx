@@ -1,4 +1,4 @@
-import { Box, ListSubheader } from "@mui/material";
+import { Box, ListSubheader, Button } from "@mui/material";
 import { Iconify, sxStyled } from "@fastest/components";
 import {
   MenuArrowIconSx,
@@ -71,12 +71,7 @@ export const SubHeader = ({
       className={className}
       sx={sxStyled(
         MenuSubHeaderSx,
-        collapsed || isMobile ? {} : MenuSubHeaderAnimateSx,
-        {
-          opacity: disabled ? 0.6 : 1,
-          cursor: disabled ? "not-allowed" : "pointer",
-          pointerEvents: disabled ? "none" : "auto",
-        }
+        collapsed || isMobile ? {} : MenuSubHeaderAnimateSx
       )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -85,56 +80,77 @@ export const SubHeader = ({
       role="button"
       tabIndex={disabled ? -1 : tabIndex}
     >
-      {(collapsed || isMobile) && showArrow && (
-        <Iconify
-          sx={sxStyled(MenuArrowIconSx, {
-            transform: open ? "rotate(0deg)" : "rotate(-90deg)",
-            transition: "transform 0.2s ease-in-out",
-          })}
-          icon="eva:arrow-ios-downward-fill"
-          className={`icon-arrow ${open ? "expanded" : "collapsed"}`}
-        />
-      )}
-      <Box
-        className={`flex items-center w-full flex-wrap ${
-          collapsed || isMobile ? "justify-start" : "justify-center"
-        }`}
+      <Button
         sx={{
-          transition: "all 0.2s ease-in-out",
-          "&:hover": {
-            color: disabled ? "inherit" : "primary.main",
-            ".icon-menu": {
-              color: disabled ? "inherit" : "primary.main",
-            },
-          },
+          // display: "inline-flex",
+          height: "80%",
+          width: "100%",
+          padding: 0,
+          // left: 0,
+          backgroundColor: "transparent",
+          borderRadius: (theme) => theme.spacing(1),
+          // ":hover": {
+          //   backgroundColor: "transparent",
+          //   border: "none",
+          // },
         }}
       >
-        {iconName && (
-          <MenuItemIcon
-            className="icon-menu"
-            sx={{
-              minWidth: "24px",
-              marginRight: collapsed || isMobile ? "10px" : "0px",
-              transition: "all 0.2s ease-in-out",
-            }}
-            iconName={iconName}
+        {(collapsed || isMobile) && showArrow && (
+          <Iconify
+            sx={sxStyled(MenuArrowIconSx, {})}
+            icon="eva:arrow-ios-downward-fill"
+            className={`icon-arrow ${open ? "expanded" : "collapsed"}`}
           />
         )}
-        {(collapsed || isMobile) && (
-          <span
-            className="text-sm sx-text-primary"
+        <Box
+          className={`flex items-center w-full flex-wrap ${
+            collapsed || isMobile ? "justify-start" : "justify-center "
+          }`}
+          sx={{
+            width: "100%",
+            transition: "all 0.2s ease-in-out",
+            "&:hover": {
+              color: disabled ? "inherit" : "primary.main",
+              ".icon-menu": {
+                color: disabled ? "inherit" : "primary.main",
+              },
+            },
+          }}
+        >
+          {iconName && (
+            <MenuItemIcon
+              className="icon-menu"
+              sx={{
+                minWidth: "24px",
+                // marginRight: collapsed || isMobile ? "10px" : "0px",
+                transition: "all 0.2s ease-in-out",
+              }}
+              iconName={iconName}
+            />
+          )}
+          <Box
+            className={`text-sm sx-text-primary flex justify-center items-center`}
             style={{
               transition: "opacity 0.2s ease-in-out",
               whiteSpace: "nowrap",
               overflow: "hidden",
               textOverflow: "ellipsis",
-              maxWidth: "120px",
+              width: "auto",
             }}
           >
-            {title}
-          </span>
-        )}
-      </Box>
+            <span
+              className={`${
+                collapsed || isMobile ? "scale-100 pl-2" : "scale-75"
+              }`}
+              style={{
+                display: "inline-block",
+              }}
+            >
+              {title}
+            </span>
+          </Box>
+        </Box>
+      </Button>
     </ListSubheader>
   );
 };

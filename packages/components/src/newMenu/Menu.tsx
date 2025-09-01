@@ -6,18 +6,31 @@ import {
   MenuSubBoxSx,
 } from "./styles/Menu.sx";
 import { SubHeader, MenuItemGroup, MenuItemBox, MenuItem } from "./components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import menuData from "./data";
 import { sxStyled } from "@components/utils/sx";
 import type { MenuSection } from "./types";
 import { useMenuStore } from "./stores";
 import "./styles/global.less";
 
-export const Menu = () => {
-  const { expanded, selected, toggleExpand, selectItem } = useMenuStore();
+export const Menu = (props: any) => {
+  const {
+    expanded,
+    collapsed,
+    selected,
+    toggleExpand,
+    selectItem,
+    setCollapsed,
+  } = useMenuStore();
+
+  useEffect(() => {
+    console.log(props.collapsed, "props.collapsed");
+
+    setCollapsed(props.collapsed);
+  }, [props.collapsed]);
 
   const data = menuData as unknown as MenuSection[];
-  const collapse = false;
+
   const handleSectionClick = (section: any) => {
     console.log("Section clicked:", section);
     toggleExpand(section.id.toString());
@@ -37,7 +50,7 @@ export const Menu = () => {
   };
 
   return (
-    <Box sx={sxStyled(MenuBoxSx, collapse ? {} : MenuBoxAnimateSx)}>
+    <Box sx={sxStyled(MenuBoxSx)}>
       <List>
         {data.map((value, index) => (
           <Box sx={sxStyled(MenuSubBoxSx)} key={index}>

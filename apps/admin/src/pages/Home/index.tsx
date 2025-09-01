@@ -1,143 +1,67 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { MenuDemo } from "@fastest/components";
-import {
-  Box,
-  Button,
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem as MuiMenuItem,
-  Switch,
-  FormControlLabel,
-  Chip,
-  Divider,
-  Alert,
-  Paper,
-} from "@mui/material";
+import { MenuDemo, Iconify } from "@fastest/components";
+import { Box, Button, IconButton } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { useAppStore } from "@/store";
 
 // ==================== 测试数据 Test Data ====================
-
-const menuItems = [
-  {
-    subheader: "Marketing",
-    items: [
-      {
-        title: "Landing",
-        path: "#landing",
-        icon: "solar:home-angle-bold-duotone",
-        info: ["info.landing", "+1"],
-        roles: ["admin"],
-        caption:
-          "Display only admin roleDisplay only admin roleDisplay only admin roleDisplay only admin role",
-      },
-      {
-        title: "Services",
-        path: "#services",
-        icon: "solar:home-angle-bold-duotone",
-        roles: ["admin", "user"],
-      },
-      {
-        title: "Blog",
-        path: "#blog",
-        icon: "solar:home-angle-bold-duotone",
-        info: ["info.blog", "+2"],
-        children: [
-          {
-            title: "Item 1",
-            path: "#blog/item-1",
-            caption: "Display caption",
-            info: ["info.blog.item1", "+3"],
-          },
-          {
-            title: "Item 2",
-            path: "#blog/item-2",
-          },
-        ],
-      },
-    ],
+// 侧边栏切换按钮
+export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
+  position: "absolute",
+  border: `1px solid ${theme.customLayout.outlined?.borderColor}`,
+  top: theme.spacing(3),
+  right: 0,
+  background: theme.palette.background.default,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  transform: "translateX(50%)",
+  width: theme.spacing(3),
+  height: theme.spacing(3),
+  zIndex: 1000,
+  "&:hover": {
+    background: "#c0c4c7",
   },
-  {
-    subheader: "Travel",
-    items: [
-      {
-        title: "About",
-        path: "#about",
-        icon: "solar:gallery-circle-outline",
-      },
-      {
-        title: "Contact",
-        path: "#contact",
-        icon: "solar:gallery-circle-outline",
-      },
-      {
-        title: "Level",
-        path: "#level",
-        icon: "solar:gallery-circle-outline",
-        children: [
-          {
-            title: "Level 2a",
-            path: "#level/2a",
-            icon: "solar:gallery-circle-outline",
-            caption: "This is the caption",
-            children: [
-              {
-                title: "Level 3a",
-                path: "#level/2a/3a",
-              },
-              {
-                title: "Level 3b",
-                path: "#level/2a/3b",
-                children: [
-                  {
-                    title: "Level 4a",
-                    path: "#level/2a/3b/4a",
-                  },
-                  {
-                    title: "Level 4b",
-                    path: "#level/2a/3b/4b",
-                  },
-                ],
-              },
-              {
-                title: "Level 3c",
-                path: "#level/2a/3c",
-              },
-            ],
-          },
-          {
-            title: "Level 2b",
-            path: "#level/2b",
-            icon: "solar:gallery-circle-outline",
-          },
-          {
-            title: "Level 2c",
-            path: "#level/2c",
-            icon: "solar:gallery-circle-outline",
-          },
-        ],
-      },
-    ],
-  },
-];
+}));
+// 侧边栏箭头图标
+export const StyledArrowIcon = styled(Iconify, {
+  shouldForwardProp: (prop) => prop !== "open",
+})<{ open: boolean }>(({ theme, open }) => ({
+  fontSize: theme.spacing(2),
+  color: theme.palette.grey[500],
+  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+  transform: open ? "rotate(90deg)" : "rotate(-90deg)",
+}));
 
 const Home = () => {
   const [collapsible, setCollapsed] = useState(false);
-
+  const { sidebarCollapsed, toggleSidebarCollapsed } = useAppStore();
   useEffect(() => {
     console.log(collapsible, "collapsed");
   }, [collapsible]);
+  // 侧边栏是否展开（与 sidebarCollapsed 相反）
+  const open = !sidebarCollapsed;
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
       <Button onClick={() => setCollapsed(!collapsible)}>
         {collapsible ? "展开" : "收起"}
       </Button>
-      <Box sx={{ width: "300px", height: "100vh" }}>
-        <MenuDemo />
+      <Box
+        sx={{
+          width: sidebarCollapsed ? "100px" : "300px",
+          height: "100vh",
+          position: "relative",
+        }}
+      >
+        <StyledToggleButton onClick={toggleSidebarCollapsed}>
+          <StyledArrowIcon
+            icon="eva:arrow-ios-downward-fill"
+            open={open}
+            className="icon-arrow"
+          />
+        </StyledToggleButton>
+        <MenuDemo collapsed={!sidebarCollapsed} />
       </Box>
       {/* <SidebarMenu
         id="SidebarMenu-1"
