@@ -56,7 +56,6 @@ const Home = () => {
       </Button>
       <Box
         sx={{
-          border: "1px solid red",
           width: sidebarCollapsed ? "100px" : "300px",
           height: "100vh",
           position: "relative",

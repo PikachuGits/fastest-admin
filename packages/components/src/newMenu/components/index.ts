@@ -9,3 +9,4 @@ export { default as SubHeaderExamples } from "./SubHeader/SubHeader.example";
 export { MenuItemGroup } from "./MenuItem/MenuItemGroup";
 export { MenuItemLeaf } from "./MenuItem/MenuItemLeaf";
 export { MenuItemBox } from "./MenuItem/MenuItemBox";
+export { MenuFloating } from "./MenuItem/MenuFloating";

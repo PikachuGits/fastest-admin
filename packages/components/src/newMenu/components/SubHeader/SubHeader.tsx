@@ -48,6 +48,7 @@ export const SubHeader = ({
   className,
   showArrow = true,
   disabled = false,
+  selected = false,
 }: SubHeaderProps) => {
   const { collapsed, isMobile } = useMenuStore();
 
@@ -71,7 +72,8 @@ export const SubHeader = ({
       className={className}
       sx={sxStyled(
         MenuSubHeaderSx,
-        collapsed || isMobile ? MenuSubHeaderAnimateSx : {}
+        collapsed || isMobile ? MenuSubHeaderAnimateSx : {},
+        { mb: open ? 1 : 0, transition: "all 0.2s ease-in-out" }
       )}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -82,17 +84,18 @@ export const SubHeader = ({
     >
       <Button
         sx={{
-          // display: "inline-flex",
-          height: "80%",
+          height: "100%",
           width: "100%",
-          padding: 0,
-          // left: 0,
-          backgroundColor: "transparent",
+          minWidth: "auto",
+          minHeight: "24px",
+          padding: (theme) => theme.spacing(0.5),
+          backgroundColor: selected
+            ? "rgba(200, 109, 109, 0.391)"
+            : "transparent",
           borderRadius: (theme) => theme.spacing(1),
-          // ":hover": {
-          //   backgroundColor: "transparent",
-          //   border: "none",
-          // },
+          "&:hover": {
+            backgroundColor: selected ? "action.selected" : "action.hover",
+          },
         }}
       >
         <Iconify
@@ -105,15 +108,21 @@ export const SubHeader = ({
         <Box
           className={`flex items-center w-full flex-wrap ${
             collapsed || isMobile ? "justify-center " : "justify-start"
-          }`}
+          } ${collapsed || isMobile ? "scale-90" : "scale-100 pl-2"}`}
           sx={{
             width: "100%",
+            height: "100%",
+            mt: collapsed || isMobile ? 1 : 0,
             transition: "all 0.2s ease-in-out",
+            color: selected ? "primary.main" : "inherit",
             "&:hover": {
               color: disabled ? "inherit" : "primary.main",
               ".icon-menu": {
                 color: disabled ? "inherit" : "primary.main",
               },
+            },
+            ".icon-menu": {
+              color: selected ? "primary.main" : "inherit",
             },
           }}
         >
@@ -121,6 +130,7 @@ export const SubHeader = ({
             <MenuItemIcon
               className="icon-menu"
               sx={{
+                height: "auto",
                 minWidth: "24px",
                 // marginRight: collapsed || isMobile ? "10px" : "0px",
                 transition: "all 0.2s ease-in-out",

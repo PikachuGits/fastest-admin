@@ -230,6 +230,8 @@ export interface SubHeaderProps {
   showArrow?: boolean;
   /** 是否禁用 Whether disabled */
   disabled?: boolean;
+  /** 是否选中（当分组下有选中项时显示选中状态）Whether selected (show selected state when section has selected items) */
+  selected?: boolean;
 }
 
 // ==================== 工具类型 Utility Types ====================

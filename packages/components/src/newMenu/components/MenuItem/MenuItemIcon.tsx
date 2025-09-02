@@ -45,7 +45,7 @@ export const MenuItemIcon: React.FC<MenuItemIconProps> = React.memo(
         className={className}
         sx={{
           minWidth: "0",
-          height: "100%",
+          height: "auto",
           padding: 0,
           margin: 0,
         }}

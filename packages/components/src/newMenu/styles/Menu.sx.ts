@@ -25,7 +25,7 @@ export const MenuSubBoxSx = {
   height: "100%",
   borderRadius: (theme: Theme) => theme.spacing(1),
   boxShadow: "var(--fast-menu-box-shadow)",
-  padding: (theme: Theme) => theme.spacing(0, 1, 0, 1),
+  padding: (theme: Theme) => theme.spacing(0.5),
   margin: 0,
   marginBottom: 1,
 };
@@ -37,6 +37,7 @@ export const MenuSubHeaderSx = {
   fontSize: (theme: Theme) => theme.typography.pxToRem(14),
   fontWeight: 500,
   color: (theme: Theme) => theme.palette.text.secondary,
+
   // letterSpacing: "0.5px",
   // lineHeight: (theme: Theme) => theme.typography.pxToRem(16),
   // padding: (theme: Theme) => theme.spacing(1, 0, 1, 0.5),

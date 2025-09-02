@@ -5,6 +5,7 @@ import { MenuItem } from "./MenuItem";
 import { Fragment, useMemo } from "react";
 import type { MenuItem as MenuItemType } from "../../types";
 import { MenuItemBox } from "./MenuItemBox";
+import { shouldMenuItemShowSelected } from "../../utils/menuUtils";
 import styles from "../../styles/index.module.less";
 
 /**
@@ -61,7 +62,7 @@ export const MenuItemGroup = ({
         list.length > 0 &&
         list.map((item, index) => {
           const isExpanded = !expanded[item.id.toString()];
-          const isSelected = selected === item.id.toString();
+          const isSelected = shouldMenuItemShowSelected(item, selected);
 
           return (
             <Box key={index} sx={{ paddingTop: 1 }}>
