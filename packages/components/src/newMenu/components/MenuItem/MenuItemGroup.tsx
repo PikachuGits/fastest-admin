@@ -62,7 +62,7 @@ export const MenuItemGroup = ({
         list.length > 0 &&
         list.map((item, index) => {
           const isExpanded = !expanded[item.id.toString()];
-          const isSelected = shouldMenuItemShowSelected(item, selected);
+          const isSelected = shouldMenuItemShowSelected(item, selected || "");
 
           return (
             <Box key={index} sx={{ paddingTop: 1 }}>

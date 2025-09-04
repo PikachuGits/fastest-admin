@@ -56,6 +56,8 @@ export const Menu = (props: any) => {
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    console.log(props.collapsed, "props.collapsed");
+
     setCollapsed(props.collapsed);
   }, [props.collapsed]);
 
@@ -73,7 +75,7 @@ export const Menu = (props: any) => {
     if (item.children?.length) {
       toggleExpand(item.id.toString());
     } else {
-      selectItem(item.id.toString());
+      selectItem(item.id.toString(), data);
       // 这里可以添加路由跳转或其他业务逻辑
       // Here you can add routing navigation or other business logic
     }

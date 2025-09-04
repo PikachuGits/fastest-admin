@@ -1,15 +1,22 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const MenuBox = styled(Box)<{
+interface MenuBoxProps {
   selected?: boolean;
   disabled?: boolean;
   collapsed?: boolean;
   isMobile?: boolean;
-}>(({ theme, selected, disabled, collapsed, isMobile }) => {
+}
+
+export const MenuBox = styled(Box, {
+  shouldForwardProp: (prop) =>
+    prop !== "selected" &&
+    prop !== "disabled" &&
+    prop !== "collapsed" &&
+    prop !== "isMobile",
+})<MenuBoxProps>(({ theme, selected, disabled, collapsed, isMobile }) => {
   const baseColor = selected ? theme.palette.primary.main : "inherit";
   const hoverColor = disabled ? "inherit" : theme.palette.primary.main;
-
   return {
     display: "flex",
     alignItems: "center",

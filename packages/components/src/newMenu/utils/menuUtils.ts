@@ -73,3 +73,53 @@ export const isMenuSectionContainsSelected = (
     isMenuItemContainsSelected(item, selectedId)
   );
 };
+
+/**
+ * 获取包含指定选中项的所有父级ID（包括分组ID和菜单项ID）
+ * @param menuData 完整的菜单数据
+ * @param selectedId 选中的菜单项ID
+ * @returns 包含选中项的所有父级ID数组
+ */
+export const getParentIdsForSelectedItem = (
+  menuData: any[],
+  selectedId: string | null
+): string[] => {
+  if (!selectedId || !menuData) return [];
+
+  const parentIds: string[] = [];
+
+  // 递归查找父级ID的辅助函数
+  const findParentIds = (items: any[], parentId?: string): boolean => {
+    for (const item of items) {
+      // 如果找到了选中项
+      if (item.id.toString() === selectedId) {
+        if (parentId) {
+          parentIds.push(parentId);
+        }
+        return true;
+      }
+
+      // 如果有子项，递归查找
+      if (item.children && Array.isArray(item.children)) {
+        if (findParentIds(item.children, item.id.toString())) {
+          // 如果在子项中找到了，将当前项ID加入父级ID列表
+          if (parentId) {
+            parentIds.push(parentId);
+          }
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  // 遍历所有菜单分组
+  for (const section of menuData) {
+    if (findParentIds(section.items, section.id.toString())) {
+      // 如果在该分组中找到了选中项，跳出循环
+      break;
+    }
+  }
+
+  return parentIds;
+};
