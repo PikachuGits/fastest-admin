@@ -92,7 +92,6 @@ export const SubHeader = ({
           minWidth: "auto",
           minHeight: "24px",
           padding: (theme) => theme.spacing(0.5),
-          // border: "1px solid red",
           backgroundColor: (theme) =>
             selected ? alpha(theme.palette.primary.main, 0.2) : "transparent",
           borderRadius: (theme) => theme.spacing(1),
