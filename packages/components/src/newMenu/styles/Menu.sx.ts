@@ -11,7 +11,7 @@ export const MenuBoxSx = {
   boxShadow: "var(--fast-menu-box-shadow) inset",
   // backgroundColor: "rgba(236, 240, 243, 1.00)",
   backgroundColor: (theme: Theme) => theme.palette.background.default,
-  padding: (theme: Theme) => theme.spacing(0, 1.7, 0, 1.7),
+  padding: (theme: Theme) => theme.spacing(0, 1.6, 0, 1.6),
   margin: 0,
   overflowY: "auto",
 };
@@ -34,7 +34,7 @@ export const MenuSubHeaderSx = {
   backgroundColor: "transparent",
   width: "100%",
   height: "40px",
-  fontSize: (theme: Theme) => theme.typography.pxToRem(14),
+  // fontSize: (theme: Theme) => theme.typography.pxToRem(14),
   fontWeight: 500,
   color: (theme: Theme) => theme.palette.text.secondary,
 

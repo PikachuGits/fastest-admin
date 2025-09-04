@@ -38,6 +38,11 @@ export const MenuFloating: React.FC<MenuFloatingProps> = ({
   const renderMenuItems = (items: any[], level: number = 0) => {
     return items.map((item, itemIndex) => (
       <Box
+        sx={{
+          "&:not(:last-child)": {
+            marginBottom: (theme) => theme.spacing(0.5),
+          },
+        }}
         key={itemIndex}
         onMouseEnter={(e) => onMenuItemMouseEnter(e, item, level)}
       >
@@ -110,7 +115,7 @@ export const MenuFloating: React.FC<MenuFloatingProps> = ({
               <List
                 dense
                 sx={{
-                  padding: (theme) => theme.spacing(0.5, 0, 0.5, 0),
+                  padding: (theme) => theme.spacing(0.5),
                 }}
               >
                 {renderMenuItems(menu.items, menu.level)}

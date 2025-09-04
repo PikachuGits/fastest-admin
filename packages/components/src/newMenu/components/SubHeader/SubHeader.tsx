@@ -1,5 +1,5 @@
 import { Box, ListSubheader, Button } from "@mui/material";
-import { Iconify, sxStyled } from "@fastest/components";
+import { Iconify, sxStyled, ScalableText } from "@fastest/components";
 import {
   MenuArrowIconSx,
   MenuSubHeaderAnimateSx,
@@ -8,6 +8,9 @@ import {
 import { MenuItemIcon } from "@components/newMenu/components/MenuItem/MenuItemIcon";
 import { useMenuStore } from "@components/newMenu/stores";
 import type { SubHeaderProps } from "@components/newMenu/types";
+import { alpha } from "@mui/material/styles";
+import { classes_merge } from "@fastest/utils";
+import { MenuBox } from "@components/newMenu/styles/SubHeader.styles";
 
 /**
  * SubHeader 组件 - 菜单分组标题组件
@@ -89,12 +92,15 @@ export const SubHeader = ({
           minWidth: "auto",
           minHeight: "24px",
           padding: (theme) => theme.spacing(0.5),
-          backgroundColor: selected
-            ? "rgba(200, 109, 109, 0.391)"
-            : "transparent",
+          // border: "1px solid red",
+          backgroundColor: (theme) =>
+            selected ? alpha(theme.palette.primary.main, 0.2) : "transparent",
           borderRadius: (theme) => theme.spacing(1),
           "&:hover": {
-            backgroundColor: selected ? "action.selected" : "action.hover",
+            backgroundColor: (theme) =>
+              selected
+                ? alpha(theme.palette.primary.main, 0.2)
+                : "action.hover",
           },
         }}
       >
@@ -105,26 +111,12 @@ export const SubHeader = ({
             collapsed || isMobile ? "display-none" : "icon-arrow "
           }`}
         />
-        <Box
-          className={`flex items-center w-full flex-wrap ${
-            collapsed || isMobile ? "justify-center " : "justify-start"
-          } ${collapsed || isMobile ? "scale-90" : "scale-100 pl-2"}`}
-          sx={{
-            width: "100%",
-            height: "100%",
-            mt: collapsed || isMobile ? 1 : 0,
-            transition: "all 0.2s ease-in-out",
-            color: selected ? "primary.main" : "inherit",
-            "&:hover": {
-              color: disabled ? "inherit" : "primary.main",
-              ".icon-menu": {
-                color: disabled ? "inherit" : "primary.main",
-              },
-            },
-            ".icon-menu": {
-              color: selected ? "primary.main" : "inherit",
-            },
-          }}
+
+        <MenuBox
+          selected={selected}
+          disabled={disabled}
+          collapsed={collapsed}
+          isMobile={isMobile}
         >
           {iconName && (
             <MenuItemIcon
@@ -132,30 +124,32 @@ export const SubHeader = ({
               sx={{
                 height: "auto",
                 minWidth: "24px",
-                // marginRight: collapsed || isMobile ? "10px" : "0px",
                 transition: "all 0.2s ease-in-out",
               }}
               iconName={iconName}
             />
           )}
           <Box
-            className={` w-auto`}
-            style={{
+            className={"flex items-center justify-center"}
+            sx={{
               transition: "opacity 0.2s ease-in-out",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              position: "relative",
+              width: "100%",
+              height: "20px",
+              flex: 1,
+              fontSize: "12px",
             }}
           >
-            <span
-              className={`text-xs text-center ${
-                collapsed || isMobile ? "scale-75" : "scale-100 pl-2"
-              } `}
+            <ScalableText
+              width={collapsed || isMobile ? "100%" : "90%"}
+              height="100%"
+              scale={collapsed || isMobile ? 0.9 : 1}
+              textAlign={collapsed || isMobile ? "center" : "left"}
             >
               {title}
-            </span>
+            </ScalableText>
           </Box>
-        </Box>
+        </MenuBox>
       </Button>
     </ListSubheader>
   );

@@ -15,7 +15,7 @@ export const StyledToggleButton = styled(IconButton)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  transform: "translateX(50%)",
+  transform: "translateX(60%)",
   width: theme.spacing(3),
   height: theme.spacing(3),
   zIndex: 1000,

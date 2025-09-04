@@ -49,6 +49,8 @@ export const MenuItem = (props: MenuItemProps) => {
         backgroundColor: selected ? "action.selected" : "transparent",
         height: "40px",
         ...sx,
+
+        color: selected ? "primary.main" : "inherit",
       }}
     >
       {/* 菜单项图标 Menu item icon */}
@@ -66,7 +68,7 @@ export const MenuItem = (props: MenuItemProps) => {
         title={item.title}
         caption={item.caption}
         collapsed={collapsed}
-        sx={sxStyled(textStyles, {})}
+        sx={sxStyled(textStyles)}
       />
       {/* 右侧操作区域 Right action area */}
       <MenuItemActions

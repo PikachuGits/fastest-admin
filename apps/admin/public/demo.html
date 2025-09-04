@@ -1,0 +1,126 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script>
+                window.onload = function() {
+                    const slider = document.getElementById('scale-slider');
+                    const scaleValueSpan = document.getElementById('scale-value');
+                    const clipperBox = document.getElementById('clipperBox');
+
+                    slider.addEventListener('input', (event) => {
+                    const scale = event.target.value;
+                    
+                    // 更新 CSS 变量 --scale-factor 的值
+                    clipperBox.style.setProperty('--scale-factor', scale);
+                    
+                    // 更新显示的数值
+                    scaleValueSpan.textContent = parseFloat(scale).toFixed(2);
+                    });
+
+                    // 初始化
+                    clipperBox.style.setProperty('--scale-factor', slider.value);
+                    scaleValueSpan.textContent = parseFloat(slider.value).toFixed(2);
+                }
+        </script>
+    </head>
+    <style type="text/css">
+        /* 用于演示的外部容器 */
+        .demo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: sans-serif;
+        }
+
+        /* 1. 外部容器 (Clipper Box) */
+        .clipper-box {
+        /* 定义一个固定的视窗大小 */
+        --container-width: 300px; 
+        width: var(--container-width);
+        height: 60px;
+        
+        border: 2px dashed #007bff;
+        margin: 20px 0;
+        
+        /* 关键点1: 裁剪所有超出部分 */
+        overflow: hidden;
+
+        /* 关键点2: 使用 Flexbox 保证缩放层始终居中 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        /* 2. 缩放层 (Scale Wrapper) */
+        .scale-wrapper {
+        /* 
+        * CSS 变量 --scale-factor 会由 JS 控制 
+        * 我们也可以在 hover 等状态下改变它
+        */
+        --scale-factor: 0.5;
+
+        /* 关键点3: 应用缩放变换 */
+        transform: scale(var(--scale-factor));
+        
+        /* 让缩放更平滑 */
+        transition: transform 0.1s linear;
+        
+        /* 确保缩放中心是元素的正中心 */
+        transform-origin: center center;
+        }
+
+        /* 3. 内容层 (Text Content) */
+        .text-content {
+        /* 关键点4: 宽度进行“逆向补偿”计算 */
+        /* 当 scale=0.5, width=200%; 当 scale=2, width=50% */
+            width: calc(var(--container-width) / var(--scale-factor));
+            /* 实现省略号的“三件套” */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            /* 其他样式 */
+            text-align: center;
+            font-size: 20px;
+            padding: 10px 0;
+            background-color: rgba(255, 165, 0, 0.3);
+            box-sizing: border-box;
+        }
+
+        /* 控制器样式 (非核心) */
+        .controls {
+        width: 300px;
+        }
+
+        .controls label {
+        font-weight: bold;
+        }
+
+        .controls input[type="range"] {
+            width: 100%;
+        }
+    </style>
+    <body>
+        <div class="demo-container">
+            <!-- 1. 外部容器 (裁剪视窗 + 居中) -->
+            <div class="clipper-box" id="clipperBox">
+              <!-- 2. 缩放层 (只负责 scale) -->
+              <div class="scale-wrapper">
+                <!-- 3. 内容层 (宽度动态计算 + 省略号) -->
+                <div class="text-content">
+                  这是一个非常非常非常长的文本，用来测试不同缩放下的省略效果。
+                </div>
+              </div>
+            </div>
+          
+            <!-- 控制器 -->
+            <div class="controls">
+              <label for="scale-slider">Scale: <span id="scale-value">1.0</span></label>
+              <input type="range" id="scale-slider" min="0.2" max="2" step="0.01" value="1">
+            </div>
+          </div>
+    </body>
+    </html>

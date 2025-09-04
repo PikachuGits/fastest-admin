@@ -10,6 +10,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { StyledListItemText } from "../../styles/MenuItem.styles";
 import type { SxProps, Theme } from "@mui/material";
+import { sxStyled } from "@components/utils/sx";
 
 // ==================== 类型定义 Type Definitions ====================
 
@@ -51,7 +52,9 @@ export const MenuItemContent: React.FC<MenuItemContentProps> = React.memo(
      * Render primary title
      */
     const renderPrimaryText = () =>
-      title ? <span className="text-sm truncate">{title}</span> : null;
+      title ? (
+        <span className="text-sm truncate color-inherit">{title}</span>
+      ) : null;
 
     /**
      * 渲染副标题
@@ -59,14 +62,16 @@ export const MenuItemContent: React.FC<MenuItemContentProps> = React.memo(
      */
     const renderSecondaryText = () =>
       caption && !collapsed ? (
-        <span className="inline-block text-xs truncate w-full">{caption}</span>
+        <span className="inline-block text-xs truncate w-full color-inherit">
+          {caption}
+        </span>
       ) : null;
 
     // ==================== 组件渲染 Component Render ====================
 
     return (
       <StyledListItemText
-        sx={sx}
+        sx={sxStyled(sx)}
         className={className}
         primary={renderPrimaryText()}
         secondary={renderSecondaryText()}

@@ -1,9 +1,9 @@
 import {
-    styled,
-    ListItemButton,
-    ListItemText,
-    type SxProps,
-    type Theme,
+  styled,
+  ListItemButton,
+  ListItemText,
+  type SxProps,
+  type Theme,
 } from "@mui/material";
 import { Iconify } from "@fastest/components";
 import { createMenuTheme } from "./theme";
@@ -16,7 +16,7 @@ import { createMenuTheme } from "./theme";
 // /**
 //  * MenuItem 组件属性接口（精简版）
 //  * MenuItem component props interface (simplified)
-//  * 
+//  *
 //  * 精简props传递，移除冗余状态，统一使用状态管理
 //  * Simplified props passing, removed redundant states, unified state management
 //  */
@@ -48,7 +48,7 @@ import { createMenuTheme } from "./theme";
 // /**
 //  * 样式化的列表项按钮组件
 //  * Styled list item button component
-//  * 
+//  *
 //  * 提供菜单项的基础样式，包括选中状态、层级缩进等
 //  * Provides basic styles for menu items, including selected state, level indentation, etc.
 //  */
@@ -64,7 +64,7 @@ import { createMenuTheme } from "./theme";
 //     const menuTheme = createMenuTheme(theme);
 //     const { colors, spacing, animations, breakpoints, utils } = menuTheme;
 //     const levelStyles = utils.getLevelStyles(level);
-    
+
 //     return {
 //         // 基础布局样式 Basic layout styles
 //         // marginTop: level ? theme.spacing(0.5) : 0,
@@ -72,10 +72,10 @@ import { createMenuTheme } from "./theme";
 //         borderRadius: spacing.size.borderRadius,
 //         minHeight: spacing.size.itemHeight,
 //         overflow: 'visible',
-        
+
 //         // 过渡动画 Transition animations
 //         ...utils.createTransition(['background-color', 'color']),
-        
+
 //         // 容器查询：收起状态样式 Container query: collapsed state styles
 //         ...utils.createContainerQuery(breakpoints.container.collapsed, {
 //             "& .MuiListItemText-root": {
@@ -93,13 +93,13 @@ import { createMenuTheme } from "./theme";
 //             padding: spacing.padding.itemCollapsed,
 //             minHeight: 0
 //         }),
-        
+
 //         // 选中状态样式 Selected state styles
 //         ...((selected || parentSelected) && {
 //             // 一级菜单项（level=0）使用主题色
 //             ...(level === 0 && {
 //                 backgroundColor: colors.background.selected,
-                
+
 //                 color: colors.text.selected,
 //                 fontWeight: levelStyles.fontWeight,
 //                 "&:hover": {
@@ -147,7 +147,7 @@ import { createMenuTheme } from "./theme";
 //                 marginRight: 0,
 //             }),
 //         },
-        
+
 //         // 次文本样式 Secondary text styles
 //         "& .MuiListItemText-secondary": {
 //             fontSize: "12px",
@@ -159,57 +159,57 @@ import { createMenuTheme } from "./theme";
 /**
  * 样式化的列表项文本组件
  * Styled list item text component
- * 
+ *
  * 定义菜单项文本的布局和样式，包括主文本和次文本
  * Defines layout and styles for menu item text, including primary and secondary text
  */
 export const StyledListItemText = styled(ListItemText)(({ theme }) => {
-    const menuTheme = createMenuTheme(theme);
-    const { spacing, colors } = menuTheme;
-    
-    return {
-        // 布局样式 Layout styles
-        flex: "1 1 auto",
-        display: "inline-flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        maxHeight: spacing.size.itemHeightCompact,
-        padding: "0 8px 0 4px",
-        margin: 0,
+  const menuTheme = createMenuTheme(theme);
+  const { spacing, colors } = menuTheme;
 
-        // 次文本样式 Secondary text styles
-        "& .MuiListItemText-secondary": {
-            fontSize: "12px",
-            lineHeight: 0,
-            color: colors.text.secondary,
-        },
+  return {
+    // 布局样式 Layout styles
+    flex: "1 1 auto",
+    display: "inline-flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    maxHeight: spacing.size.itemHeightCompact,
+    padding: "0 8px 0 4px",
+    margin: 0,
 
-        // 主文本样式 Primary text styles
-        "& .MuiListItemText-primary": {
-            fontSize: "14px",
-            fontWeight: "inherit", // 继承父级的字重设置
-            color: colors.text.primary, // 继承父级的颜色设置
-        }
-    };
+    // 次文本样式 Secondary text styles
+    "& .MuiListItemText-secondary": {
+      fontSize: "12px",
+      lineHeight: 0,
+    },
+
+    // 主文本样式 Primary text styles
+    "& .MuiListItemText-primary": {
+      fontSize: "14px",
+      fontWeight: "inherit", // 继承父级的字重设置
+    },
+  };
 });
 
 /**
  * 样式化的箭头图标组件
  * Styled arrow icon component
- * 
+ *
  * 用于显示菜单项的展开/折叠状态，带有旋转动画效果
  * Used to display expand/collapse state of menu items with rotation animation
  */
 export const StyledArrowIcon = styled(Iconify, {
-    shouldForwardProp: (prop) => prop !== "open",
-  })<{ open: boolean }>(({ theme, open }) => {
-    const menuTheme = createMenuTheme(theme);
-    const { spacing, colors, animations, utils } = menuTheme;
-    
-    return {
-        fontSize: spacing.size.arrowSize,
-        color: colors.icon.arrow,
-        ...utils.createTransition(['transform']),
-        transform: open ? animations.transform.arrowExpanded : animations.transform.arrowCollapsed,
-    };
-  });
+  shouldForwardProp: (prop) => prop !== "open",
+})<{ open: boolean }>(({ theme, open }) => {
+  const menuTheme = createMenuTheme(theme);
+  const { spacing, colors, animations, utils } = menuTheme;
+
+  return {
+    fontSize: spacing.size.arrowSize,
+    color: colors.icon.arrow,
+    ...utils.createTransition(["transform"]),
+    transform: open
+      ? animations.transform.arrowExpanded
+      : animations.transform.arrowCollapsed,
+  };
+});

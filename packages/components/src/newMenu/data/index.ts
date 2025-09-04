@@ -122,7 +122,7 @@
 export default [
   {
     id: 1,
-    subheader: "用户管理",
+    subheader: "用户管理页",
     icon: "solar:home-angle-bold-duotone",
     items: [
       {
