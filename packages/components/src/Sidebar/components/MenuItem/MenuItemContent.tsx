@@ -23,7 +23,7 @@ export interface MenuItemContentProps {
   title?: string;
   /** 副标题 Secondary title */
   caption?: string;
-  /** 是否收起状态 Whether collapsed */
+  /** 是否折叠状态 - true: 折叠, false: 展开 */
   collapsed: boolean;
   /** 自定义样式 Custom styles */
   sx?: SxProps<Theme>;

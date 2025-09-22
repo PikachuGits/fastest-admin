@@ -9,3 +9,4 @@ export { MenuItemGroup } from "./MenuItem/MenuItemGroup";
 export { MenuItemLeaf } from "./MenuItem/MenuItemLeaf";
 export { MenuItemBox } from "./MenuItem/MenuItemBox";
 export { MenuFloating } from "./MenuItem/MenuFloating";
+export { Menu } from "./Menu";

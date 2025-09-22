@@ -41,7 +41,8 @@ export interface MenuListProps {
  * Defines basic styles and layout for the menu list
  */
 export const StyledListBox = styled(List)(({ theme }) => {
-  const { spacing, colors } = menuTheme;
+  const { spacing } = menuTheme;
+  const colors = menuTheme.createColors(theme);
   
   return {
     width: '100%',

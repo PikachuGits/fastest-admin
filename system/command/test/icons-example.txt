@@ -1,0 +1,24 @@
+# 示例图标列表
+# 每行一个图标名称，支持注释行（以 # 开头）
+
+# 常用系统图标
+solar:home-bold-duotone
+solar:user-bold-duotone
+solar:settings-bold-duotone
+
+# 操作图标
+eva:edit-fill
+eva:delete-fill
+eva:save-fill
+
+# 状态图标
+mdi:check-circle
+mdi:alert-circle
+mdi:information
+
+# 导航图标
+heroicons:arrow-left-20-solid
+heroicons:arrow-right-20-solid
+heroicons:chevron-up-20-solid
+heroicons:chevron-down-20-solid
+

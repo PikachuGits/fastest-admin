@@ -93,7 +93,7 @@ export type MenuPath = string[];
  * Menu Store state interface
  */
 export interface MenuStoreState {
-  /** 侧边栏是否折叠 Whether sidebar is collapsed */
+  /** 侧边栏是否折叠 - true: 折叠, false: 展开 */
   collapsed: boolean;
   /** 是否为移动设备模式 Whether in mobile mode */
   isMobile: boolean;
@@ -113,9 +113,9 @@ export interface MenuStoreState {
  */
 export interface MenuStoreActions {
   // 侧边栏控制 Sidebar controls
-  /** 切换侧边栏展开/收起状态 Toggle sidebar expanded/collapsed state */
+  /** 切换侧边栏折叠/展开状态 Toggle sidebar collapsed/expanded state */
   toggleCollapsed: () => void;
-  /** 设置侧边栏展开/收起状态 Set sidebar expanded/collapsed state */
+  /** 设置侧边栏折叠状态 - true: 折叠, false: 展开 */
   setCollapsed: (collapsed: boolean) => void;
 
   // 设备模式控制 Device mode controls

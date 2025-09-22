@@ -5,7 +5,8 @@
     "types": "src/index.ts",
     "private": "true",
     "scripts": {
-        "build": "bun build src/index.ts --outdir dist"
+        "build": "bun build src/index.ts --outdir dist",
+        "download-icons": "bun run ../../system/command/download-icons.ts"
     },
     "dependencies": {
         "@fastest/types": "workspace:*",

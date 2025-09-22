@@ -20,6 +20,34 @@ import { styled } from "@mui/material/styles";
 import { iconifyClasses } from "./classes";
 import { allIconNames, registerIcons } from "./register-icons";
 
+/**
+ * 记录缺失的图标到文件
+ * @param iconName 缺失的图标名称
+ */
+function logMissingIcon(iconName: string) {
+  // 在浏览器环境中，我们将缺失的图标存储到 localStorage
+  if (typeof window !== 'undefined') {
+    try {
+      const existingMissingIcons = localStorage.getItem('missing-icons');
+      const missingIcons: string[] = existingMissingIcons ? JSON.parse(existingMissingIcons) : [];
+
+      // 避免重复记录
+      if (!missingIcons.includes(iconName)) {
+        missingIcons.push(iconName);
+        localStorage.setItem('missing-icons', JSON.stringify(missingIcons));
+
+        // 同时在控制台输出，方便开发者查看
+        console.log(`📝 缺失图标已记录: ${iconName}`);
+        console.log(`📋 当前缺失图标列表:`, missingIcons);
+        console.log(`💡 您可以运行以下命令下载这些图标:`);
+        console.log(`   bun run download-icons local-list ${missingIcons.join(' ')}`);
+      }
+    } catch (error) {
+      console.error('记录缺失图标时发生错误:', error);
+    }
+  }
+}
+
 
 // ==================== 样式组件 Styled Components ====================
 
@@ -92,11 +120,15 @@ export function Iconify({
    * - 提供明确的解决方案和文档链接
    */
   if (!allIconNames.includes(icon)) {
+    // 记录缺失的图标
+    logMissingIcon(icon);
+
     console.warn(
       [
         `图标 "${icon}" 当前通过在线方式加载，这可能导致闪烁效果。`,
+        `正在尝试下载图标代码供您手动添加...`,
         `为了确保更流畅的体验，请将您的图标集注册为离线使用。`,
-        `更多信息请访问：https://docs.minimals.cc/icons/`,
+        `更多信息请访问：https://icon-sets.iconify.design/`,
       ].join("\n")
     );
   }

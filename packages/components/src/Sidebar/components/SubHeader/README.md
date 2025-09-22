@@ -105,7 +105,7 @@ function MyComponent() {
 
   return (
     <div>
-      <button onClick={toggleCollapsed}>{collapsed ? "展开" : "收起"}</button>
+      <button onClick={toggleCollapsed}>{collapsed ? "展开" : "折叠"}</button>
       <SubHeader
         title="Dynamic Layout"
         open={isOpen}

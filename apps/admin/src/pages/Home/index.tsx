@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { MenuDemo, Iconify } from "@fastest/components";
+import { SidebarMenu, Iconify } from "@fastest/components";
 import { Box, Button, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useAppStore } from "@/store";
@@ -69,7 +69,7 @@ const Home = () => {
             className="icon-arrow"
           />
         </StyledToggleButton>
-        <MenuDemo collapsed={sidebarCollapsed} />
+        <SidebarMenu collapsed={sidebarCollapsed} />
       </Box>
       {/* <SidebarMenu
         id="SidebarMenu-1"

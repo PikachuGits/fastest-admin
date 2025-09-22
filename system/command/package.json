@@ -1,0 +1,25 @@
+{
+  "name": "@fastest/command",
+  "version": "0.0.1",
+  "description": "Command line tools for the fastest monorepo",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "download-icons": "bun run download-icons.ts"
+  },
+  "bin": {
+    "download-icons": "./download-icons.ts"
+  },
+  "dependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  },
+  "keywords": [
+    "icons",
+    "iconify",
+    "cli",
+    "tools"
+  ],
+  "author": "Fastest Team",
+  "license": "MIT"
+}

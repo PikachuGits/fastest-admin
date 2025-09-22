@@ -1,1 +1,1 @@
-export { default as MenuDemo } from "./components/Menu";
+export { Menu as SidebarMenu } from "./components";

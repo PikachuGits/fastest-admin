@@ -6,12 +6,12 @@
  * Independent component specifically responsible for rendering the right action area of menu items
  */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import { NumberChip } from "../NumberChip";
 import { StyledArrowIcon } from "../../styles/MenuItem.styles";
-// import { useMenuStoreContext } from "../../context/MenuStoreContext";
 import type { NumberChipColor } from "../../styles/NumberChip.styles";
+import { useMenuStore } from "../../stores";
 
 // ==================== 类型定义 Type Definitions ====================
 
@@ -54,23 +54,16 @@ export const MenuItemActions: React.FC<MenuItemActionsProps> = ({
   // ==================== 从 Store 获取状态 Get State from Store ====================
 
   /**
-   * 直接从 Zustand store 获取 collapsed 状态
-   * Get collapsed state directly from Zustand store
+   * 直接从 Zustand store 获取 collapsed 状态 (true: 折叠, false: 展开)
+   * Get collapsed state directly from Zustand store (true: collapsed, false: expanded)
    */
-  // const store = useMenuStoreContext();
-  // const collapsed = store((state) => state.collapsed);
-
-  const [collapsed, setCollapsed] = useState(false);
-
-  useEffect(() => {
-    // console.log(collapsed, "collapsed");
-  }, [collapsed]);
+  const collapsed = useMenuStore((state) => state.collapsed);
   // ==================== 状态响应性 State Reactivity ====================
   //
   // 🎯 重要：这里直接从 store 订阅 collapsed 状态，确保状态变化时组件会重新渲染
   // Important: Subscribe to collapsed state directly from store to ensure component re-renders on state changes
 
-  // 如果处于收起状态，不渲染操作区域
+  // 如果处于折叠状态，不渲染操作区域
   // Don't render actions area if collapsed
   if (collapsed) {
     return null;

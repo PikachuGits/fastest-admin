@@ -205,7 +205,7 @@ export default [
         id: 43,
         title: "流程管理",
         path: "/system/process",
-        icon: "solar:workflow-bold-duotone",
+        icon: "flowbite:code-pull-request-outline",
       },
       {
         id: 44,

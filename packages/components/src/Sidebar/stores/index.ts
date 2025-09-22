@@ -12,7 +12,7 @@ type MenuStore = {
   /** 当前选中的菜单项id */
   selected: string | null;
 
-  /** 侧边栏是否收起 */
+  /** 侧边栏是否折叠 - true: 折叠, false: 展开 */
   collapsed: boolean;
 
   /** 是否为移动端模式 */
@@ -24,10 +24,10 @@ type MenuStore = {
   /** 选中菜单项（选中时会自动收起其他展开项，但保持选中项的父级展开） */
   selectItem: (id: string, menuData?: any[]) => void;
 
-  /** 切换侧边栏收起/展开状态 */
+  /** 切换侧边栏折叠/展开状态 */
   toggleCollapsed: () => void;
 
-  /** 设置侧边栏收起状态 */
+  /** 设置侧边栏折叠状态 - true: 折叠, false: 展开 */
   setCollapsed: (collapsed: boolean) => void;
 
   /** 设置移动端模式 */
@@ -48,7 +48,7 @@ export const useMenuStore = create<MenuStore>((set, get) => ({
   /** 初始化选中项为空 */
   selected: null,
 
-  /** 初始化为收起状态 */
+  /** 初始化为折叠状态 */
   collapsed: true,
 
   /** 初始化为非移动端模式 */
@@ -56,12 +56,12 @@ export const useMenuStore = create<MenuStore>((set, get) => ({
 
   /**
    * 切换菜单项展开状态
-   * 当侧边栏收起时，禁用展开功能
+   * 当侧边栏折叠时，禁用展开功能
    * @param id 菜单项的唯一标识符
    */
   toggleExpand: (id) =>
     set((state) => {
-      // 当侧边栏收起或移动端模式时，禁用展开功能
+      // 当侧边栏折叠或移动端模式时，禁用展开功能
       if (state.collapsed || state.isMobile) {
         return state; // 返回当前状态，不做任何修改
       }
@@ -105,15 +105,15 @@ export const useMenuStore = create<MenuStore>((set, get) => ({
     }),
 
   /**
-   * 切换侧边栏收起/展开状态
+   * 切换侧边栏折叠/展开状态
    */
   toggleCollapsed: () =>
     set((state) => ({
       collapsed: !state.collapsed,
     })),
   /**
-   * 设置侧边栏收起状态
-   * @param collapsed 是否收起侧边栏
+   * 设置侧边栏折叠状态
+   * @param collapsed 是否折叠侧边栏 - true: 折叠, false: 展开
    */
   setCollapsed: (collapsed) =>
     set(() => ({
@@ -130,7 +130,7 @@ export const useMenuStore = create<MenuStore>((set, get) => ({
 
   /**
    * 获取指定菜单项的展开状态
-   * 当侧边栏收起或处于移动端模式时，强制返回 false
+   * 当侧边栏折叠或处于移动端模式时，强制返回 false
    * @param id 菜单项id
    * @returns 是否展开
    */
