@@ -4,13 +4,13 @@ import {
   MenuArrowIconSx,
   MenuSubHeaderAnimateSx,
   MenuSubHeaderSx,
-} from "@components/newMenu/styles/Menu.sx";
-import { MenuItemIcon } from "@components/newMenu/components/MenuItem/MenuItemIcon";
-import { useMenuStore } from "@components/newMenu/stores";
-import type { SubHeaderProps } from "@components/newMenu/types";
+} from "@components/Sidebar/styles/Menu.sx";
+import { MenuItemIcon } from "@components/Sidebar/components/MenuItem/MenuItemIcon";
+import { useMenuStore } from "@components/Sidebar/stores";
+import type { SubHeaderProps } from "@components/Sidebar/types";
 import { alpha } from "@mui/material/styles";
 import { classes_merge } from "@fastest/utils";
-import { MenuBox } from "@components/newMenu/styles/SubHeader.styles";
+import { MenuBox } from "@components/Sidebar/styles/SubHeader.styles";
 
 /**
  * SubHeader 组件 - 菜单分组标题组件
@@ -106,9 +106,8 @@ export const SubHeader = ({
         <Iconify
           sx={sxStyled(MenuArrowIconSx, {})}
           icon="eva:arrow-ios-downward-fill"
-          className={` ${open ? "expanded" : "collapsed"} ${
-            collapsed || isMobile ? "display-none" : "icon-arrow "
-          }`}
+          className={` ${open ? "expanded" : "collapsed"} ${collapsed || isMobile ? "display-none" : "icon-arrow "
+            }`}
         />
 
         <MenuBox

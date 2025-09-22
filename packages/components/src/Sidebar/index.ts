@@ -1,2 +1,1 @@
-export { default as SidebarMenu } from "./Menu";
-export { useMenuHelpers } from "./hooks/useMenuHelpers";
+export { default as MenuDemo } from "./components/Menu";

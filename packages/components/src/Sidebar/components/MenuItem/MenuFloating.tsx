@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, List, Paper, Popper } from "@mui/material";
-import { MenuItem } from "../";
+import { MenuItem } from "..";
 import { shouldMenuItemShowSelected } from "../../utils/menuUtils";
 
 interface MenuFloatingProps {
